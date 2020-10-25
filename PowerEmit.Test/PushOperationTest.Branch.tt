@@ -1,0 +1,101 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Reflection.Emit" #>
+<#@ output extension=".g.cs" #>
+<#
+var opcodes = typeof(OpCodes)
+    .GetFields()
+    .Where(f => f.FieldType == typeof(OpCode))
+    .Select(f => (field: f, opcode: (OpCode)f.GetValue(null)))
+    .Where(tpl => tpl.opcode.OperandType == OperandType.InlineBrTarget
+               || tpl.opcode.OperandType == OperandType.ShortInlineBrTarget)
+    .OrderBy(tpl => tpl.opcode.Value);
+#>
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
+
+namespace PowerEmit
+{
+    partial class PushOperationTest
+    {
+        public static IEnumerable<object[]> TestArgs_Branch()
+        {
+            static Action<ILGenerator> createExpectedBefore(OpCode opcode, int offset)
+                => gen =>
+                {
+                    var label = gen.DefineLabel();
+                    gen.MarkLabel(label);
+                    for(var i = 0; i < offset; ++i)
+                        gen.Emit(OpCodes.Nop);
+                    gen.Emit(opcode, label);
+                };
+            static Action<ILGenerator> createExpectedAfter(OpCode opcode, int offset)
+                => gen =>
+                {
+                    var label = gen.DefineLabel();
+                    gen.Emit(opcode, label);
+                    for(var i = 0; i < offset; ++i)
+                        gen.Emit(OpCodes.Nop);
+                    gen.MarkLabel(label);
+                };
+            static Action<CilMethodDescription> createActualBefore(Action<CilMethodDescription, CilLabel> push, int offset)
+                => desc =>
+                {
+                    var label = new CilLabel();
+                    desc.Push_MarkLabel(label);
+                    for(var i = 0; i < offset; ++i)
+                        desc.Push_Nop();
+                    push(desc, label);
+                };
+            static Action<CilMethodDescription> createActualAfter(Action<CilMethodDescription, CilLabel> push, int offset)
+                => desc =>
+                {
+                    var label = new CilLabel();
+                    push(desc, label);
+                    for(var i = 0; i < offset; ++i)
+                        desc.Push_Nop();
+                    desc.Push_MarkLabel(label);
+                };
+<#
+foreach(var (field, opcode) in opcodes)
+{
+#>
+
+<#
+    if(opcode.Name.Substring(opcode.Name.Length - 2) == ".s")
+    {
+#>
+            foreach(var i in new []{0, 1, 2, 16, 126})
+<#
+    }
+    else
+    {
+#>
+            foreach(var i in new []{0, 1, 2, 16, 127, 255, 256, 1024})
+<#
+    }
+#>
+            {
+                yield return CreateArgs(
+                    OpCodes.<#=field.Name#>,
+                    createExpectedBefore(OpCodes.<#=field.Name#>, i),
+                    createActualBefore((desc, label) => desc.Push_<#=field.Name#>(label), i)
+                );
+                yield return CreateArgs(
+                    OpCodes.<#=field.Name#>,
+                    createExpectedAfter(OpCodes.<#=field.Name#>, i),
+                    createActualAfter((desc, label) => desc.Push_<#=field.Name#>(label), i)
+                );
+            }
+<#
+}
+#>
+        }
+    }
+}

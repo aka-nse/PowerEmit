@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerEmit.Emit", "PowerEmit.Emit\PowerEmit.Emit.csproj", "{B3FD6104-F7AC-489B-A93B-589C75436180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerEmit", "PowerEmit\PowerEmit.csproj", "{B3FD6104-F7AC-489B-A93B-589C75436180}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "etc", "etc", "{ACC7BD2B-267F-4331-B345-FE5C257B57FB}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EFD175AE-D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{76B213FC-FC46-46C0-AC5E-9768405104F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerEmit.Emit.Test", "PowerEmit.Emit.Test\PowerEmit.Emit.Test.csproj", "{3E9ADB00-BE5D-4B18-95AD-1A9CF8E74C7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerEmit.Test", "PowerEmit.Test\PowerEmit.Test.csproj", "{3E9ADB00-BE5D-4B18-95AD-1A9CF8E74C7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
