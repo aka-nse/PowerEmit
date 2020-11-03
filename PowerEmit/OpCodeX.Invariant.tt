@@ -1,0 +1,188 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".g.cs" #>
+<#
+var opcodes = new []
+{
+    new OpCodeInfo("Nop"),
+    new OpCodeInfo("Break"),
+    new OpCodeInfo("Ldarg_0"),
+    new OpCodeInfo("Ldarg_1"),
+    new OpCodeInfo("Ldarg_2"),
+    new OpCodeInfo("Ldarg_3"),
+    new OpCodeInfo("Ldloc_0"),
+    new OpCodeInfo("Ldloc_1"),
+    new OpCodeInfo("Ldloc_2"),
+    new OpCodeInfo("Ldloc_3"),
+    new OpCodeInfo("Stloc_0"),
+    new OpCodeInfo("Stloc_1"),
+    new OpCodeInfo("Stloc_2"),
+    new OpCodeInfo("Stloc_3"),
+    new OpCodeInfo("Ldnull"),
+    new OpCodeInfo("Ldc_I4_M1"),
+    new OpCodeInfo("Ldc_I4_0"),
+    new OpCodeInfo("Ldc_I4_1"),
+    new OpCodeInfo("Ldc_I4_2"),
+    new OpCodeInfo("Ldc_I4_3"),
+    new OpCodeInfo("Ldc_I4_4"),
+    new OpCodeInfo("Ldc_I4_5"),
+    new OpCodeInfo("Ldc_I4_6"),
+    new OpCodeInfo("Ldc_I4_7"),
+    new OpCodeInfo("Ldc_I4_8"),
+    new OpCodeInfo("Dup"),
+    new OpCodeInfo("Pop"),
+    // new OpCodeInfo("Ret"),
+    new OpCodeInfo("Ldind_I1"),
+    new OpCodeInfo("Ldind_U1"),
+    new OpCodeInfo("Ldind_I2"),
+    new OpCodeInfo("Ldind_U2"),
+    new OpCodeInfo("Ldind_I4"),
+    new OpCodeInfo("Ldind_U4"),
+    new OpCodeInfo("Ldind_I8"),
+    new OpCodeInfo("Ldind_I"),
+    new OpCodeInfo("Ldind_R4"),
+    new OpCodeInfo("Ldind_R8"),
+    new OpCodeInfo("Ldind_Ref"),
+    new OpCodeInfo("Stind_Ref"),
+    new OpCodeInfo("Stind_I1"),
+    new OpCodeInfo("Stind_I2"),
+    new OpCodeInfo("Stind_I4"),
+    new OpCodeInfo("Stind_I8"),
+    new OpCodeInfo("Stind_R4"),
+    new OpCodeInfo("Stind_R8"),
+    new OpCodeInfo("Add"),
+    new OpCodeInfo("Sub"),
+    new OpCodeInfo("Mul"),
+    new OpCodeInfo("Div"),
+    new OpCodeInfo("Div_Un"),
+    new OpCodeInfo("Rem"),
+    new OpCodeInfo("Rem_Un"),
+    new OpCodeInfo("And"),
+    new OpCodeInfo("Or"),
+    new OpCodeInfo("Xor"),
+    new OpCodeInfo("Shl"),
+    new OpCodeInfo("Shr"),
+    new OpCodeInfo("Shr_Un"),
+    new OpCodeInfo("Neg"),
+    new OpCodeInfo("Not"),
+    new OpCodeInfo("Conv_I1"),
+    new OpCodeInfo("Conv_I2"),
+    new OpCodeInfo("Conv_I4"),
+    new OpCodeInfo("Conv_I8"),
+    new OpCodeInfo("Conv_R4"),
+    new OpCodeInfo("Conv_R8"),
+    new OpCodeInfo("Conv_U4"),
+    new OpCodeInfo("Conv_U8"),
+    new OpCodeInfo("Conv_R_Un"),
+    new OpCodeInfo("Throw"),
+    new OpCodeInfo("Conv_Ovf_I1_Un"),
+    new OpCodeInfo("Conv_Ovf_I2_Un"),
+    new OpCodeInfo("Conv_Ovf_I4_Un"),
+    new OpCodeInfo("Conv_Ovf_I8_Un"),
+    new OpCodeInfo("Conv_Ovf_U1_Un"),
+    new OpCodeInfo("Conv_Ovf_U2_Un"),
+    new OpCodeInfo("Conv_Ovf_U4_Un"),
+    new OpCodeInfo("Conv_Ovf_U8_Un"),
+    new OpCodeInfo("Conv_Ovf_I_Un"),
+    new OpCodeInfo("Conv_Ovf_U_Un"),
+    new OpCodeInfo("Ldlen"),
+    new OpCodeInfo("Ldelem_I1"),
+    new OpCodeInfo("Ldelem_U1"),
+    new OpCodeInfo("Ldelem_I2"),
+    new OpCodeInfo("Ldelem_U2"),
+    new OpCodeInfo("Ldelem_I4"),
+    new OpCodeInfo("Ldelem_U4"),
+    new OpCodeInfo("Ldelem_I8"),
+    new OpCodeInfo("Ldelem_I"),
+    new OpCodeInfo("Ldelem_R4"),
+    new OpCodeInfo("Ldelem_R8"),
+    new OpCodeInfo("Ldelem_Ref"),
+    new OpCodeInfo("Stelem_I"),
+    new OpCodeInfo("Stelem_I1"),
+    new OpCodeInfo("Stelem_I2"),
+    new OpCodeInfo("Stelem_I4"),
+    new OpCodeInfo("Stelem_I8"),
+    new OpCodeInfo("Stelem_R4"),
+    new OpCodeInfo("Stelem_R8"),
+    new OpCodeInfo("Stelem_Ref"),
+    new OpCodeInfo("Conv_Ovf_I1"),
+    new OpCodeInfo("Conv_Ovf_U1"),
+    new OpCodeInfo("Conv_Ovf_I2"),
+    new OpCodeInfo("Conv_Ovf_U2"),
+    new OpCodeInfo("Conv_Ovf_I4"),
+    new OpCodeInfo("Conv_Ovf_U4"),
+    new OpCodeInfo("Conv_Ovf_I8"),
+    new OpCodeInfo("Conv_Ovf_U8"),
+    new OpCodeInfo("Ckfinite"),
+    new OpCodeInfo("Conv_U2"),
+    new OpCodeInfo("Conv_U1"),
+    new OpCodeInfo("Conv_I"),
+    new OpCodeInfo("Conv_Ovf_I"),
+    new OpCodeInfo("Conv_Ovf_U"),
+    new OpCodeInfo("Add_Ovf"),
+    new OpCodeInfo("Add_Ovf_Un"),
+    new OpCodeInfo("Mul_Ovf"),
+    new OpCodeInfo("Mul_Ovf_Un"),
+    new OpCodeInfo("Sub_Ovf"),
+    new OpCodeInfo("Sub_Ovf_Un"),
+    new OpCodeInfo("Endfinally"),
+    new OpCodeInfo("Stind_I"),
+    new OpCodeInfo("Conv_U"),
+    new OpCodeInfo("Arglist"),
+    new OpCodeInfo("Ceq"),
+    new OpCodeInfo("Cgt"),
+    new OpCodeInfo("Cgt_Un"),
+    new OpCodeInfo("Clt"),
+    new OpCodeInfo("Clt_Un"),
+    new OpCodeInfo("Localloc"),
+    new OpCodeInfo("Endfilter"),
+    new OpCodeInfo("Volatile"),
+    new OpCodeInfo("Tailcall"),
+    new OpCodeInfo("Cpblk"),
+    new OpCodeInfo("Initblk"),
+    new OpCodeInfo("Rethrow"),
+    new OpCodeInfo("Refanytype"),
+    new OpCodeInfo("Readonly"),
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Reflection.Emit;
+
+namespace PowerEmit
+{
+    partial class OpCodeX
+    {
+<#
+foreach(var opcode in opcodes)
+{
+#>
+        public static IILStreamOpCode <#=opcode.Name#>()
+            => new Emit_<#=opcode.Name#>();
+
+        private sealed class Emit_<#=opcode.Name#> : InvariantOperation
+        {
+            public override OpCode OpCode => OpCodes.<#=opcode.Name#>;
+            public Emit_<#=opcode.Name#>() {}
+        }
+
+
+<#
+}
+#>
+    }
+}
+<#+
+public struct OpCodeInfo
+{
+    public string Name { get; }
+
+    public OpCodeInfo(string name)
+    {
+        Name = name;
+    }
+}
+#>

@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\PowerEmit\PowerEmit.csproj" />
+      <ProjectReference Include="..\PowerEmit\PowerEmit.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -30,10 +30,10 @@ namespace PowerEmit
                 .Where(fInfo => fInfo.FieldType == typeof(OpCode))
                 .Where(fInfo => !ExcludeOpCodes.Contains(fInfo.Name))
                 .ToList();
-            var operations = typeof(ICilOperation)
+            var operations = typeof(IILStreamAction)
                 .Assembly
                 .GetTypes()
-                .Where(t => typeof(ICilOperation).IsAssignableFrom(t))
+                .Where(t => typeof(IILStreamAction).IsAssignableFrom(t))
                 .ToList();
             foreach(var operation in operations)
             {

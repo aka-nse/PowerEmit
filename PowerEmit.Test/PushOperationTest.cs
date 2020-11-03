@@ -9,8 +9,11 @@ namespace PowerEmit
 {
     public partial class PushOperationTest
     {
-        private static object[] CreateArgs(OpCode opcode, Action<ILGenerator> expected, Action<CilMethodDescription> actual)
-            => new object[] { opcode, expected, actual };
+        private static object[] CreateArgs(string testname, Action<ILGenerator> expected, Action<MethodDescription> actual, Type? returnType = null, Type[]? parameterTypes = null)
+            => new object[] { testname, expected, actual };
+
+        private static object[] CreateArgs(OpCode opcode, Action<ILGenerator> expected, Action<MethodDescription> actual)
+            => CreateArgs(opcode.Name ?? "unspecified", expected, actual);
 
 
         private ITestOutputHelper Output { get; }
@@ -20,21 +23,19 @@ namespace PowerEmit
             => Output = output;
 
 
-        [Theory]
-        [MemberData(nameof(TestArgs_Basic))]
-        [MemberData(nameof(TestArgs_Branch))]
-        [MemberData(nameof(TestArgs_Opt))]
-        public void PushTest(OpCode opcode, Action<ILGenerator> expected, Action<CilMethodDescription> actual)
+        private void PushTestCore(string testname, Action<ILGenerator> expected, Action<MethodDescription> actual, Type? returnType = null, Type[]? parameterTypes = null)
         {
-            Output.WriteLine(opcode.Name);
+            Output.WriteLine(testname);
+            returnType ??= typeof(void);
+            parameterTypes ??= Array.Empty<Type>();
 
-            var builder1 = new Builder(typeof(void));
+            var builder1 = new Builder(returnType, parameterTypes);
             var gen1 = builder1.Method.GetILGenerator();
             expected(gen1);
             var expectedByteArray = builder1.GetILBytes();
 
-            var builder2 = new Builder(typeof(void));
-            var desc = new CilMethodDescription(typeof(void));
+            var builder2 = new Builder(returnType, parameterTypes);
+            var desc = new MethodDescription(returnType);
             actual(desc);
             desc.BuildMethod(builder2.Method);
             var actualByteArray = builder2.GetILBytes();

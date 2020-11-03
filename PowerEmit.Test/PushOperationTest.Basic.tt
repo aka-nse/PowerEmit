@@ -25,15 +25,22 @@ var opcodes = typeof(OpCodes)
     .Where(tpl => !exclusions.Contains(tpl.opcode))
     .OrderBy(tpl => tpl.opcode.Value);
 #>
+#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Reflection.Emit;
+using Xunit;
 
 namespace PowerEmit
 {
-    partial class PushOperationTest
+    public partial class PushOperationTest
     {
+        [Theory]
+        [MemberData(nameof(TestArgs_Basic))]
+        private void PushTest_Basic(string testname, Action<ILGenerator> expected, Action<MethodDescription> actual, Type? returnType = null, Type[]? parameterTypes = null)
+            => PushTestCore(testname, expected, actual, returnType, parameterTypes);
+
+
         public static IEnumerable<object[]> TestArgs_Basic()
         {
 <#
@@ -107,11 +114,11 @@ string GetActualAction(FieldInfo field, OpCode opcode)
     }
     if(opcode.OperandType == OperandType.InlineNone)
     {
-        return $"desc => desc.Push_{field.Name}()";
+        return $"desc => desc.Stream.Add(OpCodeX.{field.Name}())";
     }
     else
     {
-        return $"desc => desc.Push_{field.Name}({GetArgValue(opcode)})";
+        return $"desc => desc.Stream.Add(OpCodeX.{field.Name}({GetArgValue(opcode)}))";
     }
 }
 

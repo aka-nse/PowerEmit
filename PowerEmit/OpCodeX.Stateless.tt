@@ -1,0 +1,104 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ output extension=".g.cs" #>
+<#
+var opcodes = new []
+{
+    new OpCodeInfo("Ldarg_S"    , "byte"      ),
+    new OpCodeInfo("Ldarga_S"   , "byte"      ),
+    new OpCodeInfo("Starg_S"    , "byte"      ),
+    new OpCodeInfo("Ldloc_S"    , "byte"      ),
+    new OpCodeInfo("Ldloca_S"   , "byte"      ),
+    new OpCodeInfo("Stloc_S"    , "byte"      ),
+    new OpCodeInfo("Ldc_I4_S"   , "sbyte"     , false),
+    new OpCodeInfo("Ldc_I4"     , "int"       ),
+    new OpCodeInfo("Ldc_I8"     , "long"      ),
+    new OpCodeInfo("Ldc_R4"     , "float"     ),
+    new OpCodeInfo("Ldc_R8"     , "double"    ),
+    new OpCodeInfo("Jmp"        , "MethodInfo"),
+    new OpCodeInfo("Cpobj"      , "Type"      ),
+    new OpCodeInfo("Ldobj"      , "Type"      ),
+    new OpCodeInfo("Ldstr"      , "string"    ),
+    new OpCodeInfo("Castclass"  , "Type"      ),
+    new OpCodeInfo("Isinst"     , "Type"      ),
+    new OpCodeInfo("Unbox"      , "Type"      ),
+    new OpCodeInfo("Ldfld"      , "FieldInfo" ),
+    new OpCodeInfo("Ldflda"     , "FieldInfo" ),
+    new OpCodeInfo("Stfld"      , "FieldInfo" ),
+    new OpCodeInfo("Ldsfld"     , "FieldInfo" ),
+    new OpCodeInfo("Ldsflda"    , "FieldInfo" ),
+    new OpCodeInfo("Stsfld"     , "FieldInfo" ),
+    new OpCodeInfo("Stobj"      , "Type"      ),
+    new OpCodeInfo("Box"        , "Type"      ),
+    new OpCodeInfo("Newarr"     , "Type"      ),
+    new OpCodeInfo("Ldelema"    , "Type"      ),
+    new OpCodeInfo("Ldelem"     , "Type"      ),
+    new OpCodeInfo("Stelem"     , "Type"      ),
+    new OpCodeInfo("Unbox_Any"  , "Type"      ),
+    new OpCodeInfo("Refanyval"  , "Type"      ),
+    new OpCodeInfo("Mkrefany"   , "Type"      ),
+    new OpCodeInfo("Ldftn"      , "MethodInfo"),
+    new OpCodeInfo("Ldvirtftn"  , "MethodInfo"),
+    new OpCodeInfo("Ldarg"      , "short"     ),
+    new OpCodeInfo("Ldarga"     , "short"     ),
+    new OpCodeInfo("Starg"      , "short"     ),
+    new OpCodeInfo("Ldloc"      , "short"     ),
+    new OpCodeInfo("Ldloca"     , "short"     ),
+    new OpCodeInfo("Stloc"      , "short"     ),
+    new OpCodeInfo("Initobj"    , "Type"      ),
+    new OpCodeInfo("Unaligned"  , "byte"      ),
+    new OpCodeInfo("Constrained", "Type"      ),
+    new OpCodeInfo("Sizeof"     , "Type"      ),
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
+
+namespace PowerEmit
+{
+    partial class OpCodeX
+    {
+<#
+foreach(var opcode in opcodes)
+{
+#>
+        [CLSCompliant(<#=opcode.IsCompliant ? "true" : "false"#>)]
+        public static IILStreamOpCode <#=opcode.Name#>(<#=opcode.OperandType#> operand)
+            => new Emit_<#=opcode.Name#>(operand);
+
+
+        private sealed class Emit_<#=opcode.Name#> : StatelessOperation<<#=opcode.OperandType#>>
+        {
+            public override OpCode OpCode => OpCodes.<#=opcode.Name#>;
+            internal Emit_<#=opcode.Name#>(<#=opcode.OperandType#> operand) : base(operand) {}
+
+            public override void Emit(ILGeneratorState state)
+                => state.Generator.Emit(OpCode, Operand);
+        }
+
+<#
+}
+#>
+    }
+}
+<#+
+public struct OpCodeInfo
+{
+    public string Name { get; }
+    public string OperandType { get; }
+    public bool IsCompliant { get; }
+
+    public OpCodeInfo(string name, string operandType, bool isCompliant = true)
+    {
+        Name = name;
+        OperandType = operandType;
+        IsCompliant = isCompliant;
+    }
+}
+#>

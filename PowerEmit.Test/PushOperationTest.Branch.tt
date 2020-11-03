@@ -15,15 +15,23 @@ var opcodes = typeof(OpCodes)
                || tpl.opcode.OperandType == OperandType.ShortInlineBrTarget)
     .OrderBy(tpl => tpl.opcode.Value);
 #>
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using Xunit;
 
 namespace PowerEmit
 {
-    partial class PushOperationTest
+    public partial class PushOperationTest
     {
+        [Theory]
+        [MemberData(nameof(TestArgs_Branch))]
+        private void PushTest_Branch(string testname, Action<ILGenerator> expected, Action<MethodDescription> actual, Type? returnType = null, Type[]? parameterTypes = null)
+            => PushTestCore(testname, expected, actual, returnType, parameterTypes);
+
+
         public static IEnumerable<object[]> TestArgs_Branch()
         {
             static Action<ILGenerator> createExpectedBefore(OpCode opcode, int offset)
@@ -44,23 +52,23 @@ namespace PowerEmit
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
                 };
-            static Action<CilMethodDescription> createActualBefore(Action<CilMethodDescription, CilLabel> push, int offset)
+            static Action<MethodDescription> createActualBefore(Action<MethodDescription, LabelDescriptor> push, int offset)
                 => desc =>
                 {
-                    var label = new CilLabel();
-                    desc.Push_MarkLabel(label);
+                    var label = new LabelDescriptor();
+                    desc.Stream.Add(NoOpCode.MarkLabel(label));
                     for(var i = 0; i < offset; ++i)
-                        desc.Push_Nop();
+                        desc.Stream.Add(OpCodeX.Nop());
                     push(desc, label);
                 };
-            static Action<CilMethodDescription> createActualAfter(Action<CilMethodDescription, CilLabel> push, int offset)
+            static Action<MethodDescription> createActualAfter(Action<MethodDescription, LabelDescriptor> push, int offset)
                 => desc =>
                 {
-                    var label = new CilLabel();
+                    var label = new LabelDescriptor();
                     push(desc, label);
                     for(var i = 0; i < offset; ++i)
-                        desc.Push_Nop();
-                    desc.Push_MarkLabel(label);
+                        desc.Stream.Add(OpCodeX.Nop());
+                    desc.Stream.Add(NoOpCode.MarkLabel(label));
                 };
 <#
 foreach(var (field, opcode) in opcodes)
@@ -85,12 +93,12 @@ foreach(var (field, opcode) in opcodes)
                 yield return CreateArgs(
                     OpCodes.<#=field.Name#>,
                     createExpectedBefore(OpCodes.<#=field.Name#>, i),
-                    createActualBefore((desc, label) => desc.Push_<#=field.Name#>(label), i)
+                    createActualBefore((desc, label) => desc.Stream.Add(OpCodeX.<#=field.Name#>(label)), i)
                 );
                 yield return CreateArgs(
                     OpCodes.<#=field.Name#>,
                     createExpectedAfter(OpCodes.<#=field.Name#>, i),
-                    createActualAfter((desc, label) => desc.Push_<#=field.Name#>(label), i)
+                    createActualAfter((desc, label) => desc.Stream.Add(OpCodeX.<#=field.Name#>(label)), i)
                 );
             }
 <#

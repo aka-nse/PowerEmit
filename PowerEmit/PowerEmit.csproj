@@ -12,19 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="CilMethodDescription.Push_Opt.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilMethodDescription.Push_Opt.tt</DependentUpon>
-    </None>
-    <None Include="CilOperation.Branch.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Branch.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Memory" Version="4.5.1" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
@@ -35,62 +22,44 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CilMethodDescription.Push.g.cs">
+    <Compile Update="OpCodeX.Branch.g.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CilMethodDescription.Push.tt</DependentUpon>
+      <DependentUpon>OpCodeX.Branch.tt</DependentUpon>
     </Compile>
-    <Compile Update="CilMethodDescription.Push_Opt.g.cs">
+    <Compile Update="OptimizedOpCode.Branch_Opt.g.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CilMethodDescription.Push_Opt.tt</DependentUpon>
+      <DependentUpon>OptimizedOpCode.Branch_Opt.tt</DependentUpon>
     </Compile>
-    <Compile Update="CilOperation.Branch.g.cs">
+    <Compile Update="OpCodeX.Invariant.g.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Branch.tt</DependentUpon>
+      <DependentUpon>OpCodeX.Invariant.tt</DependentUpon>
     </Compile>
-    <Compile Update="CilOperation.Branch_Opt.g.cs">
+    <Compile Update="OpCodeX.Stateless.g.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Branch_Opt.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CilOperation.Invariant.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Invariant.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CilOperation.Stateless.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Stateless.tt</DependentUpon>
+      <DependentUpon>OpCodeX.Stateless.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CilMethodDescription.Push.tt">
+    <None Update="OpCodeX.Branch.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilMethodDescription.Push.g.cs</LastGenOutput>
+      <LastGenOutput>OpCodeX.Branch.g.cs</LastGenOutput>
     </None>
-    <None Update="CilMethodDescription.Push_Opt.tt">
+    <None Update="OptimizedOpCode.Branch_Opt.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilMethodDescription.Push_Opt.g.cs</LastGenOutput>
+      <LastGenOutput>OptimizedOpCode.Branch_Opt.g.cs</LastGenOutput>
     </None>
-    <None Update="CilOperation.Branch.tt">
+    <None Update="OpCodeX.Invariant.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Branch.g.cs</LastGenOutput>
+      <LastGenOutput>OpCodeX.Invariant.g.cs</LastGenOutput>
     </None>
-    <None Update="CilOperation.Branch_Opt.tt">
+    <None Update="OpCodeX.Stateless.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Branch_Opt.g.cs</LastGenOutput>
-    </None>
-    <None Update="CilOperation.Invariant.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Invariant.g.cs</LastGenOutput>
-    </None>
-    <None Update="CilOperation.Stateless.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Stateless.g.cs</LastGenOutput>
+      <LastGenOutput>OpCodeX.Stateless.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
