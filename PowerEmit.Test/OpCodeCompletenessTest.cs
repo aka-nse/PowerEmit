@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using Xunit;
@@ -30,10 +31,8 @@ namespace PowerEmit
                 .Where(fInfo => fInfo.FieldType == typeof(OpCode))
                 .Where(fInfo => !ExcludeOpCodes.Contains(fInfo.Name))
                 .ToList();
-            var operations = typeof(IILStreamAction)
-                .Assembly
-                .GetTypes()
-                .Where(t => typeof(IILStreamAction).IsAssignableFrom(t))
+            var operations = typeof(OpCodeX)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
                 .ToList();
             foreach(var operation in operations)
             {

@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using PowerEmit.Linq;
+
 
 namespace PowerEmit
 {
+    /// <summary>
+    /// Represents an argument on <see cref="MethodDescription"/> instance.
+    /// </summary>
     public sealed class ArgumentDescriptor : VariableDescriptor
     {
-        public ArgumentDescriptor(Type variableType, string name)
+        internal ArgumentDescriptor(Type variableType, string name)
             : base(variableType, name)
         {
         }
+
+        public override string ToString()
+            => $"(arg) {VariableType} {Name}";
     }
 }

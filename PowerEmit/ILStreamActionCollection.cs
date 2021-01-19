@@ -19,7 +19,15 @@ namespace PowerEmit
         public bool IsReadOnly => false;
 
         public void Add(IILStreamAction item)
-            => _actions.Add(item);
+        {
+            _actions.Add(item);
+        }
+
+        public void AddRange(IEnumerable<IILStreamAction> items)
+            => _actions.AddRange(items);
+
+        public void AddRange(params IILStreamAction[] items)
+            => _actions.AddRange(items);
 
         public void Clear()
             => _actions.Clear();

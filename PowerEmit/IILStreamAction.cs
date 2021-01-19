@@ -5,48 +5,29 @@ using System.Reflection.Emit;
 
 namespace PowerEmit
 {
+    /// <summary>
+    /// Represents some action for IL stream.
+    /// </summary>
     public interface IILStreamAction
     {
-        /// <summary>
-        /// Gets a bytesize of sum of opcode and operand.
-        /// Returns <c>null</c> if it is flexible.
-        /// </summary>
-        public int? ByteSize { get; }
-
-
-        /// <summary>
-        /// Gets a stack balance of opcode.
-        /// Returns <c>null</c> if it is flexible.
-        /// </summary>
-        public int? StackBalance { get; }
-
-
         /// <summary>
         /// Emits this action to the <see cref="ILGenerator"/> instance.
         /// </summary>
         /// <param name="state"></param>
-        public void Emit(ILGeneratorState state);
+        void Emit(IILEmissionState state);
 
         /// <summary>
-        /// Calculates actual byte size of this operation in the specified method.
+        /// Validates stack balance for emission.
         /// </summary>
         /// <param name="state"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException">
-        /// This operation is unstuck in the specified method definition.
-        /// However, this exception is not always thrown even if the conditions are met.
-        /// </exception>
-        public int GetByteSize(ILGeneratorState state);
+        /// <exception cref="Exception"></exception>
+        void ValidateStack(IILValidationState state);
 
         /// <summary>
-        /// Calculates actual stack balance of this operation in the specified method.
+        /// Operates this IL action for dynamic invocation.
         /// </summary>
         /// <param name="state"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException">
-        /// This operation is unstuck in the specified method definition.
-        /// However, this exception is not always thrown even if the conditions are met.
-        /// </exception>
-        public int GetStackBalance(ILGeneratorState state);
+        /// <returns> If <c>false</c> the method invocation will be terminated by the action. </returns>
+        void Invoke(IILInvocationState state);
     }
 }

@@ -33,6 +33,16 @@ namespace PowerEmit
         public MethodBuilder Method { get; }
 
 
+        public Type BuiltType
+            => _builtType = _builtType ?? Type.CreateType()!;
+        private Type? _builtType;
+
+
+        public MethodInfo BuiltMethod
+            => _builtMethod = _builtMethod ?? BuiltType.GetMethod(Method.Name, BindingFlags.Public | BindingFlags.Static)!;
+        private MethodInfo? _builtMethod;
+
+
         public Builder(Type returnType, params Type[] parameterTypes)
         {
             var assmName = new AssemblyName(GetName("Assembly"));
@@ -48,9 +58,7 @@ namespace PowerEmit
 
 
         public byte[]? GetILBytes()
-            => Type
-            ?.CreateType()
-            ?.GetMethod(Method.Name)
+            => BuiltMethod
             ?.GetMethodBody()
             ?.GetILAsByteArray();
     }

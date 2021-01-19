@@ -7,9 +7,25 @@
     <Authors>GlassGrass</Authors>
     <Version>0.1.0</Version>
     <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and optimize code pass on runtime.</Description>
-      <LangVersion>8.0</LangVersion>
+      <LangVersion>9.0</LangVersion>
       <Nullable>Enable</Nullable>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="OpCodeConst.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OpCodeConst.tt</DependentUpon>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Memory" Version="4.5.1" />
@@ -22,15 +38,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="OpCodeX.Branch.g.cs">
+    <Compile Update="Disassemblies\ILDisassembler.g.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>OpCodeX.Branch.tt</DependentUpon>
+      <DependentUpon>ILDisassembler.tt</DependentUpon>
     </Compile>
-    <Compile Update="OptimizedOpCode.Branch_Opt.g.cs">
+    <Compile Update="OpCodeConst.g.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>OptimizedOpCode.Branch_Opt.tt</DependentUpon>
+      <DependentUpon>OpCodeConst.tt</DependentUpon>
     </Compile>
     <Compile Update="OpCodeX.Invariant.g.cs">
       <DesignTime>True</DesignTime>
@@ -45,13 +61,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="OpCodeX.Branch.tt">
+    <None Update="Disassemblies\ILDisassembler.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OpCodeX.Branch.g.cs</LastGenOutput>
+      <LastGenOutput>ILDisassembler.g.cs</LastGenOutput>
     </None>
-    <None Update="OptimizedOpCode.Branch_Opt.tt">
+    <None Update="OpCodeConst.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OptimizedOpCode.Branch_Opt.g.cs</LastGenOutput>
+      <LastGenOutput>OpCodeConst.g.cs</LastGenOutput>
     </None>
     <None Update="OpCodeX.Invariant.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

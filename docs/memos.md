@@ -2,6 +2,14 @@
 
 ----
 
+## branch命令のオペランドの値
+
+branch命令のオペランドは、そのオペランドの終端位置からのバイトオフセット値である。
+
+## Value of operand of branch instaructions
+
+The operands of branch instaructions mean the byte offset from the terminal of its instruction.
+
 ## branch命令のオペランドサイズ解決
 
 branch命令のオペランドサイズ(1 or 4byte)は参照先ラベルのバイトオフセットに依存する。
