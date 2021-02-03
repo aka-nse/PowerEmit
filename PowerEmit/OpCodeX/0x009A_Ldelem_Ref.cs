@@ -27,14 +27,10 @@ namespace PowerEmit
             }
 
             public override void ValidateStack(IILValidationState state)
-            {
-                throw new NotImplementedException();
-            }
+                => Emit_Ldelem.ValidateStack(state, null);
 
             public override void Invoke(IILInvocationState state)
-            {
-                throw new NotImplementedException();
-            }
+                => Emit_Ldelem.Invoke(state, null);
         }
     }
 }

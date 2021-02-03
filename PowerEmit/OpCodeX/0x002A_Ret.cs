@@ -37,7 +37,7 @@ namespace PowerEmit
                 else
                 {
                     var type = state.EvaluationStack.Pop();
-                    if(!type.IsAssignableTo(returnType))
+                    if(!type.IsAssignableTo(returnType, PassByKind.Value))
                         throw new Exception();
                 }
             }

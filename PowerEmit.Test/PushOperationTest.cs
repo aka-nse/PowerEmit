@@ -83,7 +83,7 @@ namespace PowerEmit
             var builder2 = new Builder(returnType, parameterTypes);
             var desc = new MethodDescription(returnType);
             actual(desc);
-            desc.BuildMethod(builder2.Method);
+            desc.BuildMethod(builder2.Method, false);
             var actualByteArray = builder2.GetILBytes();
 
             Assert.Equal(expectedByteArray, actualByteArray);

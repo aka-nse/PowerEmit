@@ -10,45 +10,38 @@ namespace PowerEmit
         /// <summary> Creates new instruction item of <c>ldarga</c>. </summary>
         /// <param name="operand"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
-        public static IILStreamInstruction Ldarga(ushort operand)
+        public static IILStreamInstruction Ldarga(ArgumentDescriptor operand)
             => new Emit_Ldarga(operand);
 
 
-        private sealed class Emit_Ldarga : ILStreamInstruction<ushort>
+        private sealed class Emit_Ldarga : ILStreamInstruction<ArgumentDescriptor>
         {
             public override OpCode OpCode => OpCodes.Ldarga;
 
-            public Emit_Ldarga(ushort operand)
+            public Emit_Ldarga(ArgumentDescriptor operand)
                 : base(operand)
             {
             }
 
             public override void Emit(IILEmissionState state)
             {
-                state.Generator.Emit(OpCode, Operand);
+                state.Generator.Emit(OpCode, (short)(ushort)state.Arguments[Operand]);
             }
 
             public override void ValidateStack(IILValidationState state)
-            {
-                throw new NotImplementedException();
-            }
+                => ValidateStack(state, Operand);
 
             public override void Invoke(IILInvocationState state)
+                => Invoke(state, Operand);
+
+
+            public static void ValidateStack(IILValidationState state, ArgumentDescriptor operand)
             {
-                throw new NotImplementedException();
+                state.EvaluationStack.Push(StackType.FromType(operand.VariableType.MakeByRefType()));
             }
 
-
-            public static void ValidateStack(IILValidationState state, ushort operand)
+            public static void Invoke(IILInvocationState state, ArgumentDescriptor operand)
             {
-                var argDesc = state.Owner.Arguments[operand];
-                state.EvaluationStack.Push(StackType.FromType(argDesc.VariableType.MakeByRefType()));
-            }
-
-            public static void Invoke(IILInvocationState state, ushort operand)
-            {
-                var argDesc = state.Owner.Arguments[operand];
                 throw new NotSupportedException();
             }
         }

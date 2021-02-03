@@ -31,7 +31,7 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var type = state.EvaluationStack.Pop();
-                if(type is not (StackType.Int32 or StackType.NativeInt))
+                if(type is not (StackType.IInt32 or StackType.INativeInt))
                     throw new Exception();
                 state.EvaluationStack.Push(StackType.FromType(Operand.MakeArrayType()));
             }

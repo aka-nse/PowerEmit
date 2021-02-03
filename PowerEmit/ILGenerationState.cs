@@ -14,7 +14,7 @@ namespace PowerEmit
     {
         MethodDescription Owner { get; }
         int StreamPosition { get; }
-        IReadOnlyDictionary<ArgumentDescriptor, short> Arguments { get; }
+        IReadOnlyDictionary<ArgumentDescriptor, int> Arguments { get; }
         IReadOnlyDictionary<LocalDescriptor, int> Locals { get; }
         IReadOnlyDictionary<LabelDescriptor, Label> Labels { get; }
     }
@@ -32,7 +32,7 @@ namespace PowerEmit
     /// </summary>
     public interface IILValidationState : IILGenerationState
     {
-        Stack<StackType> EvaluationStack { get; }
+        Stack<IStackType> EvaluationStack { get; }
     }
 
 
@@ -42,27 +42,39 @@ namespace PowerEmit
 
         public int StreamPosition { get; internal set; }
 
-        public IReadOnlyDictionary<ArgumentDescriptor, short> Arguments { get; }
+        public IReadOnlyDictionary<ArgumentDescriptor, int> Arguments => _arguments;
+        private readonly Dictionary<ArgumentDescriptor, int> _arguments;
 
-        public IReadOnlyDictionary<LocalDescriptor, int> Locals { get; }
+        public IReadOnlyDictionary<LocalDescriptor, int> Locals => _locals;
+        private readonly Dictionary<LocalDescriptor, int> _locals;
 
-        public IReadOnlyDictionary<LabelDescriptor, Label> Labels { get; }
+        public IReadOnlyDictionary<LabelDescriptor, Label> Labels => _labels;
+        private readonly Dictionary<LabelDescriptor, Label> _labels;
 
         public ILGenerator Generator { get; }
 
-        public Stack<StackType> EvaluationStack { get; } = new Stack<StackType>();
+        public Stack<IStackType> EvaluationStack { get; } = new Stack<IStackType>();
 
 
         public ILGenerationState(MethodDescription owner, ILGenerator generator)
         {
             Owner = owner;
-            Arguments = owner.Arguments.Select((arg, i) => (arg, i: (short)i)).ToDictionary(tpl => tpl.arg, tpl => tpl.i);
-            Locals = owner.Locals.Select((loc, i) => (loc, i)).ToDictionary(tpl =>
+
+            _arguments = new Dictionary<ArgumentDescriptor, int>();
+            for(var i = 0; i < owner.Arguments.Count; ++i)
+                _arguments.Add(owner.Arguments[i], i);
+            
+            _locals = new Dictionary<LocalDescriptor, int>();
+            for(var i = 0; i < owner.Locals.Count; ++i)
             {
-                generator.DeclareLocal(tpl.loc.VariableType);
-                return tpl.loc;
-            }, tpl => tpl.i);
-            Labels = new ReadOnlyDictionary<LabelDescriptor, Label>(owner.Labels.ToDictionary(cl => cl, cl => generator.DefineLabel()));
+                generator.DeclareLocal(owner.Locals[i].VariableType);
+                _locals.Add(owner.Locals[i], i);
+            }
+
+            _labels = new Dictionary<LabelDescriptor, Label>();
+            for(var i = 0; i < owner.Labels.Count; ++i)
+                _labels.Add(owner.Labels[i], generator.DefineLabel());
+
             Generator = generator;
         }
     }

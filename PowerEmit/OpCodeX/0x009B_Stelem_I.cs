@@ -27,14 +27,10 @@ namespace PowerEmit
             }
 
             public override void ValidateStack(IILValidationState state)
-            {
-                throw new NotImplementedException();
-            }
+                => Emit_Stelem.ValidateStack(state, (_, value) => value is StackType.INativeInt);
 
             public override void Invoke(IILInvocationState state)
-            {
-                throw new NotImplementedException();
-            }
+                => Emit_Stelem.Invoke(state, (array, value) => throw new NotImplementedException());
         }
     }
 }

@@ -28,12 +28,33 @@ namespace PowerEmit
 
             public override void ValidateStack(IILValidationState state)
             {
-                throw new NotImplementedException();
+                var type = state.EvaluationStack.Pop();
+                IStackType resultType = type switch
+                {
+                    StackType.IInt32 or
+                    StackType.IInt64 or
+                    StackType.INativeInt or
+                    StackType.IFloat => StackType.NativeInt,
+                    _ => throw new Exception(),
+                };
+                state.EvaluationStack.Push(resultType);
             }
 
             public override void Invoke(IILInvocationState state)
             {
-                throw new NotImplementedException();
+                checked
+                {
+                    var value = state.EvaluationStack.Pop();
+                    var resultValue = value switch
+                    {
+                        StackValue.IInt32     x => StackValue.FromValue((nuint)x.Value),
+                        StackValue.IInt64     x => StackValue.FromValue((nuint)x.Value),
+                        StackValue.INativeInt x => StackValue.FromValue((nuint)x.Value),
+                        StackValue.IFloat x => StackValue.FromValue((nuint)Math.Truncate(x.Value)),
+                        _ => throw new Exception(),
+                    };
+                    state.EvaluationStack.Push(resultValue);
+                }
             }
         }
     }

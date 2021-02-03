@@ -39,7 +39,7 @@ namespace PowerEmit
             public static void ValidateStack(IILValidationState state, Type operand)
             {
                 var type = state.EvaluationStack.Pop();
-                if(type is not (StackType.NativeInt or StackType.ManagedPtr))
+                if(type is not (StackType.INativeInt or StackType.IManagedPtr))
                     throw new Exception();
                 state.EvaluationStack.Push(StackType.FromType(operand));
             }

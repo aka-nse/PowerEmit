@@ -19,12 +19,12 @@ namespace PowerEmit.Disassemblies
             switch(opcode)
             {
             #region Ldarg
-            case OpCodeConst.Ldarg_0: PushOperation(OpCodeX.Ldarg_X(GetArgument(0))); return;
-            case OpCodeConst.Ldarg_1: PushOperation(OpCodeX.Ldarg_X(GetArgument(1))); return;
-            case OpCodeConst.Ldarg_2: PushOperation(OpCodeX.Ldarg_X(GetArgument(2))); return;
-            case OpCodeConst.Ldarg_3: PushOperation(OpCodeX.Ldarg_X(GetArgument(3))); return;
-            case OpCodeConst.Ldarg_S: PushOperation(OpCodeX.Ldarg_X(GetArgument(ReadStreamHead<byte>()))); return;
-            case OpCodeConst.Ldarg:   PushOperation(OpCodeX.Ldarg_X(GetArgument(ReadStreamHead<short>()))); return;
+            case OpCodeConst.Ldarg_0: PushOperation(OpCodeX.Ldarg(GetArgument(0))); return;
+            case OpCodeConst.Ldarg_1: PushOperation(OpCodeX.Ldarg(GetArgument(1))); return;
+            case OpCodeConst.Ldarg_2: PushOperation(OpCodeX.Ldarg(GetArgument(2))); return;
+            case OpCodeConst.Ldarg_3: PushOperation(OpCodeX.Ldarg(GetArgument(3))); return;
+            case OpCodeConst.Ldarg_S: PushOperation(OpCodeX.Ldarg(GetArgument(ReadStreamHead<byte>()))); return;
+            case OpCodeConst.Ldarg:   PushOperation(OpCodeX.Ldarg(GetArgument(ReadStreamHead<short>()))); return;
             #endregion
 
             #region Ldc_I4
@@ -57,12 +57,12 @@ namespace PowerEmit.Disassemblies
             #endregion
 
             #region Stloc
-            case OpCodeConst.Stloc_0: PushOperation(OpCodeX.Stloc_X(GetLocal(0))); return;
-            case OpCodeConst.Stloc_1: PushOperation(OpCodeX.Stloc_X(GetLocal(1))); return;
-            case OpCodeConst.Stloc_2: PushOperation(OpCodeX.Stloc_X(GetLocal(2))); return;
-            case OpCodeConst.Stloc_3: PushOperation(OpCodeX.Stloc_X(GetLocal(3))); return;
-            case OpCodeConst.Stloc_S: PushOperation(OpCodeX.Stloc_X(GetLocal(ReadStreamHead<byte>()))); return;
-            case OpCodeConst.Stloc: PushOperation(OpCodeX.Stloc_X(GetLocal(ReadStreamHead<short>()))); return;
+            case OpCodeConst.Stloc_0: PushOperation(OpCodeX.Stloc(GetLocal(0))); return;
+            case OpCodeConst.Stloc_1: PushOperation(OpCodeX.Stloc(GetLocal(1))); return;
+            case OpCodeConst.Stloc_2: PushOperation(OpCodeX.Stloc(GetLocal(2))); return;
+            case OpCodeConst.Stloc_3: PushOperation(OpCodeX.Stloc(GetLocal(3))); return;
+            case OpCodeConst.Stloc_S: PushOperation(OpCodeX.Stloc(GetLocal(ReadStreamHead<byte>()))); return;
+            case OpCodeConst.Stloc:   PushOperation(OpCodeX.Stloc(GetLocal(ReadStreamHead<short>()))); return;
             #endregion
 
 #if false

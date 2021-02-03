@@ -30,12 +30,17 @@ namespace PowerEmit
 
             public override void ValidateStack(IILValidationState state)
             {
-                throw new NotImplementedException();
+                var type = state.EvaluationStack.Pop();
+                if(type is not StackType.IObj objType)
+                    throw new Exception();
+                if(!(objType.Type?.IsValueType ?? false))
+                    throw new Exception();
+                state.EvaluationStack.Push(StackType.FromType(objType.Type));
             }
 
             public override void Invoke(IILInvocationState state)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
         }
     }

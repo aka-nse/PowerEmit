@@ -29,12 +29,12 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var type = state.EvaluationStack.Pop();
-                StackType resultType = type switch
+                IStackType resultType = type switch
                 {
-                    StackType.Int32 or
-                    StackType.Int64 or
-                    StackType.NativeInt or
-                    StackType.F => StackType.Int32.Instance,
+                    StackType.IInt32 or
+                    StackType.IInt64 or
+                    StackType.INativeInt or
+                    StackType.IFloat => StackType.Int32,
                     _ => throw new Exception(),
                 };
                 state.EvaluationStack.Push(resultType);
@@ -47,10 +47,10 @@ namespace PowerEmit
                     var value = state.EvaluationStack.Pop();
                     var resultValue = value switch
                     {
-                        StackValue.Int32       x => StackValue.FromValue((sbyte)unchecked((uint) x.Value)),
-                        StackValue.Int64       x => StackValue.FromValue((sbyte)unchecked((ulong)x.Value)),
-                        StackValue.NativeInt   x => StackValue.FromValue((sbyte)unchecked((nuint)x.Value)),
-                        StackValue.F x => StackValue.FromValue((sbyte)Math.Abs(Math.Truncate(x.Value))),
+                        StackValue.IInt32     x => StackValue.FromValue((sbyte)unchecked((uint) x.Value)),
+                        StackValue.IInt64     x => StackValue.FromValue((sbyte)unchecked((ulong)x.Value)),
+                        StackValue.INativeInt x => StackValue.FromValue((sbyte)unchecked((nuint)x.Value)),
+                        StackValue.IFloat x => StackValue.FromValue((sbyte)Math.Abs(Math.Truncate(x.Value))),
                         _ => throw new Exception(),
                     };
                     state.EvaluationStack.Push(resultValue);

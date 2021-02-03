@@ -26,6 +26,7 @@ namespace PowerEmit
                 state.Generator.Emit(OpCode);
             }
 
+
             public override void ValidateStack(IILValidationState state)
                 => Emit_Ldloc.ValidateStack(state, 1);
 

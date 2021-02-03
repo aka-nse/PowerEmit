@@ -37,7 +37,7 @@ namespace PowerEmit
             public static void ValidateStack(IILValidationState state, Type operand)
             {
                 var types = state.EvaluationStack.Pop(2);
-                if(types[1] is not StackType.ManagedPtr)
+                if(types[1] is not StackType.IManagedPtr)
                     throw new Exception();
             }
 

@@ -10,22 +10,22 @@ namespace PowerEmit
         /// <summary> Creates new instruction item of <c>ldloca.s</c>. </summary>
         /// <param name="operand"></param>
         /// <returns></returns>
-        public static IILStreamInstruction Ldloca_S(byte operand)
+        public static IILStreamInstruction Ldloca_S(LocalDescriptor operand)
             => new Emit_Ldloca_S(operand);
 
 
-        private sealed class Emit_Ldloca_S : ILStreamInstruction<byte>
+        private sealed class Emit_Ldloca_S : ILStreamInstruction<LocalDescriptor>
         {
             public override OpCode OpCode => OpCodes.Ldloca_S;
 
-            public Emit_Ldloca_S(byte operand)
+            public Emit_Ldloca_S(LocalDescriptor operand)
                 : base(operand)
             {
             }
 
             public override void Emit(IILEmissionState state)
             {
-                state.Generator.Emit(OpCode, Operand);
+                state.Generator.Emit(OpCode, (byte)state.Locals[Operand]);
             }
 
             public override void ValidateStack(IILValidationState state)

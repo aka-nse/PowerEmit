@@ -37,7 +37,7 @@ namespace PowerEmit
 
             public static void ValidateStack(IILValidationState state, int value)
             {
-                state.EvaluationStack.Push(StackType.Int32.Instance);
+                state.EvaluationStack.Push(StackType.Int32);
             }
 
             public static bool Invoke(IILInvocationState state, int value)

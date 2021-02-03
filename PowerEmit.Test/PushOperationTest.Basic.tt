@@ -9,6 +9,19 @@
 <#
 var exclusions = new []
 {
+    OpCodes.Ldarg_S,
+    OpCodes.Ldarg,
+    OpCodes.Ldarga_S,
+    OpCodes.Ldarga,
+    OpCodes.Ldloc_S,
+    OpCodes.Ldloc,
+    OpCodes.Ldloca_S,
+    OpCodes.Ldloca,
+    OpCodes.Starg_S,
+    OpCodes.Starg,
+    OpCodes.Stloc_S,
+    OpCodes.Stloc,
+
     OpCodes.Prefix1,
     OpCodes.Prefix2,
     OpCodes.Prefix3,
@@ -40,8 +53,8 @@ namespace PowerEmit
     {
         [Theory]
         [MemberData(nameof(TestArgs_Basic))]
-        private void PushTest_Basic(string testname, Action<ILGenerator> expected, Action<MethodDescription> actual, Type? returnType = null, Type[]? parameterTypes = null)
-            => PushTestCore(testname, expected, actual, returnType, parameterTypes);
+        private void PushTest_Basic(TestCase testCase)
+            => PushTestCore(testCase);
 
 
         public static IEnumerable<object[]> TestArgs_Basic()
@@ -161,7 +174,7 @@ string GetArgValue(OpCode opcode)
     case OperandType.InlineType:
         return "typeof(MockType)";
     case OperandType.InlineVar:
-        return "default(short)";
+        return "default(ushort)";
     case OperandType.ShortInlineBrTarget:
         goto default;
     case OperandType.ShortInlineI:

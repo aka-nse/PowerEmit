@@ -135,11 +135,11 @@ namespace PowerEmit
             var state = new ILGenerationState(this, generator);
             foreach(var op in Stream)
             {
-                op.Emit(state);
                 if(validates)
                 {
                     op.ValidateStack(state);
                 }
+                op.Emit(state);
                 ++state.StreamPosition;
             }
         }

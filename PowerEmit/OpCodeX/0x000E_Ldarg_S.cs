@@ -10,22 +10,22 @@ namespace PowerEmit
         /// <summary> Creates new instruction item of <c>ldarg.s</c>. </summary>
         /// <param name="operand"></param>
         /// <returns></returns>
-        public static IILStreamInstruction Ldarg_S(byte operand)
+        public static IILStreamInstruction Ldarg_S(ArgumentDescriptor operand)
             => new Emit_Ldarg_S(operand);
 
 
-        private sealed class Emit_Ldarg_S : ILStreamInstruction<byte>
+        private sealed class Emit_Ldarg_S : ILStreamInstruction<ArgumentDescriptor>
         {
             public override OpCode OpCode => OpCodes.Ldarg_S;
 
-            public Emit_Ldarg_S(byte operand)
+            public Emit_Ldarg_S(ArgumentDescriptor operand)
                 : base(operand)
             {
             }
 
             public override void Emit(IILEmissionState state)
             {
-                state.Generator.Emit(OpCode, Operand);
+                state.Generator.Emit(OpCode, (byte)state.Arguments[Operand]);
             }
 
             public override void ValidateStack(IILValidationState state)

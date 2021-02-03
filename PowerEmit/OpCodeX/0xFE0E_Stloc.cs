@@ -10,23 +10,22 @@ namespace PowerEmit
         /// <summary> Creates new instruction item of <c>stloc</c>. </summary>
         /// <param name="operand"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
-        public static IILStreamInstruction Stloc(ushort operand)
+        public static IILStreamInstruction Stloc(LocalDescriptor operand)
             => new Emit_Stloc(operand);
 
 
-        private sealed class Emit_Stloc : ILStreamInstruction<ushort>
+        private sealed class Emit_Stloc : ILStreamInstruction<LocalDescriptor>
         {
             public override OpCode OpCode => OpCodes.Stloc;
 
-            public Emit_Stloc(ushort operand)
+            public Emit_Stloc(LocalDescriptor operand)
                 : base(operand)
             {
             }
 
             public override void Emit(IILEmissionState state)
             {
-                state.Generator.Emit(OpCode, Operand);
+                state.Generator.Emit(OpCode, (short)(ushort)state.Locals[Operand]);
             }
 
             public override void ValidateStack(IILValidationState state)
@@ -35,21 +34,27 @@ namespace PowerEmit
             public override void Invoke(IILInvocationState state)
                 => Invoke(state, Operand);
 
-            public static void ValidateStack(IILValidationState state, ushort locVar)
+
+            public static void ValidateStack(IILValidationState state, int argIndex)
+                => ValidateStack(state, state.Locals.ReverseLookup(argIndex));
+
+            public static void ValidateStack(IILValidationState state, LocalDescriptor operand)
             {
-                var locDesc = state.Owner.Locals[locVar];
                 var type = state.EvaluationStack.Pop();
-                if(!type.IsAssignableTo(locDesc))
+                if(!type.IsAssignableTo(operand))
                     throw new Exception();
             }
 
-            public static void Invoke(IILInvocationState state, ushort locVar)
+
+            public static void Invoke(IILInvocationState state, int argIndex)
+                => Invoke(state, state.Locals.ReverseLookup(argIndex));
+
+            public static void Invoke(IILInvocationState state, LocalDescriptor operand)
             {
-                var locDesc = state.Owner.Locals[locVar];
                 var value = state.EvaluationStack.Pop();
-                if(!value.TryToAssignable(locDesc).Try(out var valueObj))
+                if(!value.TryToAssignable(operand).Try(out var valueObj))
                     throw new Exception();
-                state.Locals[locVar] = valueObj;
+                state.Locals[operand] = valueObj;
             }
         }
     }

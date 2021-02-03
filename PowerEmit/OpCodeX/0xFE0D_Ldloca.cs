@@ -10,23 +10,22 @@ namespace PowerEmit
         /// <summary> Creates new instruction item of <c>ldloca</c>. </summary>
         /// <param name="operand"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
-        public static IILStreamInstruction Ldloca(ushort operand)
+        public static IILStreamInstruction Ldloca(LocalDescriptor operand)
             => new Emit_Ldloca(operand);
 
 
-        private sealed class Emit_Ldloca : ILStreamInstruction<ushort>
+        private sealed class Emit_Ldloca : ILStreamInstruction<LocalDescriptor>
         {
             public override OpCode OpCode => OpCodes.Ldloca;
 
-            public Emit_Ldloca(ushort operand)
+            public Emit_Ldloca(LocalDescriptor operand)
                 : base(operand)
             {
             }
 
             public override void Emit(IILEmissionState state)
             {
-                state.Generator.Emit(OpCode, Operand);
+                state.Generator.Emit(OpCode, (short)(ushort)state.Locals[Operand]);
             }
 
             public override void ValidateStack(IILValidationState state)
@@ -39,15 +38,13 @@ namespace PowerEmit
                 throw new NotImplementedException();
             }
 
-            public static void ValidateStack(IILValidationState state, ushort operand)
+            public static void ValidateStack(IILValidationState state, LocalDescriptor operand)
             {
-                var locDesc = state.Owner.Locals[operand];
-                state.EvaluationStack.Push(StackType.FromType(locDesc.VariableType.MakeByRefType()));
+                state.EvaluationStack.Push(StackType.FromType(operand.VariableType.MakeByRefType()));
             }
 
-            public static void Invoke(IILInvocationState state, ushort operand)
+            public static void Invoke(IILInvocationState state, LocalDescriptor operand)
             {
-                var locDesc = state.Owner.Locals[operand];
                 throw new NotSupportedException();
             }
         }

@@ -10,23 +10,22 @@ namespace PowerEmit
         /// <summary> Creates new instruction item of <c>starg</c>. </summary>
         /// <param name="operand"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
-        public static IILStreamInstruction Starg(ushort operand)
+        public static IILStreamInstruction Starg(ArgumentDescriptor operand)
             => new Emit_Starg(operand);
 
 
-        private sealed class Emit_Starg : ILStreamInstruction<ushort>
+        private sealed class Emit_Starg : ILStreamInstruction<ArgumentDescriptor>
         {
             public override OpCode OpCode => OpCodes.Starg;
 
-            public Emit_Starg(ushort operand)
+            public Emit_Starg(ArgumentDescriptor operand)
                 : base(operand)
             {
             }
 
             public override void Emit(IILEmissionState state)
             {
-                state.Generator.Emit(OpCode, Operand);
+                state.Generator.Emit(OpCode, (short)(ushort)state.Arguments[Operand]);
             }
 
             public override void ValidateStack(IILValidationState state)
@@ -35,23 +34,19 @@ namespace PowerEmit
             public override void Invoke(IILInvocationState state)
                 => Invoke(state, Operand);
 
-            public static void ValidateStack(IILValidationState state, ushort argVar)
+            public static void ValidateStack(IILValidationState state, ArgumentDescriptor operand)
             {
-                var argDesc = state.Owner.Arguments[argVar];
-
                 var type = state.EvaluationStack.Pop();
-                if(!type.IsAssignableTo(argDesc))
+                if(!type.IsAssignableTo(operand))
                     throw new Exception();
             }
 
-            public static void Invoke(IILInvocationState state, ushort argVar)
+            public static void Invoke(IILInvocationState state, ArgumentDescriptor operand)
             {
-                var argDesc = state.Owner.Arguments[argVar];
-
                 var value = state.EvaluationStack.Pop();
-                if(!value.TryToAssignable(argDesc).Try(out var valueObj))
+                if(!value.TryToAssignable(operand).Try(out var valueObj))
                     throw new Exception();
-                state.Arguments[argVar] = valueObj;
+                state.Arguments[operand] = valueObj;
             }
         }
     }

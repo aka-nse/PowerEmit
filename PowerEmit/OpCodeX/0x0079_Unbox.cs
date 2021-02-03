@@ -31,9 +31,9 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var type = state.EvaluationStack.Pop();
-                if(type is not StackType.O)
+                if(type is not StackType.IObj)
                     throw new Exception();
-                state.EvaluationStack.Push(StackType.ManagedPtr.Instance);
+                state.EvaluationStack.Push(StackType.ManagedPtr);
             }
 
             public override void Invoke(IILInvocationState state)

@@ -28,12 +28,25 @@ namespace PowerEmit
 
             public override void ValidateStack(IILValidationState state)
             {
-                throw new NotImplementedException();
+                static bool isAssignable(Type arrayType, IStackType value)
+                    => value switch
+                    {
+                        StackType.IInt64
+                            => true,
+                        StackType.IUserValue uValue when uValue.DataSize == 8
+                            => true,
+                        _ => false,
+                    };
+
+                Emit_Stelem.ValidateStack(state, isAssignable);
             }
 
             public override void Invoke(IILInvocationState state)
             {
-                throw new NotImplementedException();
+                static object? getAssigningValue(Array array, StackValue value)
+                    => throw new NotImplementedException();
+
+                Emit_Stelem.Invoke(state, getAssigningValue);
             }
         }
     }

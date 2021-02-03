@@ -52,30 +52,6 @@ namespace PowerEmit
                 gen => gen.Emit(OpCodes.Ldvirtftn, MockType.MethodInfo),
                 desc => desc.Stream.Add(OpCodeX.Ldvirtftn(MockType.MethodInfo)));
             yield return CreateArgs(
-                OpCodes.Ldarg,
-                gen => gen.Emit(OpCodes.Ldarg, default(short)),
-                desc => desc.Stream.Add(OpCodeX.Ldarg(default(short))));
-            yield return CreateArgs(
-                OpCodes.Ldarga,
-                gen => gen.Emit(OpCodes.Ldarga, default(short)),
-                desc => desc.Stream.Add(OpCodeX.Ldarga(default(short))));
-            yield return CreateArgs(
-                OpCodes.Starg,
-                gen => gen.Emit(OpCodes.Starg, default(short)),
-                desc => desc.Stream.Add(OpCodeX.Starg(default(short))));
-            yield return CreateArgs(
-                OpCodes.Ldloc,
-                gen => gen.Emit(OpCodes.Ldloc, default(short)),
-                desc => desc.Stream.Add(OpCodeX.Ldloc(default(short))));
-            yield return CreateArgs(
-                OpCodes.Ldloca,
-                gen => gen.Emit(OpCodes.Ldloca, default(short)),
-                desc => desc.Stream.Add(OpCodeX.Ldloca(default(short))));
-            yield return CreateArgs(
-                OpCodes.Stloc,
-                gen => gen.Emit(OpCodes.Stloc, default(short)),
-                desc => desc.Stream.Add(OpCodeX.Stloc(default(short))));
-            yield return CreateArgs(
                 OpCodes.Localloc,
                 gen => gen.Emit(OpCodes.Localloc),
                 desc => desc.Stream.Add(OpCodeX.Localloc()));
@@ -183,30 +159,6 @@ namespace PowerEmit
                 OpCodes.Stloc_3,
                 gen => gen.Emit(OpCodes.Stloc_3),
                 desc => desc.Stream.Add(OpCodeX.Stloc_3()));
-            yield return CreateArgs(
-                OpCodes.Ldarg_S,
-                gen => gen.Emit(OpCodes.Ldarg_S, default(byte)),
-                desc => desc.Stream.Add(OpCodeX.Ldarg_S(default(byte))));
-            yield return CreateArgs(
-                OpCodes.Ldarga_S,
-                gen => gen.Emit(OpCodes.Ldarga_S, default(byte)),
-                desc => desc.Stream.Add(OpCodeX.Ldarga_S(default(byte))));
-            yield return CreateArgs(
-                OpCodes.Starg_S,
-                gen => gen.Emit(OpCodes.Starg_S, default(byte)),
-                desc => desc.Stream.Add(OpCodeX.Starg_S(default(byte))));
-            yield return CreateArgs(
-                OpCodes.Ldloc_S,
-                gen => gen.Emit(OpCodes.Ldloc_S, default(byte)),
-                desc => desc.Stream.Add(OpCodeX.Ldloc_S(default(byte))));
-            yield return CreateArgs(
-                OpCodes.Ldloca_S,
-                gen => gen.Emit(OpCodes.Ldloca_S, default(byte)),
-                desc => desc.Stream.Add(OpCodeX.Ldloca_S(default(byte))));
-            yield return CreateArgs(
-                OpCodes.Stloc_S,
-                gen => gen.Emit(OpCodes.Stloc_S, default(byte)),
-                desc => desc.Stream.Add(OpCodeX.Stloc_S(default(byte))));
             yield return CreateArgs(
                 OpCodes.Ldnull,
                 gen => gen.Emit(OpCodes.Ldnull),

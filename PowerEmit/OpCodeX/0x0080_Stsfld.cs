@@ -30,12 +30,15 @@ namespace PowerEmit
 
             public override void ValidateStack(IILValidationState state)
             {
-                throw new NotImplementedException();
+                var type = state.EvaluationStack.Pop();
+                if(!type.IsAssignableTo(Operand.FieldType, PassByKind.Value))
+                    throw new Exception();
             }
 
             public override void Invoke(IILInvocationState state)
             {
-                throw new NotImplementedException();
+                var value = state.EvaluationStack.Pop();
+                Operand.SetValue(null, value.ObjectValue);
             }
         }
     }

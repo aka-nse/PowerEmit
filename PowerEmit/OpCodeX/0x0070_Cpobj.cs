@@ -32,17 +32,17 @@ namespace PowerEmit
             {
                 static bool cpobj(StackType[] types)
                 {
-                    if(types[0] is not StackType.NativeInt && types[0] is not StackType.ManagedPtr)
+                    if(types[0] is not StackType.INativeInt && types[0] is not StackType.IManagedPtr)
                         return false;
-                    if(types[1] is not StackType.NativeInt && types[1] is not StackType.ManagedPtr)
+                    if(types[1] is not StackType.INativeInt && types[1] is not StackType.IManagedPtr)
                         return false;
                     return true;
                 }
 
                 var types = state.EvaluationStack.Pop(2);
-                if(types[0] is not (StackType.NativeInt or StackType.ManagedPtr))
+                if(types[0] is not (StackType.INativeInt or StackType.IManagedPtr))
                     throw new Exception();
-                if(types[1] is not (StackType.NativeInt or StackType.ManagedPtr))
+                if(types[1] is not (StackType.INativeInt or StackType.IManagedPtr))
                     throw new Exception();
             }
 

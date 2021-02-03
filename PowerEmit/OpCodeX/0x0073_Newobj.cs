@@ -31,15 +31,17 @@ namespace PowerEmit
 
             public override void ValidateStack(IILValidationState state)
             {
-                if(Operand.IsStatic)
-                    throw new Exception();
+                var reqInstType = Operand.DeclaringType;
+                var reqArgTypes = Operand.GetParameters().Select(pInfo => pInfo.ParameterType).ToArray();
+                var actArgTypes = state.EvaluationStack.Pop(reqArgTypes.Length);
+                Array.Reverse(actArgTypes);
+                var actInstType = state.EvaluationStack.Pop();
 
-                var argTypes = Operand.GetParameters().Select(pi => pi.ParameterType).ToArray();
-                var types = state.EvaluationStack.Pop(argTypes.Length);
-                Array.Reverse(types);
-                foreach(var (argType, type) in Enumerable.Zip(argTypes, types, (x, y) => (x, y)))
+                if(!actInstType.IsAssignableTo(reqInstType, PassByKind.Reference))
+                    throw new Exception();
+                foreach(var (reqArgType, actArgType) in Enumerable.Zip(reqArgTypes, actArgTypes, (x, y) => (x, y)))
                 {
-                    if(!type.IsAssignableTo(argType))
+                    if(!actArgType.IsAssignableTo(reqArgType, PassByKind.Value))
                         throw new Exception();
                 }
                 state.EvaluationStack.Push(StackType.FromType(Operand.DeclaringType));

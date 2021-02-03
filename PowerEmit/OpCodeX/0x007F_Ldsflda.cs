@@ -30,7 +30,7 @@ namespace PowerEmit
 
             public override void ValidateStack(IILValidationState state)
             {
-                throw new NotImplementedException();
+                state.EvaluationStack.Push(StackType.ManagedPtr);
             }
 
             public override void Invoke(IILInvocationState state)

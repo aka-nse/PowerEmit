@@ -36,7 +36,7 @@ namespace PowerEmit
 
             public static void ValidateStack(IILValidationState state, LabelDescriptor operand)
             {
-                if(state.EvaluationStack.Pop() is not StackType.Int32)
+                if(state.EvaluationStack.Pop() is not StackType.IInt32)
                     throw new Exception();
             }
 
@@ -44,7 +44,7 @@ namespace PowerEmit
             public static void Invoke(IILInvocationState state, LabelDescriptor operand)
             {
                 var value = state.EvaluationStack.Pop();
-                if(value is not StackValue.Int32 intValue)
+                if(value is not StackValue.IInt32 intValue)
                     throw new Exception();
 
                 if(intValue.Value == 0)

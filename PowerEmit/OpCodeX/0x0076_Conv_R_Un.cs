@@ -29,11 +29,11 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var type = state.EvaluationStack.Pop();
-                StackType resultType = type switch
+                IStackType resultType = type switch
                 {
-                    StackType.Int32 or
-                    StackType.Int64 or
-                    StackType.NativeInt => StackType.F.Instance,
+                    StackType.IInt32 or
+                    StackType.IInt64 or
+                    StackType.INativeInt => StackType.Float,
                     _ => throw new Exception(),
                 };
                 state.EvaluationStack.Push(resultType);
@@ -44,9 +44,9 @@ namespace PowerEmit
                 var value = state.EvaluationStack.Pop();
                 var resultValue = value switch
                 {
-                    StackValue.Int32       x => StackValue.FromValue((float)(uint) x.Value),
-                    StackValue.Int64       x => StackValue.FromValue((float)(ulong)x.Value),
-                    StackValue.NativeInt   x => StackValue.FromValue((float)(nuint)x.Value),
+                    StackValue.IInt32       x => StackValue.FromValue((float)(uint) x.Value),
+                    StackValue.IInt64       x => StackValue.FromValue((float)(ulong)x.Value),
+                    StackValue.INativeInt   x => StackValue.FromValue((float)(nuint)x.Value),
                     _ => throw new Exception(),
                 };
                 state.EvaluationStack.Push(resultValue);

@@ -5,15 +5,30 @@ using System.Text;
 
 namespace PowerEmit
 {
-    public abstract class StackValue
+    public interface IStackValue
     {
-        public sealed class Int32 : StackValue
+        IStackType StackType { get; }
+        object? ObjectValue { get; }
+        IMaybe<object?> TryToAssignable(Type variableType);
+        IMaybe<object?> TryToAssignable(VariableDescriptor variableDescriptor);
+        object? ToAssignable(Type variableType);
+        object? ToAssignable(VariableDescriptor variableDescriptor);
+    }
+
+
+    public abstract class StackValue : IStackValue
+    {
+        public interface IInt32 : IStackValue
         {
-            public override StackType StackType => StackType.Int32.Instance;
+            int Value { get; }
+        }
+        private sealed class _Int32 : StackValue, IInt32
+        {
+            public override IStackType StackType => PowerEmit.StackType.Int32;
             public override object? ObjectValue => Value;
             public int Value { get; }
 
-            internal Int32(int value) => Value = value;
+            internal _Int32(int value) => Value = value;
 
             public override IMaybe<object?> TryToAssignable(Type variableType)
             {
@@ -28,15 +43,21 @@ namespace PowerEmit
                 return Maybe.None<object?>();
             }
         }
+        public static IInt32 Int32(int value) => new _Int32(value);
+        [CLSCompliant(false)]  public static IInt32 Int32(uint value) => new _Int32((int)value);
 
 
-        public sealed class Int64 : StackValue
+        public interface IInt64 : IStackValue
         {
-            public override StackType StackType => StackType.Int64.Instance;
+            long Value { get; }
+        }
+        private sealed class _Int64 : StackValue, IInt64
+        {
+            public override IStackType StackType => PowerEmit.StackType.Int64;
             public override object? ObjectValue => Value;
             public long Value { get; }
 
-            internal Int64(long value) => Value = value;
+            internal _Int64(long value) => Value = value;
         
             public override IMaybe<object?> TryToAssignable(Type variableType)
             {
@@ -45,15 +66,21 @@ namespace PowerEmit
                 return Maybe.None<object?>();
             }
         }
+        public static IInt64 Int64(long value) => new _Int64(value);
+        [CLSCompliant(false)] public static IInt64 Int64(ulong value) => new _Int64((long)value);
 
 
-        public sealed class NativeInt : StackValue
+        public interface INativeInt : IStackValue
         {
-            public override StackType StackType => StackType.NativeInt.Instance;
+            nint Value { get; }
+        }
+        private sealed class _NativeInt : StackValue, INativeInt
+        {
+            public override IStackType StackType => PowerEmit.StackType.NativeInt;
             public override object? ObjectValue => Value;
             public nint Value { get; }
 
-            internal NativeInt(nint value) => Value = value;
+            internal _NativeInt(nint value) => Value = value;
 
             public override IMaybe<object?> TryToAssignable(Type variableType)
             {
@@ -62,15 +89,21 @@ namespace PowerEmit
                 return Maybe.None<object?>();
             }
         }
+        public static INativeInt NativeInt(nint value) => new _NativeInt(value);
+        [CLSCompliant(false)] public static INativeInt NativeInt(nuint value) => new _NativeInt((nint)value);
 
 
-        public sealed class F : StackValue
+        public interface IFloat : IStackValue
         {
-            public override StackType StackType => StackType.F.Instance;
+            double Value { get; }
+        }
+        private sealed class _Float : StackValue, IFloat
+        {
+            public override IStackType StackType => PowerEmit.StackType.Float;
             public override object? ObjectValue => Value;
             public double Value { get; }
 
-            internal F(double value) => Value = value;
+            internal _Float(double value) => Value = value;
 
             public override IMaybe<object?> TryToAssignable(Type variableType)
             {
@@ -79,17 +112,22 @@ namespace PowerEmit
                 return Maybe.None<object?>();
             }
         }
+        public static IFloat Float(double value) => new _Float(value);
 
 
-        public sealed class O : StackValue
+        public interface IObj : IStackValue
         {
-            public override StackType StackType { get; }
+            object? Value { get; }
+        }
+        private sealed class _Obj : StackValue, IObj
+        {
+            public override IStackType StackType { get; }
             public override object? ObjectValue => Value;
             public object? Value { get; }
 
-            internal O(object? value)
+            internal _Obj(object? value)
             {
-                StackType = new StackType.O(value?.GetType());
+                StackType = PowerEmit.StackType.Obj(value?.GetType());
                 Value = value;
             }
 
@@ -100,15 +138,20 @@ namespace PowerEmit
                 return Maybe.None<object?>();
             }
         }
+        public static IObj Obj(object? value) => new _Obj(value);
 
 
-        public sealed class ManagedPtr : StackValue
+        public interface IManagedPtr : IStackValue
         {
-            public override StackType StackType => StackType.ManagedPtr.Instance;
+            ManagedPtrValue Value { get; }
+        }
+        private sealed class _ManagedPtr : StackValue, IManagedPtr
+        {
+            public override IStackType StackType => PowerEmit.StackType.ManagedPtr;
             public override object? ObjectValue => Value;
-            public PowerEmit.ManagedPtrValue Value { get; }
+            public ManagedPtrValue Value { get; }
 
-            internal ManagedPtr(PowerEmit.ManagedPtrValue value)
+            internal _ManagedPtr(ManagedPtrValue value)
             {
                 Value = value;
             }
@@ -118,15 +161,20 @@ namespace PowerEmit
                 return Maybe.Just(Value);
             }
         }
+        public static IManagedPtr ManagedPtr(ManagedPtrValue value) => new _ManagedPtr(value);
 
 
-        public sealed class TransientPtr : StackValue
+        public interface ITransientPtr : IStackValue
         {
-            public override StackType StackType => StackType.TransientPtr.Instance;
+            ManagedPtrValue Value { get; } 
+        }
+        private sealed class _TransientPtr : StackValue, ITransientPtr
+        {
+            public override IStackType StackType => PowerEmit.StackType.TransientPtr;
             public override object? ObjectValue => Value;
-            public PowerEmit.ManagedPtrValue Value { get; }
+            public ManagedPtrValue Value { get; }
 
-            internal TransientPtr(PowerEmit.ManagedPtrValue value)
+            internal _TransientPtr(ManagedPtrValue value)
             {
                 Value = value;
             }
@@ -136,17 +184,22 @@ namespace PowerEmit
                 return Maybe.Just(Value);
             }
         }
+        public static ITransientPtr TransientPtr(ManagedPtrValue value) => new _TransientPtr(value);
 
 
-        public sealed class UDValueType : StackValue
+        public interface IUserValue : IStackValue
         {
-            public override StackType StackType { get; }
+            object? Value { get; }
+        }
+        private sealed class _UserValue : StackValue, IUserValue
+        {
+            public override IStackType StackType { get; }
             public override object? ObjectValue => Value;
             public object? Value { get; }
 
-            internal UDValueType(object value)
+            internal _UserValue(object value)
             {
-                StackType = new StackType.UDValueType(value.GetType());
+                StackType = PowerEmit.StackType.UserValue(value.GetType());
                 Value = value;
             }
 
@@ -157,9 +210,10 @@ namespace PowerEmit
                 return Maybe.None<object?>();
             }
         }
+        public static IUserValue UserValue(object value) => new _UserValue(value);
 
 
-        public abstract StackType StackType { get; }
+        public abstract IStackType StackType { get; }
         public abstract object? ObjectValue { get; }
         public abstract IMaybe<object?> TryToAssignable(Type variableType);
         public IMaybe<object?> TryToAssignable(VariableDescriptor variableDescriptor)
@@ -170,83 +224,83 @@ namespace PowerEmit
             => TryToAssignable(variableDescriptor) is IJust<object?> just ? just.Value : throw new InvalidCastException();
 
 
-        public static StackValue FromValue(object? value)
+        public static IStackValue FromValue(object? value)
             => unchecked(value switch
             {
-                bool   x => new Int32(x ? 1 : 0),
-                sbyte  x => new Int32((int)x),
-                short  x => new Int32((int)x),
-                int    x => new Int32((int)x),
-                byte   x => new Int32((int)x),
-                ushort x => new Int32((int)x),
-                uint   x => new Int32((int)x),
-                char   x => new Int32((int)x),
+                bool   x => Int32(x ? 1 : 0),
+                sbyte  x => Int32((int)x),
+                short  x => Int32((int)x),
+                int    x => Int32((int)x),
+                byte   x => Int32((int)x),
+                ushort x => Int32((int)x),
+                uint   x => Int32((int)x),
+                char   x => Int32((int)x),
 
-                long  x => new Int64((long)x),
-                ulong x => new Int64((long)x),
+                long  x => Int64((long)x),
+                ulong x => Int64((long)x),
 
-                nint  x => new NativeInt((nint)x),
-                nuint x => new NativeInt((nint)x),
+                nint  x => NativeInt((nint)x),
+                nuint x => NativeInt((nint)x),
 
-                _ => new O(value),
+                _ => Obj(value),
             });
 
 
-        public static bool Equals(StackValue x, StackValue y)
+        public static bool Equals(IStackValue x, IStackValue y)
         {
             return (x, y) switch
             {
-                (Int32      xx, Int32      yy) => xx.Value == yy.Value,
-                (Int32      xx, NativeInt  yy) => xx.Value == yy.Value,
-                (Int64      xx, Int64      yy) => xx.Value == yy.Value,
-                (NativeInt  xx, Int32      yy) => xx.Value == yy.Value,
-                (NativeInt  xx, NativeInt  yy) => xx.Value == yy.Value,
-                (NativeInt  xx, ManagedPtr yy) => ManagedPtrValue.Equals(xx.Value, yy.Value),
-                (F          xx, F          yy) => xx.Value == yy.Value,
-                (ManagedPtr xx, NativeInt  yy) => ManagedPtrValue.Equals(xx.Value, yy.Value),
-                (ManagedPtr xx, ManagedPtr yy) => ManagedPtrValue.Equals(xx.Value, yy.Value),
-                (O          xx, O          yy) => ReferenceEquals(xx.Value, yy.Value),
+                (IInt32      xx, IInt32      yy) => xx.Value == yy.Value,
+                (IInt32      xx, INativeInt  yy) => xx.Value == yy.Value,
+                (IInt64      xx, IInt64      yy) => xx.Value == yy.Value,
+                (INativeInt  xx, IInt32      yy) => xx.Value == yy.Value,
+                (INativeInt  xx, INativeInt  yy) => xx.Value == yy.Value,
+                (INativeInt  xx, IManagedPtr yy) => ManagedPtrValue.Equals(xx.Value, yy.Value),
+                (IFloat      xx, IFloat      yy) => xx.Value == yy.Value,
+                (IManagedPtr xx, INativeInt  yy) => ManagedPtrValue.Equals(xx.Value, yy.Value),
+                (IManagedPtr xx, IManagedPtr yy) => ManagedPtrValue.Equals(xx.Value, yy.Value),
+                (IObj        xx, IObj        yy) => ReferenceEquals(xx.Value, yy.Value),
                 _ => throw new InvalidOperationException(),
             };
         }
-        public static bool Equals(StackValue[] values)
+        public static bool Equals(IStackValue[] values)
             => Equals(values[1], values[0]);
 
 
-        public static int Compare(StackValue x, StackValue y)
+        public static int Compare(IStackValue x, IStackValue y)
         {
             return (x, y) switch
             {
-                (Int32      xx, Int32      yy) => Comparer<int>   .Default.Compare(xx.Value, yy.Value),
-                (Int32      xx, NativeInt  yy) => Comparer<long>  .Default.Compare(xx.Value, yy.Value),
-                (Int64      xx, Int64      yy) => Comparer<long>  .Default.Compare(xx.Value, yy.Value),
-                (NativeInt  xx, Int32      yy) => Comparer<long>  .Default.Compare(xx.Value, yy.Value),
-                (NativeInt  xx, NativeInt  yy) => Comparer<nint>  .Default.Compare((nint)xx.Value, (nint)yy.Value),
-                (F          xx, F          yy) => Comparer<double>.Default.Compare(xx.Value, yy.Value),
-                (ManagedPtr xx, ManagedPtr yy) => ManagedPtrValue.Compare(xx.Value, yy.Value),
+                (IInt32      xx, IInt32      yy) => Comparer<int>   .Default.Compare(xx.Value, yy.Value),
+                (IInt32      xx, INativeInt  yy) => Comparer<long>  .Default.Compare(xx.Value, yy.Value),
+                (IInt64      xx, IInt64      yy) => Comparer<long>  .Default.Compare(xx.Value, yy.Value),
+                (INativeInt  xx, IInt32      yy) => Comparer<long>  .Default.Compare(xx.Value, yy.Value),
+                (INativeInt  xx, INativeInt  yy) => Comparer<nint>  .Default.Compare((nint)xx.Value, (nint)yy.Value),
+                (IFloat      xx, IFloat      yy) => Comparer<double>.Default.Compare(xx.Value, yy.Value),
+                (IManagedPtr xx, IManagedPtr yy) => ManagedPtrValue.Compare(xx.Value, yy.Value),
                 _ => throw new InvalidOperationException(),
             };
         }
-        public static int Compare(StackValue[] values)
+        public static int Compare(IStackValue[] values)
             => Compare(values[1], values[0]);
 
 
-        public static int Compare_Un(StackValue x, StackValue y)
+        public static int Compare_Un(IStackValue x, IStackValue y)
         {
             return (x, y) switch
             {
 #warning not implemented
-                (Int32       xx, Int32        yy) => Comparer<uint> .Default.Compare((uint) xx.Value, (uint) yy.Value),
-                (Int32       xx, NativeInt    yy) => Comparer<ulong>.Default.Compare((ulong)xx.Value, (ulong)yy.Value),
-                (Int64       xx, Int64        yy) => Comparer<ulong>.Default.Compare((ulong)xx.Value, (ulong)yy.Value),
-                (NativeInt   xx, Int32        yy) => Comparer<ulong>.Default.Compare((nuint)xx.Value, (uint) yy.Value),
-                (NativeInt   xx, NativeInt    yy) => Comparer<nuint>.Default.Compare((nuint)xx.Value, (nuint)yy.Value),
-                (F           xx, F            yy) => Comparer<double>.Default.Compare(xx.Value, yy.Value),
-                (ManagedPtr  xx, ManagedPtr   yy) => ManagedPtrValue.CompareUnsigned(xx.Value, yy.Value),
+                (IInt32       xx, IInt32        yy) => Comparer<uint> .Default.Compare((uint) xx.Value, (uint) yy.Value),
+                (IInt32       xx, INativeInt    yy) => Comparer<ulong>.Default.Compare((ulong)xx.Value, (ulong)yy.Value),
+                (IInt64       xx, IInt64        yy) => Comparer<ulong>.Default.Compare((ulong)xx.Value, (ulong)yy.Value),
+                (INativeInt   xx, IInt32        yy) => Comparer<ulong>.Default.Compare((nuint)xx.Value, (uint) yy.Value),
+                (INativeInt   xx, INativeInt    yy) => Comparer<nuint>.Default.Compare((nuint)xx.Value, (nuint)yy.Value),
+                (IFloat       xx, IFloat        yy) => Comparer<double>.Default.Compare(xx.Value, yy.Value),
+                (IManagedPtr  xx, IManagedPtr   yy) => ManagedPtrValue.CompareUnsigned(xx.Value, yy.Value),
                 _ => throw new InvalidOperationException(),
             };
         }
-        public static int Compare_Un(StackValue[] values)
+        public static int Compare_Un(IStackValue[] values)
             => Compare_Un(values[1], values[0]);
     }
 }

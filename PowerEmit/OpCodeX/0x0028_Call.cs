@@ -37,17 +37,10 @@ namespace PowerEmit
 
             public static void ValidateStack(IILValidationState state, MethodInfo operand)
             {
-                var argTypes = operand.GetParameterTypesWithInstance();
-                var types = state.EvaluationStack.Pop(argTypes.Length);
-                Array.Reverse(types);
-                foreach(var (argType, type) in Enumerable.Zip(argTypes, types, (x, y) => (x, y)))
-                {
-                    if(!type.IsAssignableTo(argType))
-                        throw new Exception();
-                }
-
-                if(operand.ReturnType != typeof(void))
-                    state.EvaluationStack.Push(StackType.FromType(operand.ReturnType));
+                if(operand.IsStatic)
+                    ValidateStackStatic(state, operand);
+                else
+                    ValidateStackInstance(state, operand);
             }
 
             public static void Invoke(IILInvocationState state, MethodInfo operand)
@@ -56,6 +49,41 @@ namespace PowerEmit
                     InvokeStatic(state, operand);
                 else
                     InvokeInstance(state, operand);
+            }
+
+
+            private static void ValidateStackStatic(IILValidationState state, MethodInfo operand)
+            {
+                var argTypes = operand.GetParameterTypesWithInstance();
+                var types = state.EvaluationStack.Pop(argTypes.Length);
+                Array.Reverse(types);
+                foreach(var (argType, type) in Enumerable.Zip(argTypes, types, (x, y) => (x, y)))
+                {
+                    if(!type.IsAssignableTo(argType, PassByKind.Value))
+                        throw new Exception();
+                }
+                if(operand.ReturnType != typeof(void))
+                    state.EvaluationStack.Push(StackType.FromType(operand.ReturnType));
+            }
+
+
+            private static void ValidateStackInstance(IILValidationState state, MethodInfo operand)
+            {
+                var reqInstType = operand.DeclaringType;
+                var reqArgTypes = operand.GetParameters().Select(pInfo => pInfo.ParameterType).ToArray();
+                var actArgTypes = state.EvaluationStack.Pop(reqArgTypes.Length);
+                Array.Reverse(actArgTypes);
+                var actInstType = state.EvaluationStack.Pop();
+
+                if(!actInstType.IsAssignableTo(reqInstType, PassByKind.Reference))
+                    throw new Exception();
+                foreach(var (reqArgType, actArgType) in Enumerable.Zip(reqArgTypes, actArgTypes, (x, y) => (x, y)))
+                {
+                    if(!actArgType.IsAssignableTo(reqArgType, PassByKind.Value))
+                        throw new Exception();
+                }
+                if(operand.ReturnType != typeof(void))
+                    state.EvaluationStack.Push(StackType.FromType(operand.ReturnType));
             }
 
 

@@ -30,7 +30,13 @@ namespace PowerEmit
 
             public override void ValidateStack(IILValidationState state)
             {
-                throw new NotImplementedException();
+                var types = state.EvaluationStack.Pop(2);
+                var (array, index) = (types[1], types[0]);
+                if(array is not StackType.IObj || array.IsAssignableTo(typeof(Array), PassByKind.Value))
+                    throw new Exception();
+                if(index is not (StackType.IInt32 or StackType.INativeInt))
+                    throw new Exception();
+                state.EvaluationStack.Push(StackType.ManagedPtr);
             }
 
             public override void Invoke(IILInvocationState state)

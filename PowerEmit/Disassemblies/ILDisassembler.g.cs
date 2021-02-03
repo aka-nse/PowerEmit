@@ -89,37 +89,37 @@ namespace PowerEmit.Disassemblies
             case OpCodeConst.Ldarg_S:
                 {
                     var value = ReadStreamHead<byte>();
-                    PushOperation(OpCodeX.Ldarg_S(value));
+                    PushOperation(OpCodeX.Ldarg_S(_arguments[value]));
                 }
                 return;
             case OpCodeConst.Ldarga_S:
                 {
                     var value = ReadStreamHead<byte>();
-                    PushOperation(OpCodeX.Ldarga_S(value));
+                    PushOperation(OpCodeX.Ldarga_S(_arguments[value]));
                 }
                 return;
             case OpCodeConst.Starg_S:
                 {
                     var value = ReadStreamHead<byte>();
-                    PushOperation(OpCodeX.Starg_S(value));
+                    PushOperation(OpCodeX.Starg_S(_arguments[value]));
                 }
                 return;
             case OpCodeConst.Ldloc_S:
                 {
                     var value = ReadStreamHead<byte>();
-                    PushOperation(OpCodeX.Ldloc_S(value));
+                    PushOperation(OpCodeX.Ldloc_S(_locals[value]));
                 }
                 return;
             case OpCodeConst.Ldloca_S:
                 {
                     var value = ReadStreamHead<byte>();
-                    PushOperation(OpCodeX.Ldloca_S(value));
+                    PushOperation(OpCodeX.Ldloca_S(_locals[value]));
                 }
                 return;
             case OpCodeConst.Stloc_S:
                 {
                     var value = ReadStreamHead<byte>();
-                    PushOperation(OpCodeX.Stloc_S(value));
+                    PushOperation(OpCodeX.Stloc_S(_locals[value]));
                 }
                 return;
             case OpCodeConst.Ldnull:
@@ -1094,37 +1094,37 @@ namespace PowerEmit.Disassemblies
             case OpCodeConst.Ldarg:
                 {
                     var value = ReadStreamHead<ushort>();
-                    PushOperation(OpCodeX.Ldarg(value));
+                    PushOperation(OpCodeX.Ldarg(_arguments[value]));
                 }
                 return;
             case OpCodeConst.Ldarga:
                 {
                     var value = ReadStreamHead<ushort>();
-                    PushOperation(OpCodeX.Ldarga(value));
+                    PushOperation(OpCodeX.Ldarga(_arguments[value]));
                 }
                 return;
             case OpCodeConst.Starg:
                 {
                     var value = ReadStreamHead<ushort>();
-                    PushOperation(OpCodeX.Starg(value));
+                    PushOperation(OpCodeX.Starg(_arguments[value]));
                 }
                 return;
             case OpCodeConst.Ldloc:
                 {
                     var value = ReadStreamHead<ushort>();
-                    PushOperation(OpCodeX.Ldloc(value));
+                    PushOperation(OpCodeX.Ldloc(_locals[value]));
                 }
                 return;
             case OpCodeConst.Ldloca:
                 {
                     var value = ReadStreamHead<ushort>();
-                    PushOperation(OpCodeX.Ldloca(value));
+                    PushOperation(OpCodeX.Ldloca(_locals[value]));
                 }
                 return;
             case OpCodeConst.Stloc:
                 {
                     var value = ReadStreamHead<ushort>();
-                    PushOperation(OpCodeX.Stloc(value));
+                    PushOperation(OpCodeX.Stloc(_locals[value]));
                 }
                 return;
             case OpCodeConst.Localloc:

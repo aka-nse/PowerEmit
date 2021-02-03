@@ -10,7 +10,6 @@ namespace PowerEmit
         /// <summary> Creates new instruction item of <c>unaligned.</c>. </summary>
         /// <param name="operand"></param>
         /// <returns></returns>
-        [CLSCompliant(false)]
         public static IILStreamInstruction Unaligned(byte operand)
             => new Emit_Unaligned(operand);
 

@@ -31,7 +31,7 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var type = state.EvaluationStack.Pop();
-                if(type is not (StackType.O or StackType.ManagedPtr or StackType.NativeInt))
+                if(type is not (StackType.IObj or StackType.IManagedPtr or StackType.INativeInt))
                     throw new Exception();
                 state.EvaluationStack.Push(StackType.FromType(Operand.FieldType));
             }
@@ -42,11 +42,11 @@ namespace PowerEmit
                 var resultValue = default(object);
                 switch(value)
                 {
-                case StackValue.O:
+                case StackValue.IObj:
                     resultValue = Operand.GetValue(value.ObjectValue);
                     break;
-                case StackValue.ManagedPtr:
-                case StackValue.NativeInt:
+                case StackValue.IManagedPtr:
+                case StackValue.INativeInt:
                     throw new NotSupportedException();
                 default:
                     throw new Exception();

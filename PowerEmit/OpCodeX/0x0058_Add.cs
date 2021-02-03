@@ -29,18 +29,18 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var types = state.EvaluationStack.Pop(2); 
-                StackType resultType = (types[1], types[0]) switch
+                IStackType resultType = (types[1], types[0]) switch
                 {
-                    (StackType.Int32      , StackType.Int32      ) => StackType.Int32      .Instance,
-                    (StackType.Int32      , StackType.NativeInt  ) => StackType.NativeInt  .Instance,
-                    (StackType.Int32      , StackType.ManagedPtr  ) => StackType.ManagedPtr  .Instance,
-                    (StackType.Int64      , StackType.Int64      ) => StackType.Int64      .Instance,
-                    (StackType.NativeInt  , StackType.Int32      ) => StackType.NativeInt  .Instance,
-                    (StackType.NativeInt  , StackType.NativeInt  ) => StackType.NativeInt  .Instance,
-                    (StackType.NativeInt  , StackType.ManagedPtr  ) => StackType.ManagedPtr  .Instance,
-                    (StackType.F, StackType.F) => StackType.F.Instance,
-                    (StackType.ManagedPtr  , StackType.Int32      ) => StackType.ManagedPtr  .Instance,
-                    (StackType.ManagedPtr  , StackType.NativeInt  ) => StackType.ManagedPtr  .Instance,
+                    (StackType.IInt32     , StackType.IInt32     ) => StackType.Int32     ,
+                    (StackType.IInt32     , StackType.INativeInt ) => StackType.NativeInt ,
+                    (StackType.IInt32     , StackType.IManagedPtr) => StackType.ManagedPtr,
+                    (StackType.IInt64     , StackType.IInt64     ) => StackType.Int64     ,
+                    (StackType.INativeInt , StackType.IInt32     ) => StackType.NativeInt ,
+                    (StackType.INativeInt , StackType.INativeInt ) => StackType.NativeInt ,
+                    (StackType.INativeInt , StackType.IManagedPtr) => StackType.ManagedPtr,
+                    (StackType.IFloat     , StackType.IFloat     ) => StackType.Float     ,
+                    (StackType.IManagedPtr, StackType.IInt32     ) => StackType.ManagedPtr,
+                    (StackType.IManagedPtr, StackType.INativeInt ) => StackType.ManagedPtr,
                     _ => throw new Exception(),
                 };
                 state.EvaluationStack.Push(resultType);
@@ -53,16 +53,16 @@ namespace PowerEmit
                     var values = state.EvaluationStack.Pop(2);
                     var resultValue = (values[1], values[0]) switch
                     {
-                        (StackValue.Int32       x, StackValue.Int32       y) => StackValue.FromValue(x.Value + y.Value),
-                        (StackValue.Int32       x, StackValue.NativeInt   y) => StackValue.FromValue(x.Value + y.Value),
-                        (StackValue.Int32       x, StackValue.ManagedPtr   y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
-                        (StackValue.Int64       x, StackValue.Int64       y) => StackValue.FromValue(x.Value + y.Value),
-                        (StackValue.NativeInt   x, StackValue.Int32       y) => StackValue.FromValue(x.Value + y.Value),
-                        (StackValue.NativeInt   x, StackValue.NativeInt   y) => StackValue.FromValue(x.Value + y.Value),
-                        (StackValue.NativeInt   x, StackValue.ManagedPtr   y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
-                        (StackValue.F x, StackValue.F y) => StackValue.FromValue(x.Value + y.Value),
-                        (StackValue.ManagedPtr   x, StackValue.Int32       y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
-                        (StackValue.ManagedPtr   x, StackValue.NativeInt   y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
+                        (StackValue.IInt32       x, StackValue.IInt32       y) => StackValue.FromValue(x.Value + y.Value),
+                        (StackValue.IInt32       x, StackValue.INativeInt   y) => StackValue.FromValue(x.Value + y.Value),
+                        (StackValue.IInt32       x, StackValue.IManagedPtr   y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
+                        (StackValue.IInt64       x, StackValue.IInt64       y) => StackValue.FromValue(x.Value + y.Value),
+                        (StackValue.INativeInt   x, StackValue.IInt32       y) => StackValue.FromValue(x.Value + y.Value),
+                        (StackValue.INativeInt   x, StackValue.INativeInt   y) => StackValue.FromValue(x.Value + y.Value),
+                        (StackValue.INativeInt   x, StackValue.IManagedPtr   y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
+                        (StackValue.IFloat x, StackValue.IFloat y) => StackValue.FromValue(x.Value + y.Value),
+                        (StackValue.IManagedPtr   x, StackValue.IInt32       y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
+                        (StackValue.IManagedPtr   x, StackValue.INativeInt   y) => StackValue.FromValue(ManagedPtrValue.Add(x.Value, y.Value)),
                         _ => throw new Exception(),
                     };
                     state.EvaluationStack.Push(resultValue);

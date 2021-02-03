@@ -33,14 +33,14 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var type = state.EvaluationStack.Pop();
-                if(type is not StackType.Int32)
+                if(type is not StackType.IInt32)
                     throw new Exception();
             }
 
             public override void Invoke(IILInvocationState state)
             {
                 var value = state.EvaluationStack.Pop();
-                if(value is not StackValue.Int32 intValue)
+                if(value is not StackValue.IInt32 intValue)
                     throw new Exception();
 
                 var target = Operand.ElementAtOrDefault(intValue.Value);

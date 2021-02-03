@@ -29,14 +29,14 @@ namespace PowerEmit
             public override void ValidateStack(IILValidationState state)
             {
                 var type = state.EvaluationStack.Pop();
-                if(type is not StackType.O)
+                if(type is not StackType.IObj)
                     throw new Exception();
             }
 
             public override void Invoke(IILInvocationState state)
             {
                 var value = state.EvaluationStack.Pop();
-                if(value is not StackValue.O)
+                if(value is not StackValue.IObj)
                     throw new Exception();
                 state.ThrowError(value.ObjectValue ?? new NullReferenceException());
             }

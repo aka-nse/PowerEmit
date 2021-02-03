@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PowerEmit
 {
@@ -7,8 +8,8 @@ namespace PowerEmit
     {
         MethodDescription Owner { get; }
         int CurrentStreamPosition { get; }
-        object?[] Arguments { get; }
-        object?[] Locals { get; }
+        IDictionary<ArgumentDescriptor, object?> Arguments { get; }
+        IDictionary<LocalDescriptor, object?> Locals { get; }
         Stack<StackValue> EvaluationStack { get; }
         object? ReturnValue { get; }
         void SetReturnValue(object? value);
@@ -22,9 +23,9 @@ namespace PowerEmit
 
         public int CurrentStreamPosition { get; private set; }
 
-        public object?[] Arguments { get; }
+        public IDictionary<ArgumentDescriptor, object?> Arguments { get; }
 
-        public object?[] Locals { get; }
+        public IDictionary<LocalDescriptor, object?> Locals { get; }
 
         public Stack<StackValue> EvaluationStack { get; }
 
@@ -36,8 +37,17 @@ namespace PowerEmit
         public ILInvocationState(MethodDescription owner, object?[] arguments)
         {
             Owner = owner;
-            Arguments = arguments;
-            Locals = new object?[Owner.Locals.Count];
+            if(owner.Arguments.Count != arguments.Length)
+                throw new ArgumentException();
+
+            Arguments = new Dictionary<ArgumentDescriptor, object?>();
+            for(var i = 0; i < owner.Arguments.Count; ++i)
+                Arguments.Add(owner.Arguments[i], arguments[i]);
+
+            Locals = new Dictionary<LocalDescriptor, object?>();
+            for(var i = 0; i < owner.Locals.Count; ++i)
+                Locals.Add(owner.Locals[i], null);
+
             EvaluationStack = new Stack<StackValue>();
         }
 

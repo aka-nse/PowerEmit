@@ -29,13 +29,26 @@ namespace PowerEmit
             }
 
             public override void ValidateStack(IILValidationState state)
-            {
-                throw new NotImplementedException();
-            }
+                => ValidateStack(state, (arrayType, value) => arrayType.GetElementType()!.IsAssignableFrom(Operand));
 
             public override void Invoke(IILInvocationState state)
+                => Invoke(state, (array, value) => throw new NotImplementedException());
+
+            public static void ValidateStack(IILValidationState state, Func<Type, IStackType, bool> isAssignable)
             {
-                throw new NotImplementedException();
+                var types = state.EvaluationStack.Pop(3);
+                var (array, index, value) = (types[2] as StackType.IObj, types[1], types[0]);
+                if(array is null || array.IsAssignableTo(typeof(Array), PassByKind.Reference))
+                    throw new Exception();
+                if(index is not (StackType.IInt32 or StackType.INativeInt))
+                    throw new Exception();
+                if(!isAssignable(array.Type!, value))
+                    throw new Exception();
+            }
+
+            public static void Invoke(IILInvocationState state, Func<Array, StackValue, object?> getAssigningValue)
+            {
+                throw new NotSupportedException();
             }
         }
     }

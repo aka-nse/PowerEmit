@@ -41,6 +41,11 @@ namespace PowerEmit
         }
 
 
+        public static TKey ReverseLookup<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TValue value)
+            => dictionary.First(kv => Equals(kv.Value, value)).Key;
 
+
+        public static TKey ReverseLookup<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TValue value)
+            => dictionary.First(kv => Equals(kv.Value, value)).Key;
     }
 }

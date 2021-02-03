@@ -52,6 +52,45 @@ static (string name, OpCode opcode)[] OpCodeInfos = typeof(OpCodes)
     .OrderBy(tpl => (ushort)tpl.opcode.Value)
     .ToArray();
 
+static OpCode[] AboutLocal = new []{
+    OpCodes.Ldloc_0,
+    OpCodes.Ldloc_1,
+    OpCodes.Ldloc_2,
+    OpCodes.Ldloc_3,
+    OpCodes.Ldloc_S,
+    OpCodes.Ldloc,
+    OpCodes.Ldloca_S,
+    OpCodes.Ldloca,
+    OpCodes.Stloc_0,
+    OpCodes.Stloc_1,
+    OpCodes.Stloc_2,
+    OpCodes.Stloc_3,
+    OpCodes.Stloc_S,
+    OpCodes.Stloc,
+};
+static OpCode[] AboutArgument = new []{
+    OpCodes.Ldarg_0,
+    OpCodes.Ldarg_1,
+    OpCodes.Ldarg_2,
+    OpCodes.Ldarg_3,
+    OpCodes.Ldarg_S,
+    OpCodes.Ldarg,
+    OpCodes.Ldarga_S,
+    OpCodes.Ldarga,
+    OpCodes.Starg_S,
+    OpCodes.Starg,
+};
+
+
+static string ResolveVar(OpCode opcode)
+{
+    if(AboutLocal.Contains(opcode))
+        return "_locals[value]";
+    if(AboutArgument.Contains(opcode))
+        return "_arguments[value]";
+    return "value";
+}
+
 
 public static string[] GetOperationText(string name, OpCode opcode)
 {
@@ -130,7 +169,7 @@ public static string[] GetOperationText(string name, OpCode opcode)
     case OperandType.InlineVar:
         return new []{
             $"var value = ReadStreamHead<ushort>();",
-            $"PushOperation(OpCodeX.{name}(value));",
+            $"PushOperation(OpCodeX.{name}({ResolveVar(opcode)}));",
         };
     case OperandType.ShortInlineBrTarget:
         return new []{
@@ -150,7 +189,7 @@ public static string[] GetOperationText(string name, OpCode opcode)
     case OperandType.ShortInlineVar:
         return new []{
             $"var value = ReadStreamHead<byte>();",
-            $"PushOperation(OpCodeX.{name}(value));",
+            $"PushOperation(OpCodeX.{name}({ResolveVar(opcode)}));",
         };
     default:
         break;
