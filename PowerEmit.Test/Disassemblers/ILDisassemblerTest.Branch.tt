@@ -35,14 +35,14 @@ using System.Reflection.Emit;
 using System.Text;
 using Xunit;
 
-namespace PowerEmit
+namespace PowerEmit.Disassemblers
 {
-    public partial class InstTest
+    public partial class ILDisassemblerTest
     {
         [Theory]
         [MemberData(nameof(GetTestCases_Branch))]
-        public void Emit_Branch(TestCase testCase)
-            => EmitCore(testCase);
+        public void Disassemble_Branch(TestCase testCase)
+            => DisassembleCore(testCase);
 
 
         public static IEnumerable<object[]> GetTestCases_Branch()
@@ -83,45 +83,10 @@ void GenerateJumpTestCase(string lName, string uName, int instSize, int iteratio
                     gen.Emit(OpCodes.Nop);
 <#+ } #>
                 };
-                Action<ILGenerator> actual_label = gen => {
-                    var label = gen.DefineLabel();
-<#+ if(iteration < 0) { #>
-                    gen.MarkLabel(label);
-                    for(var i = -<#=instSize#>; i > <#=iteration#>; --i)
-                        gen.Emit(OpCodes.Nop);
-<#+ } #>
-                    gen.Emit(Inst.<#=uName#>(label));
-<#+ if(iteration >= 0) { #>
-                    for(var i = 0; i < <#=iteration#>; ++i)
-                        gen.Emit(OpCodes.Nop);
-                    gen.MarkLabel(label);
-                    gen.Emit(OpCodes.Nop);
-<#+ } #>
-                };
-                Action<ILGenerator> actual_labelBuilder = gen => {
-                    var labelBuilder = new LabelBuilder("test label");
-<#+ if(iteration < 0) { #>
-                    labelBuilder.MarkLabel(gen);
-                    for(var i = -<#=instSize#>; i > <#=iteration#>; --i)
-                        gen.Emit(OpCodes.Nop);
-<#+ } #>
-                    gen.Emit(Inst.<#=uName#>(labelBuilder));
-<#+ if(iteration >= 0) { #>
-                    for(var i = 0; i < <#=iteration#>; ++i)
-                        gen.Emit(OpCodes.Nop);
-                    labelBuilder.MarkLabel(gen);
-                    gen.Emit(OpCodes.Nop);
-<#+ } #>
-                };
 
                 yield return CreateTestCase(
                     $"<#=lName#> <#=iteration#>",
-                    expected,
-                    actual_label);
-                yield return CreateTestCase(
-                    $"<#=lName#> <#=iteration#> (builder)",
-                    expected,
-                    actual_labelBuilder);
+                    expected);
             }
 <#+
 }

@@ -14,6 +14,11 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>ILDisassemblerTest.Basic.tt</DependentUpon>
       </None>
+      <None Include="Disassemblers\ILDisassemblerTest.Branch.g.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ILDisassemblerTest.Branch.tt</DependentUpon>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -35,6 +40,10 @@
           <Generator>TextTemplatingFileGenerator</Generator>
           <LastGenOutput>ILDisassemblerTest.Basic.g.cs</LastGenOutput>
         </None>
+        <None Update="Disassemblers\ILDisassemblerTest.Branch.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>ILDisassemblerTest.Branch.g.cs</LastGenOutput>
+        </None>
         <None Update="InstTest.Basic.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>InstTest.Basic.g.cs</LastGenOutput>
@@ -43,6 +52,11 @@
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
           <DependentUpon>ILDisassemblerTest.Basic.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Disassemblers\ILDisassemblerTest.Branch.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>ILDisassemblerTest.Branch.tt</DependentUpon>
         </Compile>
         <Compile Update="InstTest.Basic.g.cs">
             <DesignTime>True</DesignTime>

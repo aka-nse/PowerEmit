@@ -27,6 +27,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -34,6 +35,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -41,6 +43,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -123,6 +126,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -130,6 +134,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -137,6 +142,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -155,6 +161,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -162,6 +169,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -169,6 +177,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -187,6 +196,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -194,6 +204,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -201,6 +212,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -347,6 +359,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -354,6 +367,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -361,6 +375,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -379,6 +394,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -386,6 +402,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -393,6 +410,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -411,6 +429,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -418,6 +437,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -425,6 +445,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -443,6 +464,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -450,6 +472,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -457,6 +480,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -475,6 +499,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -482,6 +507,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -489,6 +515,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -571,6 +598,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -578,6 +606,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -585,6 +614,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -603,6 +633,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -610,6 +641,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -617,6 +649,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -635,6 +668,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -642,6 +676,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -649,6 +684,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -795,6 +831,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -802,6 +839,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -809,6 +847,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -827,6 +866,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -834,6 +874,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -841,6 +882,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -859,6 +901,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -866,6 +909,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -873,6 +917,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -891,6 +936,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -898,6 +944,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -905,6 +952,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -923,6 +971,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -930,6 +979,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -937,6 +987,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1019,6 +1070,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1026,6 +1078,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1033,6 +1086,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1051,6 +1105,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1058,6 +1113,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1065,6 +1121,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1083,6 +1140,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1090,6 +1148,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1097,6 +1156,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1243,6 +1303,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1250,6 +1311,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1257,6 +1319,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1275,6 +1338,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1282,6 +1346,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1289,6 +1354,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1307,6 +1373,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1314,6 +1381,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1321,6 +1389,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1339,6 +1408,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1346,6 +1416,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1353,6 +1424,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1371,6 +1443,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1378,6 +1451,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1385,6 +1459,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1467,6 +1542,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1474,6 +1550,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1481,6 +1558,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1499,6 +1577,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1506,6 +1585,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1513,6 +1593,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1531,6 +1612,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1538,6 +1620,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1545,6 +1628,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1691,6 +1775,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1698,6 +1783,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1705,6 +1791,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1723,6 +1810,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1730,6 +1818,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1737,6 +1826,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1755,6 +1845,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1762,6 +1853,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1769,6 +1861,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1787,6 +1880,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1794,6 +1888,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1801,6 +1896,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1819,6 +1915,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1826,6 +1923,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1833,6 +1931,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1915,6 +2014,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1922,6 +2022,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1929,6 +2030,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1947,6 +2049,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1954,6 +2057,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1961,6 +2065,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -1979,6 +2084,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -1986,6 +2092,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -1993,6 +2100,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2139,6 +2247,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2146,6 +2255,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2153,6 +2263,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2171,6 +2282,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2178,6 +2290,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2185,6 +2298,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2203,6 +2317,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2210,6 +2325,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2217,6 +2333,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2235,6 +2352,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2242,6 +2360,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2249,6 +2368,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2267,6 +2387,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2274,6 +2395,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2281,6 +2403,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2363,6 +2486,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2370,6 +2494,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2377,6 +2502,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2395,6 +2521,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2402,6 +2529,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2409,6 +2537,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2427,6 +2556,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2434,6 +2564,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2441,6 +2572,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2587,6 +2719,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2594,6 +2727,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2601,6 +2735,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2619,6 +2754,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2626,6 +2762,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2633,6 +2770,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2651,6 +2789,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2658,6 +2797,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2665,6 +2805,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2683,6 +2824,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2690,6 +2832,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2697,6 +2840,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2715,6 +2859,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2722,6 +2867,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2729,6 +2875,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2811,6 +2958,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2818,6 +2966,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2825,6 +2974,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2843,6 +2993,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2850,6 +3001,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2857,6 +3009,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -2875,6 +3028,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -2882,6 +3036,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -2889,6 +3044,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3035,6 +3191,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3042,6 +3199,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3049,6 +3207,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3067,6 +3226,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3074,6 +3234,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3081,6 +3242,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3099,6 +3261,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3106,6 +3269,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3113,6 +3277,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3131,6 +3296,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3138,6 +3304,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3145,6 +3312,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3163,6 +3331,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3170,6 +3339,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3177,6 +3347,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3259,6 +3430,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3266,6 +3438,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3273,6 +3446,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3291,6 +3465,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3298,6 +3473,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3305,6 +3481,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3323,6 +3500,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3330,6 +3508,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3337,6 +3516,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3483,6 +3663,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3490,6 +3671,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3497,6 +3679,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3515,6 +3698,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3522,6 +3706,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3529,6 +3714,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3547,6 +3733,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3554,6 +3741,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3561,6 +3749,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3579,6 +3768,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3586,6 +3776,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3593,6 +3784,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3611,6 +3803,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3618,6 +3811,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3625,6 +3819,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3707,6 +3902,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3714,6 +3910,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3721,6 +3918,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3739,6 +3937,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3746,6 +3945,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3753,6 +3953,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3771,6 +3972,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3778,6 +3980,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3785,6 +3988,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3931,6 +4135,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3938,6 +4143,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3945,6 +4151,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3963,6 +4170,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -3970,6 +4178,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -3977,6 +4186,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -3995,6 +4205,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4002,6 +4213,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4009,6 +4221,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4027,6 +4240,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4034,6 +4248,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4041,6 +4256,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4059,6 +4275,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4066,6 +4283,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4073,6 +4291,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4155,6 +4374,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4162,6 +4382,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4169,6 +4390,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4187,6 +4409,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4194,6 +4417,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4201,6 +4425,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4219,6 +4444,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4226,6 +4452,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4233,6 +4460,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4379,6 +4607,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4386,6 +4615,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4393,6 +4623,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4411,6 +4642,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4418,6 +4650,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4425,6 +4658,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4443,6 +4677,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4450,6 +4685,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4457,6 +4693,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4475,6 +4712,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4482,6 +4720,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4489,6 +4728,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4507,6 +4747,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4514,6 +4755,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4521,6 +4763,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4603,6 +4846,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4610,6 +4854,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4617,6 +4862,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4635,6 +4881,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4642,6 +4889,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4649,6 +4897,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4667,6 +4916,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4674,6 +4924,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4681,6 +4932,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4827,6 +5079,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4834,6 +5087,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4841,6 +5095,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4859,6 +5114,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4866,6 +5122,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4873,6 +5130,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4891,6 +5149,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4898,6 +5157,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4905,6 +5165,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4923,6 +5184,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4930,6 +5192,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4937,6 +5200,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -4955,6 +5219,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -4962,6 +5227,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -4969,6 +5235,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5051,6 +5318,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5058,6 +5326,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5065,6 +5334,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5083,6 +5353,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5090,6 +5361,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5097,6 +5369,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5115,6 +5388,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5122,6 +5396,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5129,6 +5404,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5275,6 +5551,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5282,6 +5559,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5289,6 +5567,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5307,6 +5586,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5314,6 +5594,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5321,6 +5602,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5339,6 +5621,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5346,6 +5629,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5353,6 +5637,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5371,6 +5656,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5378,6 +5664,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5385,6 +5672,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5403,6 +5691,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5410,6 +5699,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5417,6 +5707,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5499,6 +5790,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5506,6 +5798,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5513,6 +5806,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5531,6 +5825,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5538,6 +5833,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5545,6 +5841,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5563,6 +5860,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5570,6 +5868,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5577,6 +5876,7 @@ namespace PowerEmit
                     for(var i = 0; i < 0; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5723,6 +6023,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5730,6 +6031,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5737,6 +6039,7 @@ namespace PowerEmit
                     for(var i = 0; i < 1; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5755,6 +6058,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5762,6 +6066,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5769,6 +6074,7 @@ namespace PowerEmit
                     for(var i = 0; i < 127; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5787,6 +6093,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5794,6 +6101,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5801,6 +6109,7 @@ namespace PowerEmit
                     for(var i = 0; i < 128; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(
@@ -5819,6 +6128,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_label = gen => {
                     var label = gen.DefineLabel();
@@ -5826,6 +6136,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
+                    gen.Emit(OpCodes.Nop);
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
                     var labelBuilder = new LabelBuilder("test label");
@@ -5833,6 +6144,7 @@ namespace PowerEmit
                     for(var i = 0; i < 32767; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
+                    gen.Emit(OpCodes.Nop);
                 };
 
                 yield return CreateTestCase(

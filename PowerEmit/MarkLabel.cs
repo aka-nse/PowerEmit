@@ -41,11 +41,15 @@ namespace PowerEmit
         internal MarkLabel(LabelBuilder labelBuilder)
             => _labelBuilder = labelBuilder;
 
-        public Label GetLabel(ILGenerator generator)
-            => _labelBuilder is not null ? _labelBuilder.GetLabel(generator) : _label;
-
         public override void Emit(ILGenerator generator)
-            => generator.MarkLabel(GetLabel(generator));
+        {
+            if(LabelBuilder is LabelBuilder validLabelBuilder)
+                validLabelBuilder.MarkLabel(generator);
+            else if(Label is Label validLabel)
+                generator.MarkLabel(validLabel);
+            else
+                throw new InvalidOperationException();
+        }
 
         public override bool Equals(IILStreamAction other)
             => other is MarkLabel mlOther
