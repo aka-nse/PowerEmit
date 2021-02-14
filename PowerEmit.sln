@@ -11,8 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "etc", "etc", "{ACC7BD2B-267
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EFD175AE-D1C7-40BF-BA89-2C774870149D}"
 	ProjectSection(SolutionItems) = preProject
-		docs\memos.md = docs\memos.md
-		docs\opcode-list.csv = docs\opcode-list.csv
+		docs\opcode.csv = docs\opcode.csv
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{76B213FC-FC46-46C0-AC5E-9768405104F1}"

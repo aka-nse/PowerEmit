@@ -22,28 +22,16 @@ namespace PowerEmit
 
 
         public AssemblyBuilder Assembly { get; }
+        public ModuleBuilder   Module   { get; }
+        public TypeBuilder     Type     { get; }
+        public MethodBuilder   Method   { get; }
+        public ILGenerator     ILGenerator { get; }
 
-
-        public ModuleBuilder Module { get; }
-
-
-        public TypeBuilder Type { get; }
-
-
-        public MethodBuilder Method { get; }
-
-
-        public Type BuiltType
-            => _builtType = _builtType ?? Type.CreateType()!;
         private Type? _builtType;
-
-
-        public MethodInfo BuiltMethod
-            => _builtMethod = _builtMethod ?? BuiltType.GetMethod(Method.Name, BindingFlags.Public | BindingFlags.Static)!;
         private MethodInfo? _builtMethod;
 
 
-        public Builder(Type returnType, params Type[] parameterTypes)
+        public Builder(Type? returnType, Type[]? parameterTypes)
         {
             var assmName = new AssemblyName(GetName("Assembly"));
             Assembly = AssemblyBuilder.DefineDynamicAssembly(assmName, AssemblyBuilderAccess.Run);
@@ -53,12 +41,20 @@ namespace PowerEmit
                                       TypeAttributes.Public,
                                       typeof(object));
 
-            Method = Type.DefineMethod(GetName("Method"), _methAttr, returnType, parameterTypes);
+            Method = Type.DefineMethod(GetName("Method"), _methAttr, returnType ?? typeof(void), parameterTypes);
+            ILGenerator = Method.GetILGenerator();
         }
 
 
-        public byte[]? GetILBytes()
-            => BuiltMethod
+        public Type GetBuiltType()
+            => _builtType ??= Type.CreateType()!;
+
+        public MethodInfo GetBuiltMethodInfo()
+            => _builtMethod ??= GetBuiltType().GetMethod(Method.Name)!;
+
+
+        public byte[]? GetBuiltILBytes()
+            => GetBuiltMethodInfo()
             ?.GetMethodBody()
             ?.GetILAsByteArray();
     }

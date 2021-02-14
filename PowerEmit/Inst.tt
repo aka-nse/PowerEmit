@@ -1,0 +1,292 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".g.cs" #>
+<#
+var opcodes = new (string opcode, OperandInfo[] operandTypes)[]
+{
+    ("Nop"           , null          ),
+    ("Break"         , null          ),
+    ("Ldarg_0"       , null          ),
+    ("Ldarg_1"       , null          ),
+    ("Ldarg_2"       , null          ),
+    ("Ldarg_3"       , null          ),
+    ("Ldloc_0"       , null          ),
+    ("Ldloc_1"       , null          ),
+    ("Ldloc_2"       , null          ),
+    ("Ldloc_3"       , null          ),
+    ("Stloc_0"       , null          ),
+    ("Stloc_1"       , null          ),
+    ("Stloc_2"       , null          ),
+    ("Stloc_3"       , null          ),
+    ("Ldarg_S"       , new OperandInfo[]{"byte"}),
+    ("Ldarga_S"      , new OperandInfo[]{"byte"}),
+    ("Starg_S"       , new OperandInfo[]{"byte"}),
+    ("Ldloc_S"       , new OperandInfo[]{"byte", "LocalBuilder"}),
+    ("Ldloca_S"      , new OperandInfo[]{"byte", "LocalBuilder"}),
+    ("Stloc_S"       , new OperandInfo[]{"byte", "LocalBuilder"}),
+    ("Ldnull"        , null          ),
+    ("Ldc_I4_M1"     , null          ),
+    ("Ldc_I4_0"      , null          ),
+    ("Ldc_I4_1"      , null          ),
+    ("Ldc_I4_2"      , null          ),
+    ("Ldc_I4_3"      , null          ),
+    ("Ldc_I4_4"      , null          ),
+    ("Ldc_I4_5"      , null          ),
+    ("Ldc_I4_6"      , null          ),
+    ("Ldc_I4_7"      , null          ),
+    ("Ldc_I4_8"      , null          ),
+    ("Ldc_I4_S"      , new OperandInfo[]{"sbyte"}),
+    ("Ldc_I4"        , new OperandInfo[]{"int"}),
+    ("Ldc_I8"        , new OperandInfo[]{"long"}),
+    ("Ldc_R4"        , new OperandInfo[]{"float"}),
+    ("Ldc_R8"        , new OperandInfo[]{"double"}),
+    ("Dup"           , null          ),
+    ("Pop"           , null          ),
+    ("Jmp"           , new OperandInfo[]{"MethodInfo"}),
+    ("Call"          , new OperandInfo[]{"MethodInfo", "ConstructorInfo"}),
+//  ("Calli"         , new OperandInfo[]{}),
+    ("Ret"           , null          ),
+    ("Br_S"          , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Brfalse_S"     , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Brtrue_S"      , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Beq_S"         , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bge_S"         , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bgt_S"         , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Ble_S"         , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Blt_S"         , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bne_Un_S"      , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bge_Un_S"      , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bgt_Un_S"      , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Ble_Un_S"      , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Blt_Un_S"      , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Br"            , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Brfalse"       , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Brtrue"        , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Beq"           , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bge"           , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bgt"           , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Ble"           , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Blt"           , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bne_Un"        , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bge_Un"        , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Bgt_Un"        , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Ble_Un"        , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Blt_Un"        , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Switch"        , new OperandInfo[]{"Label[]", "LabelBuilder[]"}),
+    ("Ldind_I1"      , null          ),
+    ("Ldind_U1"      , null          ),
+    ("Ldind_I2"      , null          ),
+    ("Ldind_U2"      , null          ),
+    ("Ldind_I4"      , null          ),
+    ("Ldind_U4"      , null          ),
+    ("Ldind_I8"      , null          ),
+    ("Ldind_I"       , null          ),
+    ("Ldind_R4"      , null          ),
+    ("Ldind_R8"      , null          ),
+    ("Ldind_Ref"     , null          ),
+    ("Stind_Ref"     , null          ),
+    ("Stind_I1"      , null          ),
+    ("Stind_I2"      , null          ),
+    ("Stind_I4"      , null          ),
+    ("Stind_I8"      , null          ),
+    ("Stind_R4"      , null          ),
+    ("Stind_R8"      , null          ),
+    ("Add"           , null          ),
+    ("Sub"           , null          ),
+    ("Mul"           , null          ),
+    ("Div"           , null          ),
+    ("Div_Un"        , null          ),
+    ("Rem"           , null          ),
+    ("Rem_Un"        , null          ),
+    ("And"           , null          ),
+    ("Or"            , null          ),
+    ("Xor"           , null          ),
+    ("Shl"           , null          ),
+    ("Shr"           , null          ),
+    ("Shr_Un"        , null          ),
+    ("Neg"           , null          ),
+    ("Not"           , null          ),
+    ("Conv_I1"       , null          ),
+    ("Conv_I2"       , null          ),
+    ("Conv_I4"       , null          ),
+    ("Conv_I8"       , null          ),
+    ("Conv_R4"       , null          ),
+    ("Conv_R8"       , null          ),
+    ("Conv_U4"       , null          ),
+    ("Conv_U8"       , null          ),
+    ("Callvirt"      , new OperandInfo[]{"MethodInfo"}),
+    ("Cpobj"         , new OperandInfo[]{"Type"}),
+    ("Ldobj"         , new OperandInfo[]{"Type"}),
+    ("Ldstr"         , new OperandInfo[]{"string"}),
+    ("Newobj"        , new OperandInfo[]{"ConstructorInfo"}),
+    ("Castclass"     , new OperandInfo[]{"Type"}),
+    ("Isinst"        , new OperandInfo[]{"Type"}),
+    ("Conv_R_Un"     , null          ),
+    ("Unbox"         , new OperandInfo[]{"Type"}),
+    ("Throw"         , null          ),
+    ("Ldfld"         , new OperandInfo[]{"FieldInfo"}),
+    ("Ldflda"        , new OperandInfo[]{"FieldInfo"}),
+    ("Stfld"         , new OperandInfo[]{"FieldInfo"}),
+    ("Ldsfld"        , new OperandInfo[]{"FieldInfo"}),
+    ("Ldsflda"       , new OperandInfo[]{"FieldInfo"}),
+    ("Stsfld"        , new OperandInfo[]{"FieldInfo"}),
+    ("Stobj"         , new OperandInfo[]{"Type"}),
+    ("Conv_Ovf_I1_Un", null          ),
+    ("Conv_Ovf_I2_Un", null          ),
+    ("Conv_Ovf_I4_Un", null          ),
+    ("Conv_Ovf_I8_Un", null          ),
+    ("Conv_Ovf_U1_Un", null          ),
+    ("Conv_Ovf_U2_Un", null          ),
+    ("Conv_Ovf_U4_Un", null          ),
+    ("Conv_Ovf_U8_Un", null          ),
+    ("Conv_Ovf_I_Un" , null          ),
+    ("Conv_Ovf_U_Un" , null          ),
+    ("Box"           , new OperandInfo[]{"Type"}),
+    ("Newarr"        , new OperandInfo[]{"Type"}),
+    ("Ldlen"         , null          ),
+    ("Ldelema"       , new OperandInfo[]{"Type"}),
+    ("Ldelem_I1"     , null          ),
+    ("Ldelem_U1"     , null          ),
+    ("Ldelem_I2"     , null          ),
+    ("Ldelem_U2"     , null          ),
+    ("Ldelem_I4"     , null          ),
+    ("Ldelem_U4"     , null          ),
+    ("Ldelem_I8"     , null          ),
+    ("Ldelem_I"      , null          ),
+    ("Ldelem_R4"     , null          ),
+    ("Ldelem_R8"     , null          ),
+    ("Ldelem_Ref"    , null          ),
+    ("Stelem_I"      , null          ),
+    ("Stelem_I1"     , null          ),
+    ("Stelem_I2"     , null          ),
+    ("Stelem_I4"     , null          ),
+    ("Stelem_I8"     , null          ),
+    ("Stelem_R4"     , null          ),
+    ("Stelem_R8"     , null          ),
+    ("Stelem_Ref"    , null          ),
+    ("Ldelem"        , new OperandInfo[]{"Type"}),
+    ("Stelem"        , new OperandInfo[]{"Type"}),
+    ("Unbox_Any"     , new OperandInfo[]{"Type"}),
+    ("Conv_Ovf_I1"   , null          ),
+    ("Conv_Ovf_U1"   , null          ),
+    ("Conv_Ovf_I2"   , null          ),
+    ("Conv_Ovf_U2"   , null          ),
+    ("Conv_Ovf_I4"   , null          ),
+    ("Conv_Ovf_U4"   , null          ),
+    ("Conv_Ovf_I8"   , null          ),
+    ("Conv_Ovf_U8"   , null          ),
+    ("Refanyval"     , new OperandInfo[]{"Type"}),
+    ("Ckfinite"      , null          ),
+    ("Mkrefany"      , new OperandInfo[]{"Type"}),
+    ("Ldtoken"       , new OperandInfo[]{"MethodInfo", "FieldInfo", "Type"}),
+    ("Conv_U2"       , null          ),
+    ("Conv_U1"       , null          ),
+    ("Conv_I"        , null          ),
+    ("Conv_Ovf_I"    , null          ),
+    ("Conv_Ovf_U"    , null          ),
+    ("Add_Ovf"       , null          ),
+    ("Add_Ovf_Un"    , null          ),
+    ("Mul_Ovf"       , null          ),
+    ("Mul_Ovf_Un"    , null          ),
+    ("Sub_Ovf"       , null          ),
+    ("Sub_Ovf_Un"    , null          ),
+    ("Endfinally"    , null          ),
+    ("Leave"         , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Leave_S"       , new OperandInfo[]{"Label", "LabelBuilder"}),
+    ("Stind_I"       , null          ),
+    ("Conv_U"        , null          ),
+    ("Arglist"       , null          ),
+    ("Ceq"           , null          ),
+    ("Cgt"           , null          ),
+    ("Cgt_Un"        , null          ),
+    ("Clt"           , null          ),
+    ("Clt_Un"        , null          ),
+    ("Ldftn"         , new OperandInfo[]{"MethodInfo"}),
+    ("Ldvirtftn"     , new OperandInfo[]{"MethodInfo"}),
+    ("Ldarg"         , new OperandInfo[]{"ushort"}),
+    ("Ldarga"        , new OperandInfo[]{"ushort"}),
+    ("Starg"         , new OperandInfo[]{"ushort"}),
+    ("Ldloc"         , new OperandInfo[]{"ushort", "LocalBuilder"}),
+    ("Ldloca"        , new OperandInfo[]{"ushort", "LocalBuilder"}),
+    ("Stloc"         , new OperandInfo[]{"ushort", "LocalBuilder"}),
+    ("Localloc"      , null          ),
+    ("Endfilter"     , null          ),
+    ("Unaligned"     , new OperandInfo[]{"Label", "byte"}),
+    ("Volatile"      , null          ),
+    ("Tailcall"      , null          ),
+    ("Initobj"       , new OperandInfo[]{"Type"}),
+    ("Constrained"   , new OperandInfo[]{"Type"}),
+    ("Cpblk"         , null          ),
+    ("Initblk"       , null          ),
+    ("Rethrow"       , null          ),
+    ("Sizeof"        , new OperandInfo[]{"Type"}),
+    ("Refanytype"    , null          ),
+    ("Readonly"      , null          ),
+};
+GenerateText(opcodes);
+#>
+<#+ void GenerateText((string opcode, OperandInfo[] operandTypes)[] opcodes) { #>
+// <auto-generated>
+// THIS (.cs) FILE IS GENERATED BY T4. DO NOT CHANGE IT. CHANGE THE .tt FILE INSTEAD.
+// </auto-generated>
+using System;
+using System.Reflection;
+using System.Reflection.Emit;
+
+namespace PowerEmit
+{
+    partial struct Inst
+    {
+
+<#+
+foreach(var (opcode, operandTypes) in opcodes)
+{
+    if(operandTypes is null)
+        GenerateNoOperand(opcode);
+    else
+        GenerateWithOperand(opcode, operandTypes);
+}
+#>
+    }
+}
+<#+ } #>
+<#+ void GenerateNoOperand(string opcode) { #>
+        /// <summary> Gets emitter to emit <#=opcode.ToLower().Replace('_', '.')#>. </summary>
+        /// <returns> The built emitter. </returns>
+        public static Inst <#=opcode#>()
+            => new Inst(OpCodes.<#=opcode#>);
+
+
+<#+ } #>
+<#+ void GenerateWithOperand(string opcode, OperandInfo[] operands) { #>
+<#+     foreach(var operand in operands) { #>
+        /// <summary> Gets emitter to emit <#=opcode.ToLower().Replace('_', '.')#>. </summary>
+        /// <param name="operand"> The operand to emit. </param>
+        /// <returns> The built emitter. </returns>
+        public static Inst<<#=operand.Type#>> <#=opcode#>(<#=operand.Type#> operand)
+            => new Inst<<#=operand.Type#>>(OpCodes.<#=opcode#>, operand, <#=operand.EmitOverride#>);
+
+
+<#+     } #>
+<#+ } #>
+<#+
+struct OperandInfo
+{
+    public string Type { get; }
+    public string EmitOverride { get; }
+
+    public OperandInfo(string type, string emitOverride)
+    {
+        Type = type;
+        EmitOverride = emitOverride ?? "null";
+    }
+
+    public static implicit operator OperandInfo(string type)
+        => new OperandInfo(type, null);
+}
+
+
+#>

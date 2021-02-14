@@ -1,82 +1,69 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Company />
-    <Authors>GlassGrass</Authors>
-    <Version>0.1.0</Version>
-    <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and optimize code pass on runtime.</Description>
-      <LangVersion>9.0</LangVersion>
-      <Nullable>Enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Company />
+        <Authors>GlassGrass</Authors>
+        <Version>0.1.0</Version>
+        <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and optimize code pass on runtime.</Description>
+        <LangVersion>9.0</LangVersion>
+        <Nullable>Enable</Nullable>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="OpCodeConst.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>OpCodeConst.tt</DependentUpon>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+        <PackageReference Include="System.Memory" Version="4.5.4" />
+        <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Memory" Version="4.5.1" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
-  </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Disassemblers\ILDisassembler.Entity.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ILDisassembler.Entity.tt</DependentUpon>
+        </Compile>
+        <None Update="Disassemblers\ILDisassembler.Entity.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>ILDisassembler.Entity.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Disassemblies\ILDisassembler.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ILDisassembler.tt</DependentUpon>
-    </Compile>
-    <Compile Update="OpCodeConst.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>OpCodeConst.tt</DependentUpon>
-    </Compile>
-    <Compile Update="OpCodeX.Invariant.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>OpCodeX.Invariant.tt</DependentUpon>
-    </Compile>
-    <Compile Update="OpCodeX.Stateless.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>OpCodeX.Stateless.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Inst.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Inst.tt</DependentUpon>
+        </Compile>
+        <None Update="Inst.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>Inst.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Disassemblies\ILDisassembler.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ILDisassembler.g.cs</LastGenOutput>
-    </None>
-    <None Update="OpCodeConst.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OpCodeConst.g.cs</LastGenOutput>
-    </None>
-    <None Update="OpCodeX.Invariant.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OpCodeX.Invariant.g.cs</LastGenOutput>
-    </None>
-    <None Update="OpCodeX.Stateless.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OpCodeX.Stateless.g.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="OpCodeConst.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>OpCodeConst.tt</DependentUpon>
+        </Compile>
+        <None Update="OpCodeConst.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>OpCodeConst.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
 
 </Project>
