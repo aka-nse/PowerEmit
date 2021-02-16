@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -50,9 +50,15 @@ namespace PowerEmit.Disassemblers
 
             private void Disassemble()
             {
-                while(_current < _stream.Length)
+                while(true)
                 {
                     var index = _current;
+                    PushOperation(Directive.MarkLabel(GetOrAddLabel(index)));
+                    if(index >= _stream.Length)
+                    {
+                        break;
+                    }
+
                     var opcode = (short)_stream[index];
                     if(opcode >= OpCodeConst.Prefix7)
                     {
@@ -63,7 +69,6 @@ namespace PowerEmit.Disassemblers
                     {
                         _current += 1;
                     }
-                    PushOperation(Directive.MarkLabel(GetOrAddLabel(index)));
                     DisassembleNextOpCode(index, opcode);
                 }
             }

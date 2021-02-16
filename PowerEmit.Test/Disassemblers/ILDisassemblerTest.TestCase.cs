@@ -1,4 +1,4 @@
-﻿// #define SERIALIZATION_TESTCASES_ENABLED
+// #define SERIALIZATION_TESTCASES_ENABLED
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,9 +56,11 @@ namespace PowerEmit.Disassemblers
 
         public static object[] CreateTestCase(
             string name,
-            Action<ILGenerator> expected)
+            Action<ILGenerator> expected,
+            Type? returnType = null,
+            Type[]? parameterTypes = null)
         {
-            var builder = new Builder(typeof(void), null);
+            var builder = new Builder(returnType, parameterTypes);
             expected(builder.ILGenerator);
             return CreateTestCase(name, builder.GetBuiltMethodInfo());
         }

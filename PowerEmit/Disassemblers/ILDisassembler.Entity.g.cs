@@ -221,14 +221,20 @@ namespace PowerEmit.Disassemblers
                     return;
                 case OpCodeConst.Jmp:
                     {
-                        var meth = (MethodInfo)Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        PushOperation(Inst.Jmp(meth));
+                        var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
+                        if(callable is MethodInfo meth)
+                            PushOperation(Inst.Jmp(meth));
+                        else if(callable is ConstructorInfo ctor)
+                            PushOperation(Inst.Jmp(ctor));
                     }
                     return;
                 case OpCodeConst.Call:
                     {
-                        var meth = (MethodInfo)Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        PushOperation(Inst.Call(meth));
+                        var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
+                        if(callable is MethodInfo meth)
+                            PushOperation(Inst.Call(meth));
+                        else if(callable is ConstructorInfo ctor)
+                            PushOperation(Inst.Call(ctor));
                     }
                     return;
                 case OpCodeConst.Calli:
@@ -616,8 +622,11 @@ namespace PowerEmit.Disassemblers
                     return;
                 case OpCodeConst.Callvirt:
                     {
-                        var meth = (MethodInfo)Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        PushOperation(Inst.Callvirt(meth));
+                        var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
+                        if(callable is MethodInfo meth)
+                            PushOperation(Inst.Callvirt(meth));
+                        else if(callable is ConstructorInfo ctor)
+                            PushOperation(Inst.Callvirt(ctor));
                     }
                     return;
                 case OpCodeConst.Cpobj:
@@ -640,8 +649,11 @@ namespace PowerEmit.Disassemblers
                     return;
                 case OpCodeConst.Newobj:
                     {
-                        var meth = (ConstructorInfo)Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        PushOperation(Inst.Newobj(meth));
+                        var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
+                        if(callable is MethodInfo meth)
+                            PushOperation(Inst.Newobj(meth));
+                        else if(callable is ConstructorInfo ctor)
+                            PushOperation(Inst.Newobj(ctor));
                     }
                     return;
                 case OpCodeConst.Castclass:
@@ -961,10 +973,10 @@ namespace PowerEmit.Disassemblers
                     {
                         switch(Method.Module.ResolveMember(ReadStreamHead<int>()))
                         {
-                        case Type type: PushOperation(Inst.Ldtoken(type)); break;
+                        case Type type        : PushOperation(Inst.Ldtoken(type));   break;
                         case MethodInfo method: PushOperation(Inst.Ldtoken(method)); break;
-                        case FieldInfo field: PushOperation(Inst.Ldtoken(field)); break;
-                        default: throw new InvalidOperationException();
+                        case FieldInfo field  : PushOperation(Inst.Ldtoken(field));  break;
+                        default               : throw new InvalidOperationException();
                         }
                         throw new NotSupportedException();
                     }
@@ -1083,14 +1095,20 @@ namespace PowerEmit.Disassemblers
                     return;
                 case OpCodeConst.Ldftn:
                     {
-                        var meth = (MethodInfo)Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        PushOperation(Inst.Ldftn(meth));
+                        var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
+                        if(callable is MethodInfo meth)
+                            PushOperation(Inst.Ldftn(meth));
+                        else if(callable is ConstructorInfo ctor)
+                            PushOperation(Inst.Ldftn(ctor));
                     }
                     return;
                 case OpCodeConst.Ldvirtftn:
                     {
-                        var meth = (MethodInfo)Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        PushOperation(Inst.Ldvirtftn(meth));
+                        var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
+                        if(callable is MethodInfo meth)
+                            PushOperation(Inst.Ldvirtftn(meth));
+                        else if(callable is ConstructorInfo ctor)
+                            PushOperation(Inst.Ldvirtftn(ctor));
                     }
                     return;
                 case OpCodeConst.Ldarg:

@@ -1,4 +1,4 @@
-﻿// #define SERIALIZATION_TESTCASES_ENABLED
+// #define SERIALIZATION_TESTCASES_ENABLED
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,19 +47,19 @@ namespace PowerEmit
 
             public void Deserialize(IXunitSerializationInfo info)
             {
-                TestName       = info.GetValue<string             >(nameof(TestName)      );
-                Expected       = info.GetValue<Action<ILGenerator>>(nameof(Expected)      );
-                Actual         = info.GetValue<Action<ILGenerator>>(nameof(Actual)        );
-                ReturnType     = info.GetValue<Type?              >(nameof(ReturnType)    );
-                ParameterTypes = info.GetValue<Type[]?            >(nameof(ParameterTypes));
+                TestName       = info.GetValue<string>(nameof(TestName));
+                Expected       = info.GetValue<Action<ILGenerator>>(nameof(Expected));
+                Actual         = info.GetValue<Action<ILGenerator>>(nameof(Actual));
+                ReturnType     = info.GetValue<Type?>(nameof(ReturnType));
+                ParameterTypes = info.GetValue<Type[]?>(nameof(ParameterTypes));
             }
 
             public void Serialize(IXunitSerializationInfo info)
             {
-                info.AddValue(nameof(TestName)      , TestName      );
-                info.AddValue(nameof(Expected)      , Expected      );
-                info.AddValue(nameof(Actual)        , Actual        );
-                info.AddValue(nameof(ReturnType)    , ReturnType    );
+                info.AddValue(nameof(TestName), TestName);
+                info.AddValue(nameof(Expected), Expected);
+                info.AddValue(nameof(Actual), Actual);
+                info.AddValue(nameof(ReturnType), ReturnType);
                 info.AddValue(nameof(ParameterTypes), ParameterTypes);
             }
         }

@@ -80,7 +80,6 @@ void GenerateJumpTestCase(string lName, string uName, int instSize, int iteratio
                     for(var i = 0; i < <#=iteration#>; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
-                    gen.Emit(OpCodes.Nop);
 <#+ } #>
                 };
                 Action<ILGenerator> actual_label = gen => {
@@ -95,7 +94,6 @@ void GenerateJumpTestCase(string lName, string uName, int instSize, int iteratio
                     for(var i = 0; i < <#=iteration#>; ++i)
                         gen.Emit(OpCodes.Nop);
                     gen.MarkLabel(label);
-                    gen.Emit(OpCodes.Nop);
 <#+ } #>
                 };
                 Action<ILGenerator> actual_labelBuilder = gen => {
@@ -110,7 +108,6 @@ void GenerateJumpTestCase(string lName, string uName, int instSize, int iteratio
                     for(var i = 0; i < <#=iteration#>; ++i)
                         gen.Emit(OpCodes.Nop);
                     labelBuilder.MarkLabel(gen);
-                    gen.Emit(OpCodes.Nop);
 <#+ } #>
                 };
 

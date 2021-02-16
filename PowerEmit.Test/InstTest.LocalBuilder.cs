@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Text;
@@ -18,66 +18,78 @@ namespace PowerEmit
         {
             yield return CreateTestCase(
                 "ldloc.s",
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(OpCodes.Ldloc_S, loc);
                 },
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(Inst.Ldloc_S(loc));
                 });
 
             yield return CreateTestCase(
                 "ldloca.s",
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(OpCodes.Ldloca_S, loc);
                 },
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(Inst.Ldloca_S(loc));
                 });
 
             yield return CreateTestCase(
                 "ldloc",
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(OpCodes.Ldloc, loc);
                 },
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(Inst.Ldloc(loc));
                 });
 
             yield return CreateTestCase(
                 "ldloca",
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(OpCodes.Ldloca, loc);
                 },
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(Inst.Ldloca(loc));
                 });
 
             yield return CreateTestCase(
                 "stloc.s",
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(OpCodes.Stloc_S, loc);
                 },
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(Inst.Stloc_S(loc));
                 });
 
             yield return CreateTestCase(
                 "stloc",
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(OpCodes.Stloc, loc);
                 },
-                gen => {
+                gen =>
+                {
                     var loc = gen.DeclareLocal(typeof(MockType));
                     gen.Emit(Inst.Stloc(loc));
                 });

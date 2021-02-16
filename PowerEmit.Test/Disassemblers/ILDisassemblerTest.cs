@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,9 +28,9 @@ namespace PowerEmit.Disassemblers
             foreach(var action in disassembled.ILActions)
                 builder.ILGenerator.Emit(action);
             var actual = builder.GetBuiltILBytes();
-            
+
             Output.WriteLine("exp: " + string.Join(" ", expected.Select(x => x.ToString("X02"))));
-            Output.WriteLine("act: " + string.Join(" ", actual  .Select(x => x.ToString("X02"))));
+            Output.WriteLine("act: " + string.Join(" ", actual.Select(x => x.ToString("X02"))));
             Assert.Equal(expected, actual);
         }
     }

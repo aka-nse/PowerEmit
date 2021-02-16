@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS0659
+#pragma warning disable CS0659
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;

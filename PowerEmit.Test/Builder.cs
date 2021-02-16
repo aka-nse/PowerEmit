@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -22,10 +22,10 @@ namespace PowerEmit
 
 
         public AssemblyBuilder Assembly { get; }
-        public ModuleBuilder   Module   { get; }
-        public TypeBuilder     Type     { get; }
-        public MethodBuilder   Method   { get; }
-        public ILGenerator     ILGenerator { get; }
+        public ModuleBuilder Module { get; }
+        public TypeBuilder Type { get; }
+        public MethodBuilder Method { get; }
+        public ILGenerator ILGenerator { get; }
 
         private Type? _builtType;
         private MethodInfo? _builtMethod;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
@@ -8,7 +8,7 @@ namespace PowerEmit
 {
     internal static class OpCodeHelper
     {
-        public static int OperandSize<T>(this OperandType operandType, T operand) 
+        public static int OperandSize<T>(this OperandType operandType, T operand)
             => operandType switch
             {
                 OperandType.InlineBrTarget => 4,

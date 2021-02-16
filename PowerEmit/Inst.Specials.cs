@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -26,5 +26,27 @@ namespace PowerEmit
                 (methodInfo, optionalParameterTypes),
                 (generator, opcode, operand) => generator.EmitCall(opcode, operand.methodInfo, optionalParameterTypes));
 
+        #region
+
+        // NOTE:
+        //     Following factories are place holders for ILDisassembler auto-generated code.
+        //     They never do nothing, so do not call them.
+
+        internal static Inst<ConstructorInfo> Jmp(ConstructorInfo operand)
+            => throw new NotSupportedException();
+
+        internal static Inst<ConstructorInfo> Callvirt(ConstructorInfo operand)
+            => throw new NotSupportedException();
+
+        internal static Inst<MethodInfo> Newobj(MethodInfo operand)
+            => throw new NotSupportedException();
+
+        internal static Inst<ConstructorInfo> Ldftn(ConstructorInfo operand)
+            => throw new NotSupportedException();
+
+        internal static Inst<ConstructorInfo> Ldvirtftn(ConstructorInfo operand)
+            => throw new NotSupportedException();
+
+        #endregion
     }
 }

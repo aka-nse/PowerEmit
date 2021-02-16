@@ -116,8 +116,11 @@ public static string[] GetOperationText(string name, OpCode opcode)
         };
     case OperandType.InlineMethod:
         return new []{
-            $"var meth = ({(opcode == OpCodes.Newobj ? "ConstructorInfo" : "MethodInfo")})Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());",
-            $"PushOperation(Inst.{name}(meth));",
+            $"var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());",
+            $"if(callable is MethodInfo meth)",
+            $"    PushOperation(Inst.{name}(meth));",
+            $"else if(callable is ConstructorInfo ctor)",
+            $"    PushOperation(Inst.{name}(ctor));",
         };
     case OperandType.InlineNone:
         return new []{ 
