@@ -10,9 +10,11 @@ namespace PowerEmit.Disassemblers
     {
         public static ILDisassembler Instance { get; } = new ILDisassembler();
 
+
         protected ILDisassembler()
         {
         }
+
 
         public virtual MethodContent Disassemble(MethodBase method)
         {

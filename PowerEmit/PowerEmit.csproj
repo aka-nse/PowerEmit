@@ -3,12 +3,15 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>latest</LangVersion>
-        <Company />
-        <Authors>GlassGrass</Authors>
+        <Company>aka-nse</Company>
+        <Authors>aka-nse</Authors>
         <Version>0.1.0</Version>
-        <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and optimize code pass on runtime.</Description>
+        <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and deoptimize code pass on runtime.</Description>
         <LangVersion>9.0</LangVersion>
         <Nullable>Enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageProjectUrl>https://github.com/aka-nse/PowerEmit</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/aka-nse/PowerEmit</RepositoryUrl>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
