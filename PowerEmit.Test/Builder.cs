@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -22,18 +22,16 @@ namespace PowerEmit
 
 
         public AssemblyBuilder Assembly { get; }
-
-
         public ModuleBuilder Module { get; }
-
-
         public TypeBuilder Type { get; }
-
-
         public MethodBuilder Method { get; }
+        public ILGenerator ILGenerator { get; }
+
+        private Type? _builtType;
+        private MethodInfo? _builtMethod;
 
 
-        public Builder(Type returnType, params Type[] parameterTypes)
+        public Builder(Type? returnType, Type[]? parameterTypes)
         {
             var assmName = new AssemblyName(GetName("Assembly"));
             Assembly = AssemblyBuilder.DefineDynamicAssembly(assmName, AssemblyBuilderAccess.Run);
@@ -43,14 +41,20 @@ namespace PowerEmit
                                       TypeAttributes.Public,
                                       typeof(object));
 
-            Method = Type.DefineMethod(GetName("Method"), _methAttr, returnType, parameterTypes);
+            Method = Type.DefineMethod(GetName("Method"), _methAttr, returnType ?? typeof(void), parameterTypes);
+            ILGenerator = Method.GetILGenerator();
         }
 
 
-        public byte[]? GetILBytes()
-            => Type
-            ?.CreateType()
-            ?.GetMethod(Method.Name)
+        public Type GetBuiltType()
+            => _builtType ??= Type.CreateType()!;
+
+        public MethodInfo GetBuiltMethodInfo()
+            => _builtMethod ??= GetBuiltType().GetMethod(Method.Name)!;
+
+
+        public byte[]? GetBuiltILBytes()
+            => GetBuiltMethodInfo()
             ?.GetMethodBody()
             ?.GetILAsByteArray();
     }

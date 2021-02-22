@@ -1,2 +1,3 @@
-﻿[assembly: System.CLSCompliant(true)]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("PowerEmit.Test")]
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("PowerEmit.Test")]

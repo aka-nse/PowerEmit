@@ -1,97 +1,72 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Company />
-    <Authors>GlassGrass</Authors>
-    <Version>0.1.0</Version>
-    <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and optimize code pass on runtime.</Description>
-      <LangVersion>8.0</LangVersion>
-      <Nullable>Enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Company>aka-nse</Company>
+        <Authors>aka-nse</Authors>
+        <Version>0.1.0</Version>
+        <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and deoptimize code pass on runtime.</Description>
+        <LangVersion>9.0</LangVersion>
+        <Nullable>Enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageProjectUrl>https://github.com/aka-nse/PowerEmit</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/aka-nse/PowerEmit</RepositoryUrl>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="CilMethodDescription.Push_Opt.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilMethodDescription.Push_Opt.tt</DependentUpon>
-    </None>
-    <None Include="CilOperation.Branch.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Branch.tt</DependentUpon>
-    </None>
-  </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Memory" Version="4.5.1" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.2" />
-  </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+        <PackageReference Include="System.Memory" Version="4.5.4" />
+        <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="CilMethodDescription.Push.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilMethodDescription.Push.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CilMethodDescription.Push_Opt.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilMethodDescription.Push_Opt.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CilOperation.Branch.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Branch.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CilOperation.Branch_Opt.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Branch_Opt.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CilOperation.Invariant.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Invariant.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CilOperation.Stateless.g.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CilOperation.Stateless.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="CilMethodDescription.Push.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilMethodDescription.Push.g.cs</LastGenOutput>
-    </None>
-    <None Update="CilMethodDescription.Push_Opt.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilMethodDescription.Push_Opt.g.cs</LastGenOutput>
-    </None>
-    <None Update="CilOperation.Branch.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Branch.g.cs</LastGenOutput>
-    </None>
-    <None Update="CilOperation.Branch_Opt.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Branch_Opt.g.cs</LastGenOutput>
-    </None>
-    <None Update="CilOperation.Invariant.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Invariant.g.cs</LastGenOutput>
-    </None>
-    <None Update="CilOperation.Stateless.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CilOperation.Stateless.g.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Disassemblers\ILDisassembler.Entity.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ILDisassembler.Entity.tt</DependentUpon>
+        </Compile>
+        <None Update="Disassemblers\ILDisassembler.Entity.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>ILDisassembler.Entity.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Inst.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Inst.tt</DependentUpon>
+        </Compile>
+        <None Update="Inst.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>Inst.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="OpCodeConst.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>OpCodeConst.tt</DependentUpon>
+        </Compile>
+        <None Update="OpCodeConst.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>OpCodeConst.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
 
 </Project>
