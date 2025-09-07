@@ -1,18 +1,27 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
+    <PropertyGroup Label="platform and framework environment">
+        <LangVersion>13.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <Company>aka-nse</Company>
-        <Authors>aka-nse</Authors>
+    </PropertyGroup>
+
+    <PropertyGroup Label="package metadata">
+        <PackageId>akanse.$(AssemblyName)</PackageId>
+        <Title>PowerEmit</Title>
         <Version>0.1.0</Version>
+        <Authors>aka-nse</Authors>
+        <Company></Company>
         <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and deoptimize code pass on runtime.</Description>
-        <LangVersion>9.0</LangVersion>
-        <Nullable>Enable</Nullable>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageTags>reflection,IL</PackageTags>
         <PackageProjectUrl>https://github.com/aka-nse/PowerEmit</PackageProjectUrl>
         <RepositoryUrl>https://github.com/aka-nse/PowerEmit</RepositoryUrl>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

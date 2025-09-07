@@ -1,11 +1,11 @@
 # Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
-# C# files
-[*.cs]
-
 #### Core EditorConfig Options ####
 charset = utf-8
+
+# C# files
+[*.cs]
 
 # Indentation and spacing
 indent_size = 4
