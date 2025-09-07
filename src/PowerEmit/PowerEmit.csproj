@@ -53,9 +53,13 @@
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>ILDisassembler.Entity.g.cs</LastGenOutput>
         </None>
-        <None Include="..\LICENSE.txt">
-          <Pack>True</Pack>
-          <PackagePath></PackagePath>
+        <None Include="../../LICENSE.txt">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="../../readme.md">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
         </None>
     </ItemGroup>
 

@@ -15,7 +15,7 @@ try {
     Get-ChildItem -Directory src/*.Test*/TestResults/* | Remove-Item -Recurse
 
     # test and measure coverage
-    dotnet test src/SmartVectorDotNet.slnx --collect:"XPlat Code Coverage" --settings src/etc/coverlet.runsettings
+    dotnet test src/PowerEmit.slnx --collect:"XPlat Code Coverage" --settings src/etc/coverlet.runsettings
 
     # export HTML coverage report
     &./.dotnet/reportgenerator -reports:"src/*.Test*/TestResults/*/coverage.cobertura.xml" -targetdir:".CodeCoverage" -reporttypes:Html
