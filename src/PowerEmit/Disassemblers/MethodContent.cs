@@ -1,28 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+namespace PowerEmit.Disassemblers;
 
-namespace PowerEmit.Disassemblers
+/// <summary>
+/// Represents the content of a method, including its arguments, local variables, labels, and intermediate language (IL) actions.
+/// </summary>
+/// <remarks>
+/// This class provides a read-only view of the components that define a method's structure and behavior.
+/// It is primarily used in scenarios involving dynamic method generation or analysis of IL streams.
+/// </remarks>
+public class MethodContent
 {
-    public class MethodContent
-    {
-        public IReadOnlyList<Type> Arguments { get; }
-        public IReadOnlyList<Type> Locals { get; }
-        public IReadOnlyCollection<LabelBuilder> Labels { get; }
-        public IReadOnlyList<IILStreamAction> ILActions { get; }
+    /// <summary>
+    /// Gets the list of argument types for the method.
+    /// </summary>
+    public IReadOnlyList<Type> Arguments { get; }
 
-        internal MethodContent(
-            IReadOnlyList<Type> arguments,
-            IReadOnlyList<Type> locals,
-            IReadOnlyCollection<LabelBuilder> labels,
-            IReadOnlyList<IILStreamAction> ilActions)
-        {
-            Arguments = arguments;
-            Locals = locals;
-            Labels = labels;
-            ILActions = ilActions;
-        }
+    /// <summary>
+    /// Gets the list of local variable types used within the method.
+    /// </summary>
+    public IReadOnlyList<Type> Locals { get; }
+
+    /// <summary>
+    /// Gets the collection of label builders used for branching and control flow within the method.
+    /// </summary>
+    public IReadOnlyCollection<LabelBuilder> Labels { get; }
+
+    /// <summary>
+    /// Gets the collection of intermediate language (IL) stream actions associated with this instance.
+    /// </summary>
+    public IReadOnlyList<IILStreamAction> ILActions { get; }
+
+    internal MethodContent(
+        IReadOnlyList<Type> arguments,
+        IReadOnlyList<Type> locals,
+        IReadOnlyCollection<LabelBuilder> labels,
+        IReadOnlyList<IILStreamAction> ilActions)
+    {
+        Arguments = arguments;
+        Locals = locals;
+        Labels = labels;
+        ILActions = ilActions;
     }
 }

@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -12,10 +12,14 @@
 using System;
 using System.Reflection.Emit;
 
-namespace PowerEmit
+namespace PowerEmit;
+
+/// <summary>
+/// Provides constants for all IL opcodes defined in <see cref="OpCodes"/>.
+/// </summary>
+public static class OpCodeConst
 {
-    public static class OpCodeConst
-    {
+    #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 <#
 var opcodes = typeof(OpCodes)
     .GetFields(BindingFlags.Public | BindingFlags.Static)
@@ -26,23 +30,27 @@ var opcodes = typeof(OpCodes)
 foreach(var opcode in opcodes)
 {
 #>
-        public const short <#=opcode.name.PadRight(14)#> = <#=opcode.value#>;
+    public const short <#=opcode.name.PadRight(14)#> = <#=opcode.value#>;
 <#
 }
 #>
+    #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
-
-        public static OpCode GetOpCodeInstance(short value)
-            => value switch {
+    /// <summary>
+    /// Gets the <see cref="OpCode"/> instance corresponding to the specified constant value.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static OpCode GetOpCodeInstance(short value)
+        => value switch {
 <#
 foreach(var opcode in opcodes)
 {
 #>
-                <#=opcode.name.PadRight(14)#> => OpCodes.<#=opcode.name.PadRight(14)#>,
+            <#=opcode.name.PadRight(14)#> => OpCodes.<#=opcode.name.PadRight(14)#>,
 <#
 }
 #>
-                _ => default,
-            };
-    }
+            _ => default,
+        };
 }

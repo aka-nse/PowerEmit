@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -236,11 +236,10 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace PowerEmit
-{
-    partial struct Inst
-    {
+namespace PowerEmit;
 
+partial struct Inst
+{
 <#+
 foreach(var (opcode, operandTypes) in opcodes)
 {
@@ -250,25 +249,22 @@ foreach(var (opcode, operandTypes) in opcodes)
         GenerateWithOperand(opcode, operandTypes);
 }
 #>
-    }
 }
 <#+ } #>
 <#+ void GenerateNoOperand(string opcode) { #>
-        /// <summary> Gets emitter to emit <#=opcode.ToLower().Replace('_', '.')#>. </summary>
-        /// <returns> The built emitter. </returns>
-        public static Inst <#=opcode#>()
-            => new Inst(OpCodes.<#=opcode#>);
-
+    /// <summary> Gets emitter to emit <#=opcode.ToLower().Replace('_', '.')#>. </summary>
+    /// <returns> The built emitter. </returns>
+    public static Inst <#=opcode#>()
+        => new Inst(OpCodes.<#=opcode#>);
 
 <#+ } #>
 <#+ void GenerateWithOperand(string opcode, OperandInfo[] operands) { #>
 <#+     foreach(var operand in operands) { #>
-        /// <summary> Gets emitter to emit <#=opcode.ToLower().Replace('_', '.')#>. </summary>
-        /// <param name="operand"> The operand to emit. </param>
-        /// <returns> The built emitter. </returns>
-        public static Inst<<#=operand.Type#>> <#=opcode#>(<#=operand.Type#> operand)
-            => new Inst<<#=operand.Type#>>(OpCodes.<#=opcode#>, operand, <#=operand.EmitOverride#>);
-
+    /// <summary> Gets emitter to emit <#=opcode.ToLower().Replace('_', '.')#>. </summary>
+    /// <param name="operand"> The operand to emit. </param>
+    /// <returns> The built emitter. </returns>
+    public static Inst<<#=operand.Type#>> <#=opcode#>(<#=operand.Type#> operand)
+        => new Inst<<#=operand.Type#>>(OpCodes.<#=opcode#>, operand, <#=operand.EmitOverride#>);
 
 <#+     } #>
 <#+ } #>

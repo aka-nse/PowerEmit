@@ -7,70 +7,69 @@ using System.Text;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace PowerEmit
+namespace PowerEmit;
+
+partial class InstTest
 {
-    partial class InstTest
-    {
-        public class TestCase
+    public class TestCase
 #if SERIALIZATION_TESTCASES_ENABLED
-            : IXunitSerializable
+        : IXunitSerializable
 #endif
+    {
+        public string TestName { get; set; }
+        public Action<ILGenerator> Expected { get; set; }
+        public Action<ILGenerator> Actual { get; set; }
+        public Type? ReturnType { get; set; }
+        public Type[]? ParameterTypes { get; set; }
+
+        public TestCase()
         {
-            public string TestName { get; set; }
-            public Action<ILGenerator> Expected { get; set; }
-            public Action<ILGenerator> Actual { get; set; }
-            public Type? ReturnType { get; set; }
-            public Type[]? ParameterTypes { get; set; }
-
-            public TestCase()
-            {
-                TestName = "";
-                Expected = _ => { };
-                Actual = _ => { };
-            }
-
-            public TestCase(
-                string testname,
-                Action<ILGenerator> expected,
-                Action<ILGenerator> actual,
-                Type? returnType,
-                Type[]? parameterTypes)
-            {
-                TestName       = testname;
-                Expected       = expected;
-                Actual         = actual;
-                ReturnType     = returnType;
-                ParameterTypes = parameterTypes;
-            }
-
-            public override string ToString() => TestName;
-
-            public void Deserialize(IXunitSerializationInfo info)
-            {
-                TestName       = info.GetValue<string>(nameof(TestName));
-                Expected       = info.GetValue<Action<ILGenerator>>(nameof(Expected));
-                Actual         = info.GetValue<Action<ILGenerator>>(nameof(Actual));
-                ReturnType     = info.GetValue<Type?>(nameof(ReturnType));
-                ParameterTypes = info.GetValue<Type[]?>(nameof(ParameterTypes));
-            }
-
-            public void Serialize(IXunitSerializationInfo info)
-            {
-                info.AddValue(nameof(TestName), TestName);
-                info.AddValue(nameof(Expected), Expected);
-                info.AddValue(nameof(Actual), Actual);
-                info.AddValue(nameof(ReturnType), ReturnType);
-                info.AddValue(nameof(ParameterTypes), ParameterTypes);
-            }
+            TestName = "";
+            Expected = _ => { };
+            Actual = _ => { };
         }
 
-
-        public static object[] CreateTestCase(
-            string name,
+        public TestCase(
+            string testname,
             Action<ILGenerator> expected,
             Action<ILGenerator> actual,
-            Type? returnType = null,
-            Type[]? parameterTypes = null)
-            => new object[] { new TestCase(name, expected, actual, returnType, parameterTypes) };
+            Type? returnType,
+            Type[]? parameterTypes)
+        {
+            TestName       = testname;
+            Expected       = expected;
+            Actual         = actual;
+            ReturnType     = returnType;
+            ParameterTypes = parameterTypes;
+        }
+
+        public override string ToString() => TestName;
+
+        public void Deserialize(IXunitSerializationInfo info)
+        {
+            TestName       = info.GetValue<string>(nameof(TestName));
+            Expected       = info.GetValue<Action<ILGenerator>>(nameof(Expected));
+            Actual         = info.GetValue<Action<ILGenerator>>(nameof(Actual));
+            ReturnType     = info.GetValue<Type?>(nameof(ReturnType));
+            ParameterTypes = info.GetValue<Type[]?>(nameof(ParameterTypes));
+        }
+
+        public void Serialize(IXunitSerializationInfo info)
+        {
+            info.AddValue(nameof(TestName), TestName);
+            info.AddValue(nameof(Expected), Expected);
+            info.AddValue(nameof(Actual), Actual);
+            info.AddValue(nameof(ReturnType), ReturnType);
+            info.AddValue(nameof(ParameterTypes), ParameterTypes);
+        }
     }
+
+
+    public static object[] CreateTestCase(
+        string name,
+        Action<ILGenerator> expected,
+        Action<ILGenerator> actual,
+        Type? returnType = null,
+        Type[]? parameterTypes = null)
+        => new object[] { new TestCase(name, expected, actual, returnType, parameterTypes) };
 }

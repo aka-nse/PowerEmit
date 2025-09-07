@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -238,26 +238,25 @@ using System.Reflection.Emit;
 using System.Text;
 using Xunit;
 
-namespace PowerEmit.Disassemblers
+namespace PowerEmit.Disassemblers;
+
+public partial class ILDisassemblerTest
 {
-    public partial class ILDisassemblerTest
+    [Theory]
+    [MemberData(nameof(GetTestCases_Basic))]
+    public void Disassemble_Basic(TestCase testCase)
+        => DisassembleCore(testCase);
+
+
+    public static IEnumerable<object[]> GetTestCases_Basic()
     {
-        [Theory]
-        [MemberData(nameof(GetTestCases_Basic))]
-        public void Disassemble_Basic(TestCase testCase)
-            => DisassembleCore(testCase);
-
-
-        public static IEnumerable<object[]> GetTestCases_Basic()
-        {
 <#  foreach(var (lName, uName, operand) in testCases) { #>
-            yield return CreateTestCase(
-                "<#=lName#>",
-                gen => <#=GetExpected(uName, operand)#>
-                );
+        yield return CreateTestCase(
+            "<#=lName#>",
+            gen => <#=GetExpected(uName, operand)#>
+            );
 <#  } #>
-            yield break;
-        }
+        yield break;
     }
 }
 <#+

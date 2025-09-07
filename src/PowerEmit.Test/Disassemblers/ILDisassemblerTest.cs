@@ -1,37 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace PowerEmit.Disassemblers
+namespace PowerEmit.Disassemblers;
+
+public partial class ILDisassemblerTest(ITestOutputHelper output)
 {
-    public partial class ILDisassemblerTest
+    public ITestOutputHelper Output { get; } = output;
+
+    private void DisassembleCore(TestCase testCase)
     {
-        public ITestOutputHelper Output { get; }
+        var expected = testCase.Method.GetMethodBody()!.GetILAsByteArray()!;
 
-        public ILDisassemblerTest(ITestOutputHelper output)
-        {
-            Output = output;
-        }
+        var disassembled = ILDisassembler.Instance.Disassemble(testCase.Method);
 
-        private void DisassembleCore(TestCase testCase)
-        {
-            var expected = testCase.Method.GetMethodBody()!.GetILAsByteArray();
+        var builder = new Builder(
+            testCase.Method.ReturnType,
+            [.. testCase.Method.GetParameters().Select(p => p.ParameterType)]);
+        foreach(var action in disassembled.ILActions)
+            builder.ILGenerator.Emit(action);
+        var actual = builder.GetBuiltILBytes()!;
 
-            var disassembled = ILDisassembler.Instance.Disassemble(testCase.Method);
-
-            var builder = new Builder(
-                testCase.Method.ReturnType,
-                testCase.Method.GetParameters().Select(p => p.ParameterType).ToArray());
-            foreach(var action in disassembled.ILActions)
-                builder.ILGenerator.Emit(action);
-            var actual = builder.GetBuiltILBytes();
-
-            Output.WriteLine("exp: " + string.Join(" ", expected.Select(x => x.ToString("X02"))));
-            Output.WriteLine("act: " + string.Join(" ", actual.Select(x => x.ToString("X02"))));
-            Assert.Equal(expected, actual);
-        }
+        Output.WriteLine("exp: " + string.Join(" ", expected.Select(x => x.ToString("X02"))));
+        Output.WriteLine("act: " + string.Join(" ", actual.Select(x => x.ToString("X02"))));
+        Assert.Equal(expected, actual);
     }
 }
