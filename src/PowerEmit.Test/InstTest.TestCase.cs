@@ -17,6 +17,7 @@ partial class InstTest
 #endif
     {
         public string TestName { get; set; }
+        public IILStreamAction? TestTargetAction { get; set; }
         public Action<ILGenerator> Expected { get; set; }
         public Action<ILGenerator> Actual { get; set; }
         public Type? ReturnType { get; set; }
@@ -31,32 +32,36 @@ partial class InstTest
 
         public TestCase(
             string testname,
+            IILStreamAction? testTargetAction,
             Action<ILGenerator> expected,
             Action<ILGenerator> actual,
             Type? returnType,
             Type[]? parameterTypes)
         {
-            TestName       = testname;
-            Expected       = expected;
-            Actual         = actual;
-            ReturnType     = returnType;
-            ParameterTypes = parameterTypes;
+            TestName         = testname;
+            TestTargetAction = testTargetAction;
+            Expected        = expected;
+            Actual          = actual;
+            ReturnType      = returnType;
+            ParameterTypes  = parameterTypes;
         }
 
         public override string ToString() => TestName;
 
         public void Deserialize(IXunitSerializationInfo info)
         {
-            TestName       = info.GetValue<string>(nameof(TestName));
-            Expected       = info.GetValue<Action<ILGenerator>>(nameof(Expected));
-            Actual         = info.GetValue<Action<ILGenerator>>(nameof(Actual));
-            ReturnType     = info.GetValue<Type?>(nameof(ReturnType));
-            ParameterTypes = info.GetValue<Type[]?>(nameof(ParameterTypes));
+            TestName         = info.GetValue<string>(nameof(TestName));
+            TestTargetAction = info.GetValue<IILStreamAction?>(nameof(TestTargetAction));
+            Expected         = info.GetValue<Action<ILGenerator>>(nameof(Expected));
+            Actual           = info.GetValue<Action<ILGenerator>>(nameof(Actual));
+            ReturnType       = info.GetValue<Type?>(nameof(ReturnType));
+            ParameterTypes   = info.GetValue<Type[]?>(nameof(ParameterTypes));
         }
 
         public void Serialize(IXunitSerializationInfo info)
         {
             info.AddValue(nameof(TestName), TestName);
+            info.AddValue(nameof(TestTargetAction), TestTargetAction);
             info.AddValue(nameof(Expected), Expected);
             info.AddValue(nameof(Actual), Actual);
             info.AddValue(nameof(ReturnType), ReturnType);
@@ -65,11 +70,20 @@ partial class InstTest
     }
 
 
-    public static object[] CreateTestCase(
+    public static TestCase CreateTestCase(
+        string name,
+        IILStreamAction testTargetAction,
+        Action<ILGenerator> expected,
+        Type? returnType = null,
+        Type[]? parameterTypes = null)
+        => new (name, testTargetAction, expected, gen => gen.Emit(testTargetAction), returnType, parameterTypes);
+
+
+    public static TestCase CreateTestCase(
         string name,
         Action<ILGenerator> expected,
         Action<ILGenerator> actual,
         Type? returnType = null,
         Type[]? parameterTypes = null)
-        => new object[] { new TestCase(name, expected, actual, returnType, parameterTypes) };
+        => new (name, null, expected, actual, returnType, parameterTypes);
 }

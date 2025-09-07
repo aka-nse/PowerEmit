@@ -34,7 +34,7 @@ public class ILDeoptimizer
     }
 
 
-    private static IILStreamAction? Deoptimize(IILStreamAction action)
+    internal static IILStreamAction Deoptimize(IILStreamAction action)
         => action switch
         {
             IInst<byte> inst => inst.OpCode.Value switch
@@ -45,6 +45,11 @@ public class ILDeoptimizer
                 OpCodeConst.Ldloca_S => Inst.Ldloca(inst.Operand),
                 OpCodeConst.Starg_S  => Inst.Starg (inst.Operand),
                 OpCodeConst.Stloc_S  => Inst.Stloc (inst.Operand),
+                _ => action,
+            },
+            IInst<sbyte> inst => inst.OpCode.Value switch
+            {
+                OpCodeConst.Ldc_I4_S => Inst.Ldc_I4(inst.Operand),
                 _ => action,
             },
             IInst<LabelBuilder> inst => inst.OpCode.Value switch

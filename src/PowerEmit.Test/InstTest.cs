@@ -17,9 +17,21 @@ public partial class InstTest(ITestOutputHelper output)
         var actualBuilder = new Builder(testCase.ReturnType, testCase.ParameterTypes);
         testCase.Actual(actualBuilder.ILGenerator);
         var actual = actualBuilder.GetBuiltILBytes()!;
-
-        Output.WriteLine("exp: " + string.Join(" ", expected.Select(x => x.ToString("X02"))));
-        Output.WriteLine("act: " + string.Join(" ", actual.Select(x => x.ToString("X02"))));
-        Assert.Equal(expected, actual);
+        var forcastedByteSize = testCase.TestTargetAction?.ByteSize ?? -1;
+        try
+        {
+            if(forcastedByteSize > 0)
+            {
+                Assert.Equal(expected.Length, forcastedByteSize);
+            }
+            Assert.Equal(expected, actual);
+        }
+        catch
+        {
+            Output.WriteLine($"byte size: {forcastedByteSize}");
+            Output.WriteLine("exp: " + string.Join(" ", expected.Select(x => x.ToString("X02"))));
+            Output.WriteLine("act: " + string.Join(" ", actual.Select(x => x.ToString("X02"))));
+            throw;
+        }
     }
 }

@@ -12,10 +12,10 @@ public partial class InstTest
         => EmitCore(testCase);
 
 
-    public static IEnumerable<object[]> GetTestCases_Integration()
-    {
+    public static TheoryData<TestCase> GetTestCases_Integration() =>
+    [
         #region int Add(int, int)
-        yield return CreateTestCase(
+        CreateTestCase(
             "int Add(int, int)",
             gen =>
             {
@@ -32,12 +32,12 @@ public partial class InstTest
                 gen.Emit(Inst.Ret());
             },
             typeof(int),
-            new[] { typeof(int), typeof(int), }
-            );
+            [typeof(int), typeof(int),]
+            ),
         #endregion
 
         #region int Sum(int[] array)
-        yield return CreateTestCase(
+        CreateTestCase(
             "int Sum(int[] array)",
             gen =>
             {
@@ -138,10 +138,8 @@ public partial class InstTest
                 il_0017.MarkLabel(gen); gen.Emit(Inst.Ret());
             },
             typeof(int),
-            new[] { typeof(int[]), }
-            );
+            [typeof(int[]),]
+            ),
         #endregion
-
-        yield break;
-    }
+    ];
 }
