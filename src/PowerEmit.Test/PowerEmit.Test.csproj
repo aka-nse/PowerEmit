@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>13.0</LangVersion>
+        <Nullable>Enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <RootNamespace>PowerEmit</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+        <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="6.0.4">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\PowerEmit\PowerEmit.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="Disassemblers\ILDisassemblerTest.Basic.g.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ILDisassemblerTest.Basic.tt</DependentUpon>
+      </None>
+      <None Include="Disassemblers\ILDisassemblerTest.Branch.g.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ILDisassemblerTest.Branch.tt</DependentUpon>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="Disassemblers\ILDisassemblerTest.Basic.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>ILDisassemblerTest.Basic.g.cs</LastGenOutput>
+        </None>
+        <None Update="Disassemblers\ILDisassemblerTest.Branch.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>ILDisassemblerTest.Branch.g.cs</LastGenOutput>
+        </None>
+        <None Update="InstTest.Basic.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>InstTest.Basic.g.cs</LastGenOutput>
+        </None>
+        <Compile Update="Disassemblers\ILDisassemblerTest.Basic.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>ILDisassemblerTest.Basic.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Disassemblers\ILDisassemblerTest.Branch.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>ILDisassemblerTest.Branch.tt</DependentUpon>
+        </Compile>
+        <Compile Update="InstTest.Basic.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>InstTest.Basic.tt</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="InstTest.Branch.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>InstTest.Branch.g.cs</LastGenOutput>
+        </None>
+        <Compile Update="InstTest.Branch.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>InstTest.Branch.tt</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+</Project>

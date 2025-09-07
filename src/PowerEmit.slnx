@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/etc/">
+    <File Path="../.editorconfig" />
+    <File Path="../LICENSE.txt" />
+    <File Path="../README.md" />
+  </Folder>
+  <Folder Name="/etc/docs/">
+    <File Path="docs/opcode.csv" />
+  </Folder>
+  <Folder Name="/Test/">
+    <Project Path="PowerEmit.Test/PowerEmit.Test.csproj" />
+  </Folder>
+  <Project Path="PowerEmit/PowerEmit.csproj" />
+</Solution>

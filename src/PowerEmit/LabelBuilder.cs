@@ -1,0 +1,65 @@
+using System.Reflection.Emit;
+
+namespace PowerEmit;
+
+/// <summary>
+/// Provides labels management for IL generation.
+/// </summary>
+/// <param name="name"></param>
+public sealed class LabelBuilder(string name)
+{
+    private readonly Dictionary<ILGenerator, Label> _definedLabels = [];
+    private readonly Dictionary<ILGenerator, Label> _markedLabels  = [];
+
+    /// <summary>
+    /// Gets the name associated with the current instance.
+    /// </summary>
+    public string Name { get; } = name;
+
+    /// <summary>
+    /// Gets a value indicating whether the label has been marked in any IL generator.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() => $"{{LabelBuilder \"{Name}\"}}";
+
+    /// <summary>
+    /// Retrieves a previously defined label for the specified <see cref="ILGenerator"/> or defines a new label if none exists.
+    /// </summary>
+    /// <remarks>
+    /// This method ensures that each <see cref="ILGenerator"/> is associated with a unique label.
+    /// If the label for the specified <see cref="ILGenerator"/> has already been defined, it is returned.
+    /// Otherwise, a new label is defined and stored for future retrieval.
+    /// </remarks>
+    /// <param name="targetGenerator">The <see cref="ILGenerator"/> for which the label is retrieved or defined.</param>
+    /// <returns>
+    /// The <see cref="Label"/> associated with the specified <see cref="ILGenerator"/>.
+    /// If no label was previously defined, a new label is created and returned.
+    /// </returns>
+    public Label GetLabel(ILGenerator targetGenerator)
+    {
+        if(_definedLabels.TryGetValue(targetGenerator, out var value))
+            return value;
+
+        var label = targetGenerator.DefineLabel();
+        _definedLabels.Add(targetGenerator, label);
+        return label;
+    }
+
+    /// <summary>
+    /// Marks a label in the specified <see cref="ILGenerator"/> to indicate a position in the emitted IL code.
+    /// </summary>
+    /// <remarks>
+    /// This method ensures that each <see cref="ILGenerator"/> can have its label marked only once. 
+    /// Attempting to mark a label for the same <see cref="ILGenerator"/> multiple times will result in an exception.
+    /// </remarks>
+    /// <param name="targetGenerator">The <see cref="ILGenerator"/> in which the label will be marked.</param>
+    public void MarkLabel(ILGenerator targetGenerator)
+    {
+        if(_markedLabels.ContainsKey(targetGenerator))
+            throw ExceptionHelper.AlreadyLabelMarked();
+
+        var label = GetLabel(targetGenerator);
+        targetGenerator.MarkLabel(label);
+        _markedLabels.Add(targetGenerator, label);
+    }
+}

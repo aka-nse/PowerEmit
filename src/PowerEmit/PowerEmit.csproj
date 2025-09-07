@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup Label="platform and framework environment">
+        <LangVersion>13.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Label="package metadata">
+        <PackageId>akanse.$(AssemblyName)</PackageId>
+        <Title>PowerEmit</Title>
+        <Version>0.1.0</Version>
+        <Authors>aka-nse</Authors>
+        <Company></Company>
+        <Description>PowerEmit is designed to engage IL emitting, dynamic disassemble, and deoptimize code pass on runtime.</Description>
+        <PackageTags>reflection,IL</PackageTags>
+        <PackageProjectUrl>https://github.com/aka-nse/PowerEmit</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/aka-nse/PowerEmit</RepositoryUrl>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
+        <PackageReference Include="System.Memory" Version="4.5.4" />
+        <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Disassemblers\ILDisassembler.Entity.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ILDisassembler.Entity.tt</DependentUpon>
+        </Compile>
+        <None Update="Disassemblers\ILDisassembler.Entity.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>ILDisassembler.Entity.g.cs</LastGenOutput>
+        </None>
+        <None Include="../../LICENSE.txt">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="../../readme.md">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Inst.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Inst.tt</DependentUpon>
+        </Compile>
+        <None Update="Inst.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>Inst.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="OpCodeConst.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>OpCodeConst.tt</DependentUpon>
+        </Compile>
+        <None Update="OpCodeConst.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>OpCodeConst.g.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+
+</Project>
