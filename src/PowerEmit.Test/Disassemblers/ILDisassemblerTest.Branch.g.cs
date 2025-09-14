@@ -18,10 +18,12 @@ public partial class ILDisassemblerTest
         => DisassembleCore(testCase);
 
 
-    public static IEnumerable<object[]> GetTestCases_Branch()
+    public static TheoryData<TestCase> GetTestCases_Branch()
     {
+        var data = new TheoryData<TestCase>();
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -29,12 +31,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -42,12 +45,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Br_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -55,12 +59,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Br_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -68,12 +73,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -81,12 +87,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br, label);
                 for(var i = 0; i < 0; ++i)
@@ -94,12 +101,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -107,12 +115,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Br, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -120,12 +129,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Br, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -133,12 +143,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Br, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -146,12 +157,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Br, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br, label);
                 for(var i = 0; i < 1; ++i)
@@ -159,12 +171,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br, label);
                 for(var i = 0; i < 127; ++i)
@@ -172,12 +185,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br, label);
                 for(var i = 0; i < 128; ++i)
@@ -185,12 +199,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Br, label);
                 for(var i = 0; i < 32767; ++i)
@@ -198,12 +213,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"br 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -211,12 +227,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -224,12 +241,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brfalse_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -237,12 +255,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brfalse_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -250,12 +269,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -263,12 +283,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse, label);
                 for(var i = 0; i < 0; ++i)
@@ -276,12 +297,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -289,12 +311,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brfalse, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -302,12 +325,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brfalse, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -315,12 +339,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brfalse, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -328,12 +353,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brfalse, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse, label);
                 for(var i = 0; i < 1; ++i)
@@ -341,12 +367,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse, label);
                 for(var i = 0; i < 127; ++i)
@@ -354,12 +381,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse, label);
                 for(var i = 0; i < 128; ++i)
@@ -367,12 +395,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brfalse, label);
                 for(var i = 0; i < 32767; ++i)
@@ -380,12 +409,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brfalse 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -393,12 +423,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -406,12 +437,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brtrue_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -419,12 +451,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brtrue_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -432,12 +465,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -445,12 +479,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue, label);
                 for(var i = 0; i < 0; ++i)
@@ -458,12 +493,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -471,12 +507,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brtrue, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -484,12 +521,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brtrue, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -497,12 +535,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brtrue, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -510,12 +549,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Brtrue, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue, label);
                 for(var i = 0; i < 1; ++i)
@@ -523,12 +563,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue, label);
                 for(var i = 0; i < 127; ++i)
@@ -536,12 +577,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue, label);
                 for(var i = 0; i < 128; ++i)
@@ -549,12 +591,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Brtrue, label);
                 for(var i = 0; i < 32767; ++i)
@@ -562,12 +605,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"brtrue 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -575,12 +619,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -588,12 +633,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Beq_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -601,12 +647,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Beq_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -614,12 +661,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -627,12 +675,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq, label);
                 for(var i = 0; i < 0; ++i)
@@ -640,12 +689,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -653,12 +703,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Beq, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -666,12 +717,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Beq, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -679,12 +731,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Beq, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -692,12 +745,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Beq, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq, label);
                 for(var i = 0; i < 1; ++i)
@@ -705,12 +759,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq, label);
                 for(var i = 0; i < 127; ++i)
@@ -718,12 +773,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq, label);
                 for(var i = 0; i < 128; ++i)
@@ -731,12 +787,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Beq, label);
                 for(var i = 0; i < 32767; ++i)
@@ -744,12 +801,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"beq 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -757,12 +815,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -770,12 +829,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -783,12 +843,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -796,12 +857,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -809,12 +871,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge, label);
                 for(var i = 0; i < 0; ++i)
@@ -822,12 +885,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -835,12 +899,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -848,12 +913,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -861,12 +927,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -874,12 +941,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge, label);
                 for(var i = 0; i < 1; ++i)
@@ -887,12 +955,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge, label);
                 for(var i = 0; i < 127; ++i)
@@ -900,12 +969,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge, label);
                 for(var i = 0; i < 128; ++i)
@@ -913,12 +983,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge, label);
                 for(var i = 0; i < 32767; ++i)
@@ -926,12 +997,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -939,12 +1011,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -952,12 +1025,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -965,12 +1039,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -978,12 +1053,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -991,12 +1067,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt, label);
                 for(var i = 0; i < 0; ++i)
@@ -1004,12 +1081,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -1017,12 +1095,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -1030,12 +1109,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -1043,12 +1123,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -1056,12 +1137,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt, label);
                 for(var i = 0; i < 1; ++i)
@@ -1069,12 +1151,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt, label);
                 for(var i = 0; i < 127; ++i)
@@ -1082,12 +1165,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt, label);
                 for(var i = 0; i < 128; ++i)
@@ -1095,12 +1179,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt, label);
                 for(var i = 0; i < 32767; ++i)
@@ -1108,12 +1193,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -1121,12 +1207,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -1134,12 +1221,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -1147,12 +1235,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -1160,12 +1249,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -1173,12 +1263,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble, label);
                 for(var i = 0; i < 0; ++i)
@@ -1186,12 +1277,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -1199,12 +1291,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -1212,12 +1305,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -1225,12 +1319,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -1238,12 +1333,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble, label);
                 for(var i = 0; i < 1; ++i)
@@ -1251,12 +1347,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble, label);
                 for(var i = 0; i < 127; ++i)
@@ -1264,12 +1361,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble, label);
                 for(var i = 0; i < 128; ++i)
@@ -1277,12 +1375,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble, label);
                 for(var i = 0; i < 32767; ++i)
@@ -1290,12 +1389,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -1303,12 +1403,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -1316,12 +1417,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -1329,12 +1431,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -1342,12 +1445,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -1355,12 +1459,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt, label);
                 for(var i = 0; i < 0; ++i)
@@ -1368,12 +1473,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -1381,12 +1487,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -1394,12 +1501,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -1407,12 +1515,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -1420,12 +1529,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt, label);
                 for(var i = 0; i < 1; ++i)
@@ -1433,12 +1543,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt, label);
                 for(var i = 0; i < 127; ++i)
@@ -1446,12 +1557,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt, label);
                 for(var i = 0; i < 128; ++i)
@@ -1459,12 +1571,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt, label);
                 for(var i = 0; i < 32767; ++i)
@@ -1472,12 +1585,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -1485,12 +1599,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -1498,12 +1613,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bne_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -1511,12 +1627,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bne_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -1524,12 +1641,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -1537,12 +1655,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un, label);
                 for(var i = 0; i < 0; ++i)
@@ -1550,12 +1669,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -1563,12 +1683,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bne_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -1576,12 +1697,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bne_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -1589,12 +1711,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bne_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -1602,12 +1725,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bne_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un, label);
                 for(var i = 0; i < 1; ++i)
@@ -1615,12 +1739,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un, label);
                 for(var i = 0; i < 127; ++i)
@@ -1628,12 +1753,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un, label);
                 for(var i = 0; i < 128; ++i)
@@ -1641,12 +1767,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bne_Un, label);
                 for(var i = 0; i < 32767; ++i)
@@ -1654,12 +1781,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bne.un 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -1667,12 +1795,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -1680,12 +1809,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -1693,12 +1823,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -1706,12 +1837,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -1719,12 +1851,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un, label);
                 for(var i = 0; i < 0; ++i)
@@ -1732,12 +1865,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -1745,12 +1879,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -1758,12 +1893,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -1771,12 +1907,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -1784,12 +1921,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bge_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un, label);
                 for(var i = 0; i < 1; ++i)
@@ -1797,12 +1935,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un, label);
                 for(var i = 0; i < 127; ++i)
@@ -1810,12 +1949,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un, label);
                 for(var i = 0; i < 128; ++i)
@@ -1823,12 +1963,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bge_Un, label);
                 for(var i = 0; i < 32767; ++i)
@@ -1836,12 +1977,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bge.un 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -1849,12 +1991,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -1862,12 +2005,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -1875,12 +2019,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -1888,12 +2033,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -1901,12 +2047,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un, label);
                 for(var i = 0; i < 0; ++i)
@@ -1914,12 +2061,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -1927,12 +2075,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -1940,12 +2089,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -1953,12 +2103,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -1966,12 +2117,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Bgt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un, label);
                 for(var i = 0; i < 1; ++i)
@@ -1979,12 +2131,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un, label);
                 for(var i = 0; i < 127; ++i)
@@ -1992,12 +2145,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un, label);
                 for(var i = 0; i < 128; ++i)
@@ -2005,12 +2159,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Bgt_Un, label);
                 for(var i = 0; i < 32767; ++i)
@@ -2018,12 +2173,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"bgt.un 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -2031,12 +2187,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -2044,12 +2201,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -2057,12 +2215,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -2070,12 +2229,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -2083,12 +2243,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un, label);
                 for(var i = 0; i < 0; ++i)
@@ -2096,12 +2257,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -2109,12 +2271,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -2122,12 +2285,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -2135,12 +2299,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -2148,12 +2313,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ble_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un, label);
                 for(var i = 0; i < 1; ++i)
@@ -2161,12 +2327,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un, label);
                 for(var i = 0; i < 127; ++i)
@@ -2174,12 +2341,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un, label);
                 for(var i = 0; i < 128; ++i)
@@ -2187,12 +2355,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Ble_Un, label);
                 for(var i = 0; i < 32767; ++i)
@@ -2200,12 +2369,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"ble.un 32767",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un_S, label);
                 for(var i = 0; i < 0; ++i)
@@ -2213,12 +2383,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un.s 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -3; --i)
@@ -2226,12 +2397,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un.s -3",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -2; i > -128; --i)
@@ -2239,12 +2411,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_Un_S, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un.s -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un_S, label);
                 for(var i = 0; i < 1; ++i)
@@ -2252,12 +2425,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un.s 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un_S, label);
                 for(var i = 0; i < 127; ++i)
@@ -2265,12 +2439,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un.s 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un, label);
                 for(var i = 0; i < 0; ++i)
@@ -2278,12 +2453,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un 0",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -6; --i)
@@ -2291,12 +2467,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un -6",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -128; --i)
@@ -2304,12 +2481,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un -128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -129; --i)
@@ -2317,12 +2495,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un -129",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.MarkLabel(label);
                 for(var i = -5; i > -32768; --i)
@@ -2330,12 +2509,13 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Blt_Un, label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un -32768",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un, label);
                 for(var i = 0; i < 1; ++i)
@@ -2343,12 +2523,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un 1",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un, label);
                 for(var i = 0; i < 127; ++i)
@@ -2356,12 +2537,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un 127",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un, label);
                 for(var i = 0; i < 128; ++i)
@@ -2369,12 +2551,13 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un 128",
-                expected);
+                expected));
         }
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
                 gen.Emit(OpCodes.Blt_Un, label);
                 for(var i = 0; i < 32767; ++i)
@@ -2382,10 +2565,10 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(label);
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"blt.un 32767",
-                expected);
+                expected));
         }
-        yield break;
+        return data;
     }
 }

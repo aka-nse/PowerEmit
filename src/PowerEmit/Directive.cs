@@ -1,4 +1,3 @@
-#pragma warning disable CS0659
 using System.Reflection.Emit;
 
 namespace PowerEmit;
@@ -15,9 +14,16 @@ public abstract partial class Directive : IILStreamAction
     public abstract void Emit(ILGenerator generator);
 
     /// <inheritdoc />
-    public abstract bool Equals(IILStreamAction other);
+    public abstract bool Equals(IILStreamAction? other);
 
     /// <inheritdoc />
-    public override bool Equals(object obj)
+    public sealed override bool Equals(object? obj)
         => obj is IILStreamAction other && Equals(other);
+
+    /// <inheritdoc />
+    protected abstract int GetHashCodeImpl();
+
+    /// <inheritdoc />
+    public sealed override int GetHashCode() =>
+        GetHashCodeImpl();
 }

@@ -30,7 +30,22 @@ public partial class ILDisassembler
         return new MethodContent(
             entity.Arguments,
             entity.Locals,
-            entity.Labels.Values.ToList(),
+            [.. entity.Labels.OrderBy(static kv => kv.Key).Select(static kv => kv.Value)],
+            entity.ILActions
+            );
+    }
+
+
+    /// <summary>
+    /// This method is defined for unit testing purposes.
+    /// </summary>
+    private MethodContent Disassemble(Module module, Type[] arguments, Type[] locals, byte[] byteStream)
+    {
+        var entity = new Entity(module, arguments, locals, byteStream);
+        return new MethodContent(
+            entity.Arguments,
+            entity.Locals,
+            [.. entity.Labels.OrderBy(static kv => kv.Key).Select(static kv => kv.Value)],
             entity.ILActions
             );
     }

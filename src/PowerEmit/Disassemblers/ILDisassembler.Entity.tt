@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -12,30 +12,30 @@
 #pragma warning disable CS0162
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 
-namespace PowerEmit.Disassemblers
+namespace PowerEmit.Disassemblers;
+
+partial class ILDisassembler
 {
-    partial class ILDisassembler
+    partial class Entity
     {
-        partial class Entity
+        protected virtual partial void DisassembleNextOpCode(int currentIndex, short opcode)
         {
-            protected virtual partial void DisassembleNextOpCode(int currentIndex, short opcode)
+            switch(opcode)
             {
-                switch(opcode)
-                {
 <#  foreach(var (name, opcode) in OpCodeInfos) { #>
-                case OpCodeConst.<#=name#>:
-                    {
-<#=string.Join("\r\n", GetOperationText(name, opcode).Select(line => "                        " + line))#>
-                    }
-                    return;
-<#  } #>
-                default:
-                    throw new NotImplementedException();
+            case OpCodeConst.<#=name#>:
+                {
+<#=string.Join("\r\n", GetOperationText(name, opcode).Select(line => "                    " + line))#>
                 }
+                return;
+<#  } #>
+            default:
+                throw new InvalidOperationException();
             }
         }
     }
@@ -101,7 +101,7 @@ public static string[] GetOperationText(string name, OpCode opcode)
         };
     case OperandType.InlineField:
         return new []{
-            $"var fld = Method.DeclaringType.Module.ResolveField(ReadStreamHead<int>());",
+            $"var fld = Module.ResolveField(ReadStreamHead<int>());",
             $"PushOperation(Inst.{name}(fld));",
         };
     case OperandType.InlineI:
@@ -114,14 +114,6 @@ public static string[] GetOperationText(string name, OpCode opcode)
             $"var value = ReadStreamHead<long>();",
             $"PushOperation(Inst.{name}(value));",
         };
-    case OperandType.InlineMethod:
-        return new []{
-            $"var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());",
-            $"if(callable is MethodInfo meth)",
-            $"    PushOperation(Inst.{name}(meth));",
-            $"else if(callable is ConstructorInfo ctor)",
-            $"    PushOperation(Inst.{name}(ctor));",
-        };
     case OperandType.InlineNone:
         return new []{ 
             $"PushOperation(Inst.{name}());",
@@ -133,38 +125,28 @@ public static string[] GetOperationText(string name, OpCode opcode)
         };
     case OperandType.InlineSig:
         return new []{
-            $"// var sig = Method.DeclaringType.Module.ResolveSignature(ReadStreamHead<int>());",
+            $"// var sig = Module.ResolveSignature(ReadStreamHead<int>());",
             $"// PushOperation(Inst.{name}(sig));",
             $"throw new NotSupportedException();",
         };
     case OperandType.InlineString:
         return new []{
-            $"var str = Method.DeclaringType.Module.ResolveString(ReadStreamHead<int>());",
+            $"var str = Module.ResolveString(ReadStreamHead<int>());",
             $"PushOperation(Inst.{name}(str));",
         };
     case OperandType.InlineSwitch:
         return new []{
-            $"var labels = new LabelBuilder[ReadStreamHead<int>()];",
-            $"for(var i = 0; i < labels.Length; ++i)",
+            @"var length = ReadStreamHead<int>();",
+            $"var labels = ImmutableArray.CreateBuilder<LabelBuilder>(length);",
+            $"for(var i = 0; i < length; ++i)",
             @"{",
-            $"    labels[i] = GetOrAddLabel(currentIndex + 4 * (1 + labels.Length) + ReadStreamHead<int>());",
+            $"    labels.Add(GetOrAddLabel(currentIndex + 1 + 4 * (1 + length) + ReadStreamHead<int>()));",
             @"}",
-            $"PushOperation(Inst.{name}(labels));",
-        };
-    case OperandType.InlineTok:
-        return new []{
-            $"switch(Method.Module.ResolveMember(ReadStreamHead<int>()))",
-            @"{",
-            $"case Type type        : PushOperation(Inst.Ldtoken(type));   break;",
-            $"case MethodInfo method: PushOperation(Inst.Ldtoken(method)); break;",
-            $"case FieldInfo field  : PushOperation(Inst.Ldtoken(field));  break;",
-            $"default               : throw new InvalidOperationException();",
-            @"}",
-            $"throw new NotSupportedException();",
+            $"PushOperation(Inst.{name}(labels.ToImmutable()));",
         };
     case OperandType.InlineType:
         return new []{
-            $"var type = Method.DeclaringType.Module.ResolveType(ReadStreamHead<int>());",
+            $"var type = Module.ResolveType(ReadStreamHead<int>());",
             $"PushOperation(Inst.{name}(type));",
         };
     case OperandType.InlineVar:
@@ -192,6 +174,13 @@ public static string[] GetOperationText(string name, OpCode opcode)
             $"var value = ReadStreamHead<byte>();",
             $"PushOperation(Inst.{name}(value));",
         };
+
+    case OperandType.InlineMethod:
+    case OperandType.InlineTok:
+        return new []{
+            $"DisassembleNext{name}();",
+        };
+
     default:
         break;
     }

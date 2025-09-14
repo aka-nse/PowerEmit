@@ -3,8 +3,13 @@ using System.Reflection.Emit;
 namespace PowerEmit;
 
 /// <summary>
-/// Provides labels management for IL generation.
+/// Provides labels lazy marking management for IL generation.
 /// </summary>
+/// <remarks>
+/// This type is provided to define IL actions using labels without depending on a specific <see cref="ILGenerator"/> instance.
+/// An instance of this type corresponds to a single label within the IL stream.
+/// Using this type, it is not possible to mark more than one label within a single <see cref="ILGenerator"/> instance.
+/// </remarks>
 /// <param name="name"></param>
 public sealed class LabelBuilder(string name)
 {

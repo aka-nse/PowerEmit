@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -45,8 +45,9 @@ namespace PowerEmit
             => EmitCore(testCase);
 
 
-        public static IEnumerable<object[]> GetTestCases_Branch()
+        public static TheoryData<TestCase> GetTestCases_Branch()
         {
+            var data = new TheoryData<TestCase>();
 <#+
     foreach(var (lName, uName) in testCases) {
         foreach(var x in new []{ 0, -3, sbyte.MinValue, +1, sbyte.MaxValue }) {
@@ -57,7 +58,7 @@ namespace PowerEmit
         }
     }
 #>
-            yield break;
+            return data;
         }
     }
 }
@@ -111,14 +112,14 @@ void GenerateJumpTestCase(string lName, string uName, int instSize, int iteratio
 <#+ } #>
                 };
 
-                yield return CreateTestCase(
+                data.Add(CreateTestCase(
                     $"<#=lName#> <#=iteration#>",
                     expected,
-                    actual_label);
-                yield return CreateTestCase(
+                    actual_label));
+                data.Add(CreateTestCase(
                     $"<#=lName#> <#=iteration#> (builder)",
                     expected,
-                    actual_labelBuilder);
+                    actual_labelBuilder));
             }
 <#+
 }

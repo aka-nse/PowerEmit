@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Reflection.Emit;
 using Xunit;
 
@@ -12,10 +11,12 @@ public partial class ILDisassemblerTest
         => DisassembleCore(testCase);
 
 
-    public static IEnumerable<object[]> GetTestCases_Integration()
+    public static TheoryData<TestCase> GetTestCases_Integration()
     {
+        var data = new TheoryData<TestCase>();
+
         #region int Add(int, int)
-        yield return CreateTestCase(
+        data.Add(CreateTestCase(
             "int Add(int, int)",
             gen =>
             {
@@ -25,12 +26,12 @@ public partial class ILDisassemblerTest
                 gen.Emit(OpCodes.Ret);
             },
             typeof(int),
-            new[] { typeof(int), typeof(int), }
-            );
+            [typeof(int), typeof(int),]
+        ));
         #endregion
 
         #region int Sum(int[] array)
-        yield return CreateTestCase(
+        data.Add(CreateTestCase(
             "int Sum(int[] array)",
             gen =>
             {
@@ -82,10 +83,10 @@ public partial class ILDisassemblerTest
                 gen.MarkLabel(il_0017); gen.Emit(OpCodes.Ret);
             },
             typeof(int),
-            new[] { typeof(int[]), }
-            );
+            [typeof(int[]),]
+        ));
         #endregion
 
-        yield break;
+        return data;
     }
 }

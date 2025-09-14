@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -248,17 +248,16 @@ namespace PowerEmit
             => EmitCore(testCase);
 
 
-        public static IEnumerable<object[]> GetTestCases_Basic()
-        {
+        public static TheoryData<TestCase> GetTestCases_Basic() =>
+            [
 <# foreach(var (lName, uName, expOperand, actOperand) in testCases) { #>
-            yield return CreateTestCase("<#=lName#>",
-                gen => <#=GetExpected(uName, expOperand)#>,
-                gen => <#=GetActual(uName, actOperand)#>
-                );
+            CreateTestCase("<#=lName#>",
+                <#=GetAction(uName, actOperand)#>,
+                gen => <#=GetExpected(uName, expOperand)#>
+                ),
 
 <# } #>
-            yield break;
-        }
+            ];
     }
 }
 <#+
@@ -267,6 +266,6 @@ string GetExpected(string uName, string? operand)
         ? $"gen.Emit(OpCodes.{uName}, {operand})"
         : $"gen.Emit(OpCodes.{uName})";
 
-string GetActual(string uName, string? operand)
-    => $"gen.Emit(Inst.{uName}({operand}))";
+string GetAction(string uName, string? operand)
+    => $"Inst.{uName}({operand})";
 #>

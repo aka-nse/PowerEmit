@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace PowerEmit;
 
@@ -49,8 +52,11 @@ public readonly partial struct Inst(OpCode opcode) : IInst
     public readonly void Emit(ILGenerator generator) => generator.Emit(OpCode);
 
     /// <inheritdoc />
-    public readonly bool Equals(IILStreamAction other)
+    public readonly bool Equals(IILStreamAction? other)
         => other is Inst iOther && OpCode == iOther.OpCode;
+
+    /// <inheritdoc />
+    public override string ToString() => $"{OpCode}";
 }
 
 /// <summary>
@@ -79,13 +85,14 @@ public readonly struct Inst<T>(OpCode opcode, T operand, Action<ILGenerator, OpC
     public readonly void Emit(ILGenerator generator)
     {
         static ref readonly TTo asT<TTo>(in T operand) =>
-            ref Unsafe.As<T, TTo>(ref Unsafe.AsRef(operand));
+            ref Unsafe.As<T, TTo>(ref Unsafe.AsRef(in operand));
 
 #pragma warning disable format
         if(EmitOverride is not null) EmitOverride(generator, OpCode, Operand);
         else if(typeof(T) == typeof(byte  )) generator.Emit(OpCode, asT<byte  >(_operand));
         else if(typeof(T) == typeof(sbyte )) generator.Emit(OpCode, asT<sbyte >(_operand));
-        else if(typeof(T) == typeof(short )) generator.Emit(OpCode, asT<short >(_operand));
+        // short-type operands are consolidated into the ushort type.
+        // else if(typeof(T) == typeof(short )) generator.Emit(OpCode, asT<short >(_operand));
         else if(typeof(T) == typeof(ushort)) generator.Emit(OpCode, asT<short >(_operand));
         else if(typeof(T) == typeof(int   )) generator.Emit(OpCode, asT<int   >(_operand));
         else if(typeof(T) == typeof(long  )) generator.Emit(OpCode, asT<long  >(_operand));
@@ -96,18 +103,42 @@ public readonly struct Inst<T>(OpCode opcode, T operand, Action<ILGenerator, OpC
         else if(typeof(T) == typeof(LocalBuilder   )) generator.Emit(OpCode, asT<LocalBuilder   >(_operand));
         else if(typeof(T) == typeof(SignatureHelper)) generator.Emit(OpCode, asT<SignatureHelper>(_operand));
         else if(typeof(T) == typeof(LabelBuilder   )) generator.Emit(OpCode, asT<LabelBuilder   >(_operand).GetLabel(generator));
-        else if(Operand is Type            type    ) generator.Emit(OpCode, type);
-        else if(Operand is MethodInfo      methInfo) generator.Emit(OpCode, methInfo);
-        else if(Operand is FieldInfo       fldInfo ) generator.Emit(OpCode, fldInfo);
-        else if(Operand is ConstructorInfo ctorInfo) generator.Emit(OpCode, ctorInfo);
-        else if(Operand is Label[]         labels  ) generator.Emit(OpCode, labels);
+        else if(Operand is Type            type     ) generator.Emit(OpCode, type);
+        else if(Operand is MethodInfo      methInfo ) generator.Emit(OpCode, methInfo);
+        else if(Operand is FieldInfo       fldInfo  ) generator.Emit(OpCode, fldInfo);
+        else if(Operand is ConstructorInfo ctorInfo ) generator.Emit(OpCode, ctorInfo);
+        else if(Operand is ImmutableArray<Label>        labels   ) generator.Emit(OpCode, [.. labels]);
+        else if(Operand is ImmutableArray<LabelBuilder> labelBlds) generator.Emit(OpCode, [.. labelBlds.Select(l => l.GetLabel(generator))]);
         else throw ExceptionHelper.InvalidOperandType();
 #pragma warning restore format
     }
 
     /// <inheritdoc />
-    public bool Equals(IILStreamAction other)
+    public bool Equals(IILStreamAction? other)
         => other is Inst<T> iOther
         && OpCode == iOther.OpCode
         && Equals(Operand, iOther.Operand);
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        if(Operand is IEnumerable enumerable)
+        {
+            var sb = new StringBuilder();
+            var separator = "";
+            sb.Append($"{OpCode}([");
+            foreach(object? item in enumerable)
+            {
+                sb.Append(separator);
+                sb.Append(item?.ToString() ?? "<null>");
+                separator = ", ";
+            }
+            sb.Append("])");
+            return sb.ToString();
+        }
+        else
+        {
+            return $"{OpCode}({Operand})";
+        }
+    }
 }

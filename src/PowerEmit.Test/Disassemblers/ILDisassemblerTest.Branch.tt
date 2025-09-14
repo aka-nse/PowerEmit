@@ -45,8 +45,9 @@ public partial class ILDisassemblerTest
         => DisassembleCore(testCase);
 
 
-    public static IEnumerable<object[]> GetTestCases_Branch()
+    public static TheoryData<TestCase> GetTestCases_Branch()
     {
+        var data = new TheoryData<TestCase>();
 <#+
     foreach(var (lName, uName) in testCases) {
         foreach(var x in new []{ 0, -3, sbyte.MinValue, +1, sbyte.MaxValue }) {
@@ -57,7 +58,7 @@ public partial class ILDisassemblerTest
         }
     }
 #>
-        yield break;
+        return data;
     }
 }
 <#+
@@ -67,7 +68,8 @@ public partial class ILDisassemblerTest
 void GenerateJumpTestCase(string lName, string uName, int instSize, int iteration) {
 #>
         {
-            Action<ILGenerator> expected = gen => {
+            Action<ILGenerator> expected = gen =>
+            {
                 var label = gen.DefineLabel();
 <#+ if(iteration < 0) { #>
                 gen.MarkLabel(label);
@@ -82,9 +84,9 @@ void GenerateJumpTestCase(string lName, string uName, int instSize, int iteratio
 <#+ } #>
             };
 
-            yield return CreateTestCase(
+            data.Add(CreateTestCase(
                 $"<#=lName#> <#=iteration#>",
-                expected);
+                expected));
         }
 <#+
 }

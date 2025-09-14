@@ -20,7 +20,7 @@ internal static class OpCodeHelper
             OperandType.InlineSwitch => 4 + 4 * Unsafe.As<T, Label[]>(ref operand).Length,
             OperandType.InlineTok => 4,
             OperandType.InlineType => 4,
-            OperandType.InlineVar => 4,
+            OperandType.InlineVar => 2,
             OperandType.ShortInlineBrTarget => 1,
             OperandType.ShortInlineI => 1,
             OperandType.ShortInlineR => 4,

@@ -12,9 +12,9 @@ public partial class InstTest
         => EmitCore(testCase);
 
 
-    public static IEnumerable<object[]> GetTestCases_LocalBuilder()
-    {
-        yield return CreateTestCase(
+    public static TheoryData<TestCase> GetTestCases_LocalBuilder() =>
+    [
+        CreateTestCase(
             "ldloc.s",
             gen =>
             {
@@ -25,9 +25,8 @@ public partial class InstTest
             {
                 var loc = gen.DeclareLocal(typeof(MockType));
                 gen.Emit(Inst.Ldloc_S(loc));
-            });
-
-        yield return CreateTestCase(
+            }),
+        CreateTestCase(
             "ldloca.s",
             gen =>
             {
@@ -38,9 +37,8 @@ public partial class InstTest
             {
                 var loc = gen.DeclareLocal(typeof(MockType));
                 gen.Emit(Inst.Ldloca_S(loc));
-            });
-
-        yield return CreateTestCase(
+            }),
+        CreateTestCase(
             "ldloc",
             gen =>
             {
@@ -51,9 +49,8 @@ public partial class InstTest
             {
                 var loc = gen.DeclareLocal(typeof(MockType));
                 gen.Emit(Inst.Ldloc(loc));
-            });
-
-        yield return CreateTestCase(
+            }),
+        CreateTestCase(
             "ldloca",
             gen =>
             {
@@ -64,9 +61,8 @@ public partial class InstTest
             {
                 var loc = gen.DeclareLocal(typeof(MockType));
                 gen.Emit(Inst.Ldloca(loc));
-            });
-
-        yield return CreateTestCase(
+            }),
+        CreateTestCase(
             "stloc.s",
             gen =>
             {
@@ -77,9 +73,8 @@ public partial class InstTest
             {
                 var loc = gen.DeclareLocal(typeof(MockType));
                 gen.Emit(Inst.Stloc_S(loc));
-            });
-
-        yield return CreateTestCase(
+            }),
+        CreateTestCase(
             "stloc",
             gen =>
             {
@@ -90,10 +85,8 @@ public partial class InstTest
             {
                 var loc = gen.DeclareLocal(typeof(MockType));
                 gen.Emit(Inst.Stloc(loc));
-            });
-
-        yield break;
-    }
+            }),
+    ];
 
 
 }

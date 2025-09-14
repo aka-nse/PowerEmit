@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -5,6 +6,20 @@ namespace PowerEmit;
 
 public partial struct Inst
 {
+    /// <summary> Gets emitter to emit switch. </summary>
+    /// <param name="operand"> The operand to emit. </param>
+    /// <returns> The built emitter. </returns>
+    public static Inst<ImmutableArray<Label>> Switch(IEnumerable<Label> operand)
+        => Switch(operand.ToImmutableArray());
+
+
+    /// <summary> Gets emitter to emit switch. </summary>
+    /// <param name="operand"> The operand to emit. </param>
+    /// <returns> The built emitter. </returns>
+    public static Inst<ImmutableArray<LabelBuilder>> Switch(IEnumerable<LabelBuilder> operand)
+        => Switch(operand.ToImmutableArray());
+
+
     /// <summary> Gets emitter to emit call. </summary>
     /// <param name="methodInfo"></param>
     /// <param name="optionalParameterTypes"></param>
