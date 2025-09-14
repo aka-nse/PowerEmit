@@ -44,6 +44,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Remove="TestResults/**/*" />
+    </ItemGroup>
+
+    <ItemGroup>
         <None Update="Disassemblers\ILDisassemblerTest.Basic.tt">
           <Generator>TextTemplatingFileGenerator</Generator>
           <LastGenOutput>ILDisassemblerTest.Basic.g.cs</LastGenOutput>

@@ -114,10 +114,6 @@ public static string[] GetOperationText(string name, OpCode opcode)
             $"var value = ReadStreamHead<long>();",
             $"PushOperation(Inst.{name}(value));",
         };
-    case OperandType.InlineMethod:
-        return new []{
-            $"DisassembleNext{name}();",
-        };
     case OperandType.InlineNone:
         return new []{ 
             $"PushOperation(Inst.{name}());",
@@ -147,17 +143,6 @@ public static string[] GetOperationText(string name, OpCode opcode)
             $"    labels.Add(GetOrAddLabel(currentIndex + 1 + 4 * (1 + length) + ReadStreamHead<int>()));",
             @"}",
             $"PushOperation(Inst.{name}(labels.ToImmutable()));",
-        };
-    case OperandType.InlineTok:
-        return new []{
-            $"switch(Module.ResolveMember(ReadStreamHead<int>()))",
-            @"{",
-            $"case Type type        : PushOperation(Inst.Ldtoken(type));   break;",
-            $"case MethodInfo method: PushOperation(Inst.Ldtoken(method)); break;",
-            $"case FieldInfo field  : PushOperation(Inst.Ldtoken(field));  break;",
-            $"default               : throw new InvalidOperationException();",
-            @"}",
-            $"throw new NotSupportedException();",
         };
     case OperandType.InlineType:
         return new []{
@@ -189,6 +174,13 @@ public static string[] GetOperationText(string name, OpCode opcode)
             $"var value = ReadStreamHead<byte>();",
             $"PushOperation(Inst.{name}(value));",
         };
+
+    case OperandType.InlineMethod:
+    case OperandType.InlineTok:
+        return new []{
+            $"DisassembleNext{name}();",
+        };
+
     default:
         break;
     }

@@ -957,14 +957,7 @@ partial class ILDisassembler
                 return;
             case OpCodeConst.Ldtoken:
                 {
-                    switch(Module.ResolveMember(ReadStreamHead<int>()))
-                    {
-                    case Type type        : PushOperation(Inst.Ldtoken(type));   break;
-                    case MethodInfo method: PushOperation(Inst.Ldtoken(method)); break;
-                    case FieldInfo field  : PushOperation(Inst.Ldtoken(field));  break;
-                    default               : throw new InvalidOperationException();
-                    }
-                    throw new NotSupportedException();
+                    DisassembleNextLdtoken();
                 }
                 return;
             case OpCodeConst.Conv_U2:
