@@ -29,6 +29,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -71,6 +72,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -85,6 +87,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -99,6 +102,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -169,6 +173,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -183,6 +188,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -197,6 +203,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -211,6 +218,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -225,6 +233,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -267,6 +276,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -281,6 +291,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -295,6 +306,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -365,6 +377,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -379,6 +392,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -393,6 +407,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -407,6 +422,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -421,6 +437,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -463,6 +480,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -477,6 +495,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -491,6 +510,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -561,6 +581,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -575,6 +596,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -589,6 +611,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -603,6 +626,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -617,6 +641,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -659,6 +684,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -673,6 +699,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -687,6 +714,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -757,6 +785,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -771,6 +800,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -785,6 +815,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -799,6 +830,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -813,6 +845,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -855,6 +888,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -869,6 +903,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -883,6 +918,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -953,6 +989,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -967,6 +1004,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -981,6 +1019,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -995,6 +1034,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1009,6 +1049,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1051,6 +1092,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1065,6 +1107,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1079,6 +1122,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1149,6 +1193,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1163,6 +1208,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1177,6 +1223,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1191,6 +1238,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1205,6 +1253,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1247,6 +1296,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1261,6 +1311,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1275,6 +1326,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1345,6 +1397,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1359,6 +1412,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1373,6 +1427,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1387,6 +1442,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1401,6 +1457,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1443,6 +1500,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1457,6 +1515,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1471,6 +1530,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1541,6 +1601,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1555,6 +1616,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1569,6 +1631,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1583,6 +1646,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1597,6 +1661,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1639,6 +1704,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1653,6 +1719,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1667,6 +1734,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1737,6 +1805,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1751,6 +1820,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1765,6 +1835,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1779,6 +1850,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1793,6 +1865,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1835,6 +1908,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1849,6 +1923,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1863,6 +1938,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1933,6 +2009,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1947,6 +2024,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1961,6 +2039,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1975,6 +2054,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -1989,6 +2069,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2031,6 +2112,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2045,6 +2127,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2059,6 +2142,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2129,6 +2213,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2143,6 +2228,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2157,6 +2243,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2171,6 +2258,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2185,6 +2273,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2227,6 +2316,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2241,6 +2331,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2255,6 +2346,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2325,6 +2417,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2339,6 +2432,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2353,6 +2447,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2367,6 +2462,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2381,6 +2477,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2423,6 +2520,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2437,6 +2535,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2451,6 +2550,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 0; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2521,6 +2621,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 1; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2535,6 +2636,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 127; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2549,6 +2651,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 128; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(
@@ -2563,6 +2666,7 @@ public partial class ILDisassemblerTest
                 for(var i = 0; i < 32767; ++i)
                     gen.Emit(OpCodes.Nop);
                 gen.MarkLabel(label);
+                gen.Emit(OpCodes.Nop);
             };
 
             data.Add(CreateTestCase(

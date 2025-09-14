@@ -8,6 +8,7 @@
     <File Path="docs/opcode.csv" />
   </Folder>
   <Folder Name="/Test/">
+    <Project Path="PowerEmit.Sample/PowerEmit.Sample.csproj" Id="acb58cf6-9ae7-4e9c-a83f-6184079472a7" />
     <Project Path="PowerEmit.Test/PowerEmit.Test.csproj" />
   </Folder>
   <Project Path="PowerEmit/PowerEmit.csproj" />

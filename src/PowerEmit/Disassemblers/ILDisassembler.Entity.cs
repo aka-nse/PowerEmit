@@ -70,11 +70,11 @@ partial class ILDisassembler
             while(true)
             {
                 var index = _current;
-                PushOperation(Directive.MarkLabel(GetOrAddLabel(index)));
                 if(index >= _stream.Length)
                 {
                     break;
                 }
+                PushOperation(Directive.MarkLabel(GetOrAddLabel(index)));
 
                 var opcode = (short)_stream[index];
                 if(opcode >= OpCodeConst.Prefix7)
