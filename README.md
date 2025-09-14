@@ -84,10 +84,10 @@ foreach(var action in deoptimized)
 ## Requirement
 
 - .Net Standard *2.0*
-  - System.Collections.Immutable *v5.0.0*
-  - System.Memory *v4.5.4*
-  - System.Reflection.Emit *v4.7.0*
-  - System.RuntimeCompilerServices.Unsafe *v5.0.0*
+  - System.Collections.Immutable *[9.0.9,)*
+  - System.Memory *[4.6.0,)*
+  - System.Reflection.Emit *[4.7.0,)*
+  - System.RuntimeCompilerServices.Unsafe *[6.1.0,)*
 
 ## License
 

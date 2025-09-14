@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup Label="platform and framework environment">
         <LangVersion>13.0</LangVersion>
@@ -33,10 +33,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Collections.Immutable" Version="9.0.9" />
-        <PackageReference Include="System.Memory" Version="4.6.3" />
-        <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
-        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
+        <PackageReference Include="System.Collections.Immutable" Version="[9.0.0,)" />
+        <PackageReference Include="System.Memory" Version="[4.6.0,)" />
+        <PackageReference Include="System.Reflection.Emit" Version="[4.7.0,)" />
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="[6.1.0,)" />
     </ItemGroup>
 
     <ItemGroup>
