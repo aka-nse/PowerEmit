@@ -24,8 +24,8 @@ partial class ILDisassembler
         public Entity(MethodBase method)
         {
             Module = method.Module;
-            var body = method.GetMethodBody();
-            _stream = body.GetILAsByteArray();
+            var body = method.GetMethodBody()!;
+            _stream = body.GetILAsByteArray()!;
             Arguments = method
                 .GetParameters()
                 .Select(x => x.ParameterType)

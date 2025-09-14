@@ -60,7 +60,7 @@ public sealed class MarkLabel : Directive
     }
 
     /// <inheritdoc/>
-    public override bool Equals(IILStreamAction other)
+    public override bool Equals(IILStreamAction? other)
         => other is MarkLabel mlOther
         && Label == mlOther.Label
         && LabelBuilder == mlOther.LabelBuilder;
@@ -70,7 +70,7 @@ public sealed class MarkLabel : Directive
     {
         if(Label is { } label)
         {
-            return $"{label}:";
+            return $"label[{label.GetId():X04}]:";
         }
         else if(LabelBuilder is { } labelBuilder)
         {
@@ -80,5 +80,19 @@ public sealed class MarkLabel : Directive
         {
             throw new InvalidOperationException();
         }
+    }
+
+    /// <inheritdoc/>
+    protected override int GetHashCodeImpl()
+    {
+        if(_label is { } label)
+        {
+            return label.GetHashCode();
+        }
+        if(_labelBuilder is { } labelBuilder)
+        {
+            return labelBuilder.Name.GetHashCode();
+        }
+        return 0;
     }
 }

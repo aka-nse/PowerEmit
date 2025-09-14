@@ -52,7 +52,7 @@ public readonly partial struct Inst(OpCode opcode) : IInst
     public readonly void Emit(ILGenerator generator) => generator.Emit(OpCode);
 
     /// <inheritdoc />
-    public readonly bool Equals(IILStreamAction other)
+    public readonly bool Equals(IILStreamAction? other)
         => other is Inst iOther && OpCode == iOther.OpCode;
 
     /// <inheritdoc />
@@ -85,7 +85,7 @@ public readonly struct Inst<T>(OpCode opcode, T operand, Action<ILGenerator, OpC
     public readonly void Emit(ILGenerator generator)
     {
         static ref readonly TTo asT<TTo>(in T operand) =>
-            ref Unsafe.As<T, TTo>(ref Unsafe.AsRef(operand));
+            ref Unsafe.As<T, TTo>(ref Unsafe.AsRef(in operand));
 
 #pragma warning disable format
         if(EmitOverride is not null) EmitOverride(generator, OpCode, Operand);
@@ -114,7 +114,7 @@ public readonly struct Inst<T>(OpCode opcode, T operand, Action<ILGenerator, OpC
     }
 
     /// <inheritdoc />
-    public bool Equals(IILStreamAction other)
+    public bool Equals(IILStreamAction? other)
         => other is Inst<T> iOther
         && OpCode == iOther.OpCode
         && Equals(Operand, iOther.Operand);
