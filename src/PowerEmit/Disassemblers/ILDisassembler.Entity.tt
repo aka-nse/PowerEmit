@@ -35,7 +35,7 @@ namespace PowerEmit.Disassemblers
                     return;
 <#  } #>
                 default:
-                    throw new NotImplementedException();
+                    throw new InvalidOperationException();
                 }
             }
         }
@@ -118,10 +118,17 @@ public static string[] GetOperationText(string name, OpCode opcode)
     case OperandType.InlineMethod:
         return new []{
             $"var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());",
-            $"if(callable is MethodInfo meth)",
+            $"switch(callable)",
+            $"{{",
+            $"case MethodInfo meth:",
             $"    PushOperation(Inst.{name}(meth));",
-            $"else if(callable is ConstructorInfo ctor)",
+            $"    break;",
+            $"case ConstructorInfo ctor:",
             $"    PushOperation(Inst.{name}(ctor));",
+            $"    break;",
+            $"default:",
+            $"    throw new InvalidOperationException();",
+            $"}}",
         };
     case OperandType.InlineNone:
         return new []{ 
@@ -149,7 +156,7 @@ public static string[] GetOperationText(string name, OpCode opcode)
             $"var labels = ImmutableArray.CreateBuilder<LabelBuilder>(length);",
             $"for(var i = 0; i < length; ++i)",
             @"{",
-            $"    labels.Add(GetOrAddLabel(currentIndex + 4 * (1 + length) + ReadStreamHead<int>()));",
+            $"    labels.Add(GetOrAddLabel(currentIndex + 1 + 4 * (1 + length) + ReadStreamHead<int>()));",
             @"}",
             $"PushOperation(Inst.{name}(labels.ToImmutable()));",
         };

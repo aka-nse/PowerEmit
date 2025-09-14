@@ -30,7 +30,7 @@ public partial class ILDisassembler
         return new MethodContent(
             entity.Arguments,
             entity.Locals,
-            entity.Labels.Values.ToList(),
+            [.. entity.Labels.OrderBy(static kv => kv.Key).Select(static kv => kv.Value)],
             entity.ILActions
             );
     }

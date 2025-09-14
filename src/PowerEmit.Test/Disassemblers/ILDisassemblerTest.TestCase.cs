@@ -44,13 +44,13 @@ partial class ILDisassemblerTest
     }
 
 
-    public static object[] CreateTestCase(
+    public static TestCase CreateTestCase(
         string name,
         MethodInfo method)
-        => new object[] { new TestCase(name, method) };
+        => new(name, method);
 
 
-    public static object[] CreateTestCase(
+    public static TestCase CreateTestCase(
         string name,
         Action<ILGenerator> expected,
         Type? returnType = null,

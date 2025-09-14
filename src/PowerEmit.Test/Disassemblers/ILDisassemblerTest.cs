@@ -18,11 +18,36 @@ public partial class ILDisassemblerTest(ITestOutputHelper output)
             testCase.Method.ReturnType,
             [.. testCase.Method.GetParameters().Select(p => p.ParameterType)]);
         foreach(var action in disassembled.ILActions)
+        {
             builder.ILGenerator.Emit(action);
-        var actual = builder.GetBuiltILBytes()!;
+        }
 
-        Output.WriteLine("exp: " + string.Join(" ", expected.Select(x => x.ToString("X02"))));
-        Output.WriteLine("act: " + string.Join(" ", actual.Select(x => x.ToString("X02"))));
-        Assert.Equal(expected, actual);
+        byte[] actual;
+        try
+        {
+            actual = builder.GetBuiltILBytes()!;
+        }
+        catch
+        {
+            Output.WriteLine("Failed to get built IL bytes.");
+            foreach(var action in disassembled.ILActions)
+            {
+                Output.WriteLine($"  {action.ToString()}");
+            }
+            throw;
+        }
+
+        try
+        {
+            Assert.Equal(expected, actual);
+        }
+        catch
+        {
+            var exp = "exp: " + string.Join(" ", expected.Select(static x => $"{x:X02}"));
+            var act = "act: " + string.Join(" ", actual.Select(static x => $"{x:X02}"));
+            Output.WriteLine(exp);
+            Output.WriteLine(act);
+            throw;
+        }
     }
 }

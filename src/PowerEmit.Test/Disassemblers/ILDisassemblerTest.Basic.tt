@@ -248,16 +248,14 @@ public partial class ILDisassemblerTest
         => DisassembleCore(testCase);
 
 
-    public static IEnumerable<object[]> GetTestCases_Basic()
-    {
+    public static TheoryData<TestCase> GetTestCases_Basic() => [
 <#  foreach(var (lName, uName, operand) in testCases) { #>
-        yield return CreateTestCase(
-            "<#=lName#>",
-            gen => <#=GetExpected(uName, operand)#>
-            );
+            CreateTestCase(
+                "<#=lName#>",
+                gen => <#=GetExpected(uName, operand)#>
+                ),
 <#  } #>
-        yield break;
-    }
+        ];
 }
 <#+
 string GetExpected(string uName, string? operand)

@@ -223,19 +223,33 @@ namespace PowerEmit.Disassemblers
                 case OpCodeConst.Jmp:
                     {
                         var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        if(callable is MethodInfo meth)
+                        switch(callable)
+                        {
+                        case MethodInfo meth:
                             PushOperation(Inst.Jmp(meth));
-                        else if(callable is ConstructorInfo ctor)
+                            break;
+                        case ConstructorInfo ctor:
                             PushOperation(Inst.Jmp(ctor));
+                            break;
+                        default:
+                            throw new InvalidOperationException();
+                        }
                     }
                     return;
                 case OpCodeConst.Call:
                     {
                         var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        if(callable is MethodInfo meth)
+                        switch(callable)
+                        {
+                        case MethodInfo meth:
                             PushOperation(Inst.Call(meth));
-                        else if(callable is ConstructorInfo ctor)
+                            break;
+                        case ConstructorInfo ctor:
                             PushOperation(Inst.Call(ctor));
+                            break;
+                        default:
+                            throw new InvalidOperationException();
+                        }
                     }
                     return;
                 case OpCodeConst.Calli:
@@ -412,7 +426,7 @@ namespace PowerEmit.Disassemblers
                         var labels = ImmutableArray.CreateBuilder<LabelBuilder>(length);
                         for(var i = 0; i < length; ++i)
                         {
-                            labels.Add(GetOrAddLabel(currentIndex + 4 * (1 + length) + ReadStreamHead<int>()));
+                            labels.Add(GetOrAddLabel(currentIndex + 1 + 4 * (1 + length) + ReadStreamHead<int>()));
                         }
                         PushOperation(Inst.Switch(labels.ToImmutable()));
                     }
@@ -625,10 +639,17 @@ namespace PowerEmit.Disassemblers
                 case OpCodeConst.Callvirt:
                     {
                         var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        if(callable is MethodInfo meth)
+                        switch(callable)
+                        {
+                        case MethodInfo meth:
                             PushOperation(Inst.Callvirt(meth));
-                        else if(callable is ConstructorInfo ctor)
+                            break;
+                        case ConstructorInfo ctor:
                             PushOperation(Inst.Callvirt(ctor));
+                            break;
+                        default:
+                            throw new InvalidOperationException();
+                        }
                     }
                     return;
                 case OpCodeConst.Cpobj:
@@ -652,10 +673,17 @@ namespace PowerEmit.Disassemblers
                 case OpCodeConst.Newobj:
                     {
                         var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        if(callable is MethodInfo meth)
+                        switch(callable)
+                        {
+                        case MethodInfo meth:
                             PushOperation(Inst.Newobj(meth));
-                        else if(callable is ConstructorInfo ctor)
+                            break;
+                        case ConstructorInfo ctor:
                             PushOperation(Inst.Newobj(ctor));
+                            break;
+                        default:
+                            throw new InvalidOperationException();
+                        }
                     }
                     return;
                 case OpCodeConst.Castclass:
@@ -1098,19 +1126,33 @@ namespace PowerEmit.Disassemblers
                 case OpCodeConst.Ldftn:
                     {
                         var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        if(callable is MethodInfo meth)
+                        switch(callable)
+                        {
+                        case MethodInfo meth:
                             PushOperation(Inst.Ldftn(meth));
-                        else if(callable is ConstructorInfo ctor)
+                            break;
+                        case ConstructorInfo ctor:
                             PushOperation(Inst.Ldftn(ctor));
+                            break;
+                        default:
+                            throw new InvalidOperationException();
+                        }
                     }
                     return;
                 case OpCodeConst.Ldvirtftn:
                     {
                         var callable = Method.DeclaringType.Module.ResolveMethod(ReadStreamHead<int>());
-                        if(callable is MethodInfo meth)
+                        switch(callable)
+                        {
+                        case MethodInfo meth:
                             PushOperation(Inst.Ldvirtftn(meth));
-                        else if(callable is ConstructorInfo ctor)
+                            break;
+                        case ConstructorInfo ctor:
                             PushOperation(Inst.Ldvirtftn(ctor));
+                            break;
+                        default:
+                            throw new InvalidOperationException();
+                        }
                     }
                     return;
                 case OpCodeConst.Ldarg:
@@ -1219,7 +1261,7 @@ namespace PowerEmit.Disassemblers
                     }
                     return;
                 default:
-                    throw new NotImplementedException();
+                    throw new InvalidOperationException();
                 }
             }
         }

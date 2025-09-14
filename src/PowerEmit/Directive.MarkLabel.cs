@@ -9,7 +9,7 @@ partial class Directive
     /// </summary>
     /// <param name="label"></param>
     /// <returns></returns>
-    public static MarkLabel MarkLabel(Label label) => new MarkLabel(label);
+    public static MarkLabel MarkLabel(Label label) => new (label);
 
 
     /// <summary>
@@ -17,7 +17,7 @@ partial class Directive
     /// </summary>
     /// <param name="labelBuilder"></param>
     /// <returns></returns>
-    public static MarkLabel MarkLabel(LabelBuilder labelBuilder) => new MarkLabel(labelBuilder);
+    public static MarkLabel MarkLabel(LabelBuilder labelBuilder) => new (labelBuilder);
 }
 
 /// <summary>
@@ -64,4 +64,21 @@ public sealed class MarkLabel : Directive
         => other is MarkLabel mlOther
         && Label == mlOther.Label
         && LabelBuilder == mlOther.LabelBuilder;
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        if(Label is { } label)
+        {
+            return $"{label}:";
+        }
+        else if(LabelBuilder is { } labelBuilder)
+        {
+            return $"{labelBuilder.Name}:";
+        }
+        else
+        {
+            throw new InvalidOperationException();
+        }
+    }
 }
