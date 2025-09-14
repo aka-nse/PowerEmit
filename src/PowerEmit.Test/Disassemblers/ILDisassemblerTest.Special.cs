@@ -128,7 +128,7 @@ public partial class ILDisassemblerTest
         var content = Accessor.Disassemble(ILDisassembler.Instance, builder.Module, [], [], method);
         var ilOps = content.ILActions.ToArray();
         var leave = Assert.IsType<Inst<LabelBuilder>>(ilOps[1]);
-        var targetLabel = Assert.IsType<MarkLabel>(ilOps[2]);
+        var targetLabel = Assert.IsType<MarkLabel>(ilOps[2], exactMatch: false);
         Assert.Equal(OpCodes.Leave, leave.OpCode);
         Assert.Same(targetLabel.LabelBuilder, leave.Operand);
     }
@@ -145,7 +145,7 @@ public partial class ILDisassemblerTest
         var content = Accessor.Disassemble(ILDisassembler.Instance, builder.Module, [], [], method);
         var ilOps = content.ILActions.ToArray();
         var leave = Assert.IsType<Inst<LabelBuilder>>(ilOps[1]);
-        var targetLabel = Assert.IsType<MarkLabel>(ilOps[2]);
+        var targetLabel = Assert.IsType<MarkLabel>(ilOps[2], exactMatch: false);
         Assert.Equal(OpCodes.Leave_S, leave.OpCode);
         Assert.Same(targetLabel.LabelBuilder, leave.Operand);
     }

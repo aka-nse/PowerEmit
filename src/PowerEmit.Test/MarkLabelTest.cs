@@ -33,6 +33,7 @@ public class MarkLabelTest
             Assert.False(Directive.MarkLabel(label2).Equals(directive));
             Assert.False(Directive.MarkLabel(label2).Equals((object)directive));
             Assert.False(Directive.MarkLabel(label2).Equals(new object()));
+            Assert.False(Directive.MarkLabel(label2).Equals(default(object)));
         }
 
         var expectedBytes = expectedBuilder.GetBuiltILBytes();
@@ -69,10 +70,12 @@ public class MarkLabelTest
             Assert.False(Directive.MarkLabel(label2).Equals((object)directive));
             Assert.False(Directive.MarkLabel(label2).Equals(Inst.Ret()));
             Assert.False(Directive.MarkLabel(label2).Equals(new object()));
+            Assert.False(Directive.MarkLabel(label2).Equals(default(object)));
         }
 
         var expectedBytes = expectedBuilder.GetBuiltILBytes();
         var actualBytes = actualBuilder.GetBuiltILBytes();
         Assert.Equal(expectedBytes, actualBytes);
     }
+
 }

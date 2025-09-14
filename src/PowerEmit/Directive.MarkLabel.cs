@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Emit;
 
 namespace PowerEmit;
@@ -9,7 +10,8 @@ partial class Directive
     /// </summary>
     /// <param name="label"></param>
     /// <returns></returns>
-    public static MarkLabel MarkLabel(Label label) => new (label);
+    public static MarkLabel MarkLabel(Label label) =>
+        new MarkLabel_Label(label);
 
 
     /// <summary>
@@ -17,82 +19,67 @@ partial class Directive
     /// </summary>
     /// <param name="labelBuilder"></param>
     /// <returns></returns>
-    public static MarkLabel MarkLabel(LabelBuilder labelBuilder) => new (labelBuilder);
+    public static MarkLabel MarkLabel(LabelBuilder labelBuilder) =>
+        new MarkLabel_LabelBuilder(labelBuilder);
 }
+
 
 /// <summary>
 /// Provides IL directive to mark label at current position.
 /// </summary>
-public sealed class MarkLabel : Directive
+public abstract class MarkLabel : Directive
 {
-    private readonly Label _label;
-    private readonly LabelBuilder? _labelBuilder;
-
     /// <inheritdoc/>
-    public override int ByteSize => 0;
-
+    public override sealed int ByteSize => 0;
     /// <summary>
     /// Gets the label to be marked, or null if a LabelBuilder is used.
     /// </summary>
-    public Label? Label => _labelBuilder is null ? _label : null;
+    [ExcludeFromCodeCoverage]
+    public virtual Label? Label => null;
 
     /// <summary>
     /// Gets the LabelBuilder to be marked, or null if a Label is used.
     /// </summary>
-    public LabelBuilder? LabelBuilder => _labelBuilder;
+    [ExcludeFromCodeCoverage]
+    public virtual LabelBuilder? LabelBuilder => null;
+}
 
 
-    internal MarkLabel(Label label)
-        => _label = label;
+file sealed class MarkLabel_Label(Label label) : MarkLabel
+{
+    public override Label? Label => label;
 
-    internal MarkLabel(LabelBuilder labelBuilder)
-        => _labelBuilder = labelBuilder;
+    public override void Emit(ILGenerator generator) =>
+        generator.MarkLabel(label);
 
-    /// <inheritdoc/>
-    public override void Emit(ILGenerator generator)
-    {
-        if(LabelBuilder is LabelBuilder validLabelBuilder)
-            validLabelBuilder.MarkLabel(generator);
-        else if(Label is Label validLabel)
-            generator.MarkLabel(validLabel);
-        else
-            throw new InvalidOperationException();
-    }
-
-    /// <inheritdoc/>
     public override bool Equals(IILStreamAction? other)
-        => other is MarkLabel mlOther
-        && Label == mlOther.Label
-        && LabelBuilder == mlOther.LabelBuilder;
+        => other is MarkLabel_Label mlOther
+        && Label == mlOther.Label;
 
-    /// <inheritdoc/>
-    public override string ToString()
-    {
-        if(Label is { } label)
-        {
-            return $"label[{label.GetId():X04}]:";
-        }
-        else if(LabelBuilder is { } labelBuilder)
-        {
-            return $"{labelBuilder.Name}:";
-        }
-        else
-        {
-            throw new InvalidOperationException();
-        }
-    }
+    public override string ToString() =>
+        $"label[{label.GetId():X04}]:";
 
-    /// <inheritdoc/>
-    protected override int GetHashCodeImpl()
-    {
-        if(_label is { } label)
-        {
-            return label.GetHashCode();
-        }
-        if(_labelBuilder is { } labelBuilder)
-        {
-            return labelBuilder.Name.GetHashCode();
-        }
-        return 0;
-    }
+    [ExcludeFromCodeCoverage]
+    protected override int GetHashCodeImpl() =>
+        Label.GetHashCode();
+}
+
+
+file sealed class MarkLabel_LabelBuilder(LabelBuilder labelBuilder) : MarkLabel
+{
+    public override LabelBuilder? LabelBuilder => labelBuilder;
+
+    public override void Emit(ILGenerator generator) =>
+        labelBuilder.MarkLabel(generator);
+
+    public override bool Equals(IILStreamAction? other) =>
+        other is MarkLabel_LabelBuilder mlOther
+        && labelBuilder == mlOther.LabelBuilder;
+
+    public override string ToString() =>
+        $"{labelBuilder.Name}:";
+
+    [ExcludeFromCodeCoverage]
+    protected override int GetHashCodeImpl() =>
+        labelBuilder.Name.GetHashCode();
 }
