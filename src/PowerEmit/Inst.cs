@@ -28,6 +28,13 @@ public interface IInst<T> : IInst
     /// Gets the operand associated with this instruction.
     /// </summary>
     T Operand { get; }
+
+    /// <summary>
+    /// Creates a new instance of the instruction with the specified operand.
+    /// </summary>
+    /// <param name="newOperand"></param>
+    /// <returns></returns>
+    IInst<T> CloneWith(T newOperand);
 }
 
 /// <summary>
@@ -81,6 +88,15 @@ public readonly struct Inst<T>(OpCode opcode, T operand, Action<ILGenerator, OpC
     /// </summary>
     public Action<ILGenerator, OpCode, T>? EmitOverride { get; } = emitOverride;
 
+    /// <inheritdoc cref="IInst{T}.CloneWith(T)" />
+    public Inst<T> CloneWith(T newOperand) =>
+        new (OpCode, newOperand, EmitOverride);
+
+    /// <inheritdoc />
+    IInst<T> IInst<T>.CloneWith(T newOperand) =>
+        CloneWith(newOperand);
+
+
     /// <inheritdoc />
     public readonly void Emit(ILGenerator generator)
     {
@@ -126,19 +142,19 @@ public readonly struct Inst<T>(OpCode opcode, T operand, Action<ILGenerator, OpC
         {
             var sb = new StringBuilder();
             var separator = "";
-            sb.Append($"{OpCode}([");
+            sb.Append($"{OpCode} [");
             foreach(object? item in enumerable)
             {
                 sb.Append(separator);
                 sb.Append(item?.ToString() ?? "<null>");
                 separator = ", ";
             }
-            sb.Append("])");
+            sb.Append("]");
             return sb.ToString();
         }
         else
         {
-            return $"{OpCode}({Operand})";
+            return $"{OpCode} {Operand}";
         }
     }
 }

@@ -27,7 +27,7 @@ public class MarkLabelTest
             actualBuilder.ILGenerator.Emit(Inst.Ret());
 
             Assert.Equal(0, directive.ByteSize);
-            Assert.Equal("label[0000]:", directive.ToString());
+            Assert.Equal("label[0000]", directive.ToString());
             Assert.True(Directive.MarkLabel(label1).Equals(directive));
             Assert.True(Directive.MarkLabel(label1).Equals((object)directive));
             Assert.False(Directive.MarkLabel(label2).Equals(directive));
@@ -63,7 +63,7 @@ public class MarkLabelTest
             actualBuilder.ILGenerator.Emit(Inst.Ret());
 
             Assert.Equal(0, directive.ByteSize);
-            Assert.Equal($"{label1.Name}:", directive.ToString());
+            Assert.Equal($"{label1.Name}", directive.ToString());
             Assert.True(Directive.MarkLabel(label1).Equals(directive));
             Assert.True(Directive.MarkLabel(label1).Equals((object)directive));
             Assert.False(Directive.MarkLabel(label2).Equals(directive));

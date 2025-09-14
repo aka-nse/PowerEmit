@@ -39,7 +39,11 @@ public partial class ILDisassembler
     /// <summary>
     /// This method is defined for unit testing purposes.
     /// </summary>
+#pragma warning disable IDE0079
+#pragma warning disable CA1822
     private MethodContent Disassemble(Module module, Type[] arguments, Type[] locals, byte[] byteStream)
+#pragma warning restore CA1822
+#pragma warning restore IDE0079
     {
         var entity = new Entity(module, arguments, locals, byteStream);
         return new MethodContent(

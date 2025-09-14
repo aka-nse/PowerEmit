@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace PowerEmit.Disassemblers;
 
 /// <summary>
@@ -39,5 +41,27 @@ public class MethodContent
         Locals = locals;
         Labels = labels;
         ILActions = ilActions;
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine($"params ({string.Join(", ", Arguments)})");
+        sb.AppendLine($"locals ({string.Join(", ", Locals)})");
+        sb.AppendLine("{");
+        foreach(var action in ILActions)
+        {
+            if(action is MarkLabel)
+            {
+                sb.Append($"    {action}: ");
+            }
+            else
+            {
+                sb.AppendLine($"{action}");
+            }
+        }
+        sb.AppendLine("}");
+        return sb.ToString();
     }
 }

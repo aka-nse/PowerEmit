@@ -57,7 +57,7 @@ file sealed class MarkLabel_Label(Label label) : MarkLabel
         && Label == mlOther.Label;
 
     public override string ToString() =>
-        $"label[{label.GetId():X04}]:";
+        $"label[{label.GetId():X04}]";
 
     [ExcludeFromCodeCoverage]
     protected override int GetHashCodeImpl() =>
@@ -77,7 +77,7 @@ file sealed class MarkLabel_LabelBuilder(LabelBuilder labelBuilder) : MarkLabel
         && labelBuilder == mlOther.LabelBuilder;
 
     public override string ToString() =>
-        $"{labelBuilder.Name}:";
+        $"{labelBuilder.Name}";
 
     [ExcludeFromCodeCoverage]
     protected override int GetHashCodeImpl() =>
