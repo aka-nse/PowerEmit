@@ -1,17 +1,18 @@
 using System.Reflection;
 using PowerEmit.Disassemblers;
 
-internal class Disassemble : ISampleCase
+internal class Deoptimize : ISampleCase
 {
     public void Run()
     {
-        var methodInfo = typeof(Disassemble)
+        var methodInfo = typeof(Deoptimize)
             .GetMethod(
                 nameof(SampleMethod),
                 BindingFlags.Public | BindingFlags.Static)!;
 
         var disassembled = ILDisassembler.Instance.Disassemble(methodInfo);
-        Console.Write(disassembled);
+        var deoptimized = ILDeoptimizer.Instance.Deoptimize(disassembled);
+        Console.Write(deoptimized);
     }
 
     public static int SampleMethod(int x, int y, int z)

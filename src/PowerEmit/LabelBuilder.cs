@@ -10,22 +10,44 @@ namespace PowerEmit;
 /// An instance of this type corresponds to a single label within the IL stream.
 /// Using this type, it is not possible to mark more than one label within a single <see cref="ILGenerator"/> instance.
 /// </remarks>
-/// <param name="name"></param>
-public sealed class LabelBuilder(string name)
+public class LabelBuilder
 {
+    internal sealed class StreamIndexLabelBuilder(int streamIndex)
+        : LabelBuilder
+    {
+        public int StreamIndex { get; set; } = streamIndex;
+        private protected override string NameCore => $"IL_{StreamIndex:X04}";
+    }
+
+
     private readonly Dictionary<ILGenerator, Label> _definedLabels = [];
     private readonly Dictionary<ILGenerator, Label> _markedLabels  = [];
+
+    private LabelBuilder()
+    {
+        NameCore = default!;
+    }
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="LabelBuilder"/> class with the specified name.
+    /// </summary>
+    /// <param name="name"></param>
+    public LabelBuilder(string name)
+    {
+        NameCore = name;
+    }
 
     /// <summary>
     /// Gets the name associated with the current instance.
     /// </summary>
-    public string Name { get; } = name;
+    public string Name => NameCore;
+    private protected virtual string NameCore { get; }
 
     /// <summary>
     /// Gets a value indicating whether the label has been marked in any IL generator.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $"{{LabelBuilder \"{Name}\"}}";
+    public override string ToString() => Name;
 
     /// <summary>
     /// Retrieves a previously defined label for the specified <see cref="ILGenerator"/> or defines a new label if none exists.

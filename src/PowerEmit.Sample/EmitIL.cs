@@ -42,6 +42,7 @@ internal class EmitIL_ConventionalStyle : EmitIL
          MethodInfo methodInfo_string_Concat,
          MethodInfo methodInfo_Console_WriteLine)
     {
+        // conventional style, without PowerEmit
         gen.Emit(OpCodes.Ldstr, "Hello, ");
         gen.Emit(OpCodes.Ldarg_0);
         gen.Emit(OpCodes.Call, methodInfo_string_Concat);
@@ -52,6 +53,24 @@ internal class EmitIL_ConventionalStyle : EmitIL
     }
 }
 
+internal class EmitIL_SimpleStyle : EmitIL
+{
+    protected override void BuildIL(
+         ILGenerator gen,
+         MethodInfo methodInfo_string_Concat,
+         MethodInfo methodInfo_Console_WriteLine)
+    {
+        // using PowerEmit on simple way
+        gen.Emit(Inst.Ldstr("Hello, "));
+        gen.Emit(Inst.Ldarg_0());
+        gen.Emit(Inst.Call(methodInfo_string_Concat));
+        gen.Emit(Inst.Ldstr("!"));
+        gen.Emit(Inst.Call(methodInfo_string_Concat));
+        gen.Emit(Inst.Call(methodInfo_Console_WriteLine));
+        gen.Emit(Inst.Ret());
+    }
+}
+
 internal class EmitIL_ListedPowerEmitAction : EmitIL
 {
     protected override void BuildIL(
@@ -59,6 +78,7 @@ internal class EmitIL_ListedPowerEmitAction : EmitIL
          MethodInfo methodInfo_string_Concat,
          MethodInfo methodInfo_Console_WriteLine)
     {
+        // collection is available on PowerEmit
         IILStreamAction[] actions = [
             Inst.Ldstr("Hello, "),
             Inst.Ldarg_0(),
@@ -82,6 +102,7 @@ internal class EmitIL_MixedStyle : EmitIL
          MethodInfo methodInfo_string_Concat,
          MethodInfo methodInfo_Console_WriteLine)
     {
+        // PowerEmit can coexist common style.
         gen.Emit(Inst.Ldstr("Hello, "));
         gen.Emit(OpCodes.Ldarg_0);
         gen.Emit(Inst.Call(methodInfo_string_Concat));

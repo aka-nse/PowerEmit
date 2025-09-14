@@ -103,7 +103,7 @@ partial class ILDisassembler
         protected LabelBuilder GetOrAddLabel(int streamIndex)
             => _labels.TryGetValue(streamIndex, out var value)
                 ? value
-                : (_labels[streamIndex] = new LabelBuilder($"IL_{streamIndex:X04}"));
+                : (_labels[streamIndex] = new LabelBuilder.StreamIndexLabelBuilder(streamIndex));
 
 
         /// <summary>

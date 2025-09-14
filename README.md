@@ -13,57 +13,131 @@ So this library does not provide high-level method generation.
 
 ### Emit IL
 
-```CSharp
-using PowerEmit;
+- Equivalent code without PowerEmit
 
-// common style
-gen.Emit(OpCodes.Ldstr, "Hello, ");
-gen.Emit(OpCodes.Ldarg_0);
-gen.Emit(OpCodes.Ldstr, "!");
-gen.Emit(OpCodes.Call, methodInfo_string_Concat);
-gen.Emit(OpCodes.Call, methodInfo_Console_WriteLine);
-gen.Emit(OpCodes.Ret);
+  ```CSharp
+  internal class EmitIL_ConventionalStyle : EmitIL
+  {
+      protected override void BuildIL(
+          ILGenerator gen,
+          MethodInfo methodInfo_string_Concat,
+          MethodInfo methodInfo_Console_WriteLine)
+      {
+          gen.Emit(OpCodes.Ldstr, "Hello, ");
+          gen.Emit(OpCodes.Ldarg_0);
+          gen.Emit(OpCodes.Call, methodInfo_string_Concat);
+          gen.Emit(OpCodes.Ldstr, "!");
+          gen.Emit(OpCodes.Call, methodInfo_string_Concat);
+          gen.Emit(OpCodes.Call, methodInfo_Console_WriteLine);
+          gen.Emit(OpCodes.Ret);
+      }
+  }
+  ```
 
-// using PowerEmit on simple way
-gen.Emit(Inst.Ldstr("Hello, "));
-gen.Emit(Inst.Ldarg_0());
-gen.Emit(Inst.Ldstr("!"));
-gen.Emit(Inst.Call(methodInfo_string_Concat));
-gen.Emit(Inst.Call(methodInfo_Console_WriteLine));
-gen.Emit(Inst.Ret());
+- using PowerEmit on simple way
 
-// collection is also available on PowerEmit
-var list = new List<IILStreamAction> {
-    Inst.Ldstr("Hello, "),
-    Inst.Ldarg_0(),
-    Inst.Ldstr("!"),
-    Inst.Call(methodInfo_string_Concat),
-    Inst.Call(methodInfo_Console_WriteLine),
-    Inst.Ret(),
-};
-foreach(var action in list)
-    gen.Emit(action);
+  ```CSharp
+  internal class EmitIL_SimpleStyle : EmitIL
+  {
+      protected override void BuildIL(
+          ILGenerator gen,
+          MethodInfo methodInfo_string_Concat,
+          MethodInfo methodInfo_Console_WriteLine)
+      {
+          // using PowerEmit on simple way
+          gen.Emit(Inst.Ldstr("Hello, "));
+          gen.Emit(Inst.Ldarg_0());
+          gen.Emit(Inst.Call(methodInfo_string_Concat));
+          gen.Emit(Inst.Ldstr("!"));
+          gen.Emit(Inst.Call(methodInfo_string_Concat));
+          gen.Emit(Inst.Call(methodInfo_Console_WriteLine));
+          gen.Emit(Inst.Ret());
+      }
+  }
+  ```
 
-// PowerEmit can coexist common style.
-gen.Emit(Inst.Ldstr("Hello, "));
-gen.Emit(OpCodes.Ldarg_0);
-gen.Emit(Inst.Ldstr("!"));
-gen.Emit(Inst.Call(methodInfo_string_Concat));
-gen.Emit(Inst.Call(methodInfo_Console_WriteLine));
-gen.Emit(OpCodes.Ret);
-```
+- collection is available on PowerEmit
+
+  ```CSharp
+  internal class EmitIL_ListedPowerEmitAction : EmitIL
+  {
+      protected override void BuildIL(
+          ILGenerator gen,
+          MethodInfo methodInfo_string_Concat,
+          MethodInfo methodInfo_Console_WriteLine)
+      {
+          IILStreamAction[] actions = [
+              Inst.Ldstr("Hello, "),
+              Inst.Ldarg_0(),
+              Inst.Call(methodInfo_string_Concat),
+              Inst.Ldstr("!"),
+              Inst.Call(methodInfo_string_Concat),
+              Inst.Call(methodInfo_Console_WriteLine),
+              Inst.Ret(),
+          ];
+          foreach(var action in actions)
+          {
+              gen.Emit(action);
+          }
+      }
+  }
+  ```
+
+- PowerEmit can coexist conventional style
+
+  ```CSharp
+  internal class EmitIL_MixedStyle : EmitIL
+  {
+      protected override void BuildIL(
+          ILGenerator gen,
+          MethodInfo methodInfo_string_Concat,
+          MethodInfo methodInfo_Console_WriteLine)
+      {
+          gen.Emit(Inst.Ldstr("Hello, "));
+          gen.Emit(OpCodes.Ldarg_0);
+          gen.Emit(Inst.Call(methodInfo_string_Concat));
+          gen.Emit(Inst.Ldstr("!"));
+          gen.Emit(Inst.Call(methodInfo_string_Concat));
+          gen.Emit(Inst.Call(methodInfo_Console_WriteLine));
+          gen.Emit(OpCodes.Ret);
+      }
+  }
+  ```
 
 ### Disassembler
 
 *PowerEmit* provides disassembler.
 
 ```CSharp
+using System.Reflection;
 using PowerEmit.Disassemblers;
 
-var methodInfo = typeof(SomeType).GetMethod("SomeMethod");
-var disassembled = ILDisassembler.Instance.Disassemble(methodInfo);
-foreach(var action in disassembled.ILActions)
-    Console.WriteLine(action);
+internal class Disassemble : ISampleCase
+{
+    public void Run()
+    {
+        var methodInfo = typeof(Disassemble)
+            .GetMethod(
+                nameof(SampleMethod),
+                BindingFlags.Public | BindingFlags.Static)!;
+
+        var disassembled = ILDisassembler.Instance.Disassemble(methodInfo);
+        Console.Write(disassembled);
+    }
+
+    public static int SampleMethod(int x, int y, int z)
+    {
+        if(z < 0)
+        {
+            return x * y;
+        }
+        for(var i = 0; i < z; ++i)
+        {
+            x += y;
+        }
+        return x;
+    }
+}
 ```
 
 ### Deoptimizer
@@ -72,13 +146,36 @@ foreach(var action in disassembled.ILActions)
 By using with disassembler, deoptimizer enables to edit IL method safely.
 
 ```CSharp
+using System.Reflection;
 using PowerEmit.Disassemblers;
 
-var methodInfo = typeof(SomeType).GetMethod("SomeMethod");
-var disassembled = ILDisassembler.Instance.Disassemble(methodInfo);
-var deoptimized = ILDeoptimizer.Instance.Disassemble(disassembled.ILActions);
-foreach(var action in deoptimized)
-    Console.WriteLine(action);
+internal class Deoptimize : ISampleCase
+{
+    public void Run()
+    {
+        var methodInfo = typeof(Deoptimize)
+            .GetMethod(
+                nameof(SampleMethod),
+                BindingFlags.Public | BindingFlags.Static)!;
+
+        var disassembled = ILDisassembler.Instance.Disassemble(methodInfo);
+        var deoptimized = ILDeoptimizer.Instance.Deoptimize(disassembled);
+        Console.Write(deoptimized);
+    }
+
+    public static int SampleMethod(int x, int y, int z)
+    {
+        if(z < 0)
+        {
+            return x * y;
+        }
+        for(var i = 0; i < z; ++i)
+        {
+            x += y;
+        }
+        return x;
+    }
+}
 ```
 
 ## Requirement

@@ -2,9 +2,11 @@
 
 ISampleCase[] sampleCases = [
     new EmitIL_ConventionalStyle(),
+    new EmitIL_SimpleStyle(),
     new EmitIL_ListedPowerEmitAction(),
     new EmitIL_MixedStyle(),
     new Disassemble(),
+    new Deoptimize(),
 ];
 
 foreach(var sampleCase in sampleCases)
