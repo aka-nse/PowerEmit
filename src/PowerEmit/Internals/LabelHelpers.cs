@@ -1,7 +1,7 @@
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 
-namespace PowerEmit;
+namespace PowerEmit.Internals;
 
 internal static class LabelHelpers
 {

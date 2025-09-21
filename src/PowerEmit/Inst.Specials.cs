@@ -24,22 +24,22 @@ public partial struct Inst
     /// <param name="methodInfo"></param>
     /// <param name="optionalParameterTypes"></param>
     /// <returns> The built emitter. </returns>
-    public static Inst<(MethodInfo methodInfo, Type[]? optionalParameterTypes)> Call(MethodInfo methodInfo, Type[]? optionalParameterTypes)
+    public static Inst<CallInfo> Call(MethodInfo methodInfo, Type[]? optionalParameterTypes)
         => new(
             OpCodes.Call,
-            (methodInfo, optionalParameterTypes),
-            (generator, opcode, operand) => generator.EmitCall(opcode, operand.methodInfo, optionalParameterTypes));
+            new (methodInfo, optionalParameterTypes),
+            (generator, opcode, operand) => generator.EmitCall(opcode, operand.MethodInfo, optionalParameterTypes));
 
 
     /// <summary> Gets emitter to emit callvirt. </summary>
     /// <param name="methodInfo"></param>
     /// <param name="optionalParameterTypes"></param>
     /// <returns> The built emitter. </returns>
-    public static Inst<(MethodInfo methodInfo, Type[]? optionalParameterTypes)> Callvirt(MethodInfo methodInfo, Type[]? optionalParameterTypes)
+    public static Inst<CallInfo> Callvirt(MethodInfo methodInfo, Type[]? optionalParameterTypes)
         => new(
             OpCodes.Callvirt,
-            (methodInfo, optionalParameterTypes),
-            (generator, opcode, operand) => generator.EmitCall(opcode, operand.methodInfo, optionalParameterTypes));
+            new (methodInfo, optionalParameterTypes),
+            (generator, opcode, operand) => generator.EmitCall(opcode, operand.MethodInfo, optionalParameterTypes));
 
     #region
 
@@ -64,3 +64,11 @@ public partial struct Inst
 
     #endregion
 }
+
+/// <summary>
+/// Represents information required to emit a method call instruction,
+/// including the target method and optional parameter types.
+/// </summary>
+/// <param name="MethodInfo"></param>
+/// <param name="OptionalParameterTypes"></param>
+public sealed record class CallInfo(MethodInfo MethodInfo, Type[]? OptionalParameterTypes);
