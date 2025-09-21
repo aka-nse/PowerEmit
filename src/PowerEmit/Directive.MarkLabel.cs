@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Emit;
+using PowerEmit.Internals;
 
 namespace PowerEmit;
 

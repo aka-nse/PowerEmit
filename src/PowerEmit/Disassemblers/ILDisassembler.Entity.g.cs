@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using PowerEmit.Internals;
 
 namespace PowerEmit.Disassemblers;
 

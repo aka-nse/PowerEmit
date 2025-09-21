@@ -24,6 +24,6 @@ internal class Disassemble : ISampleCase
         {
             x += y;
         }
-        return x;
+        return Math.Abs(x);
     }
 }

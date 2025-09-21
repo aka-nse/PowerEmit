@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
+using PowerEmit.Internals;
 
 namespace PowerEmit;
 
@@ -136,25 +137,6 @@ public readonly struct Inst<T>(OpCode opcode, T operand, Action<ILGenerator, OpC
         && Equals(Operand, iOther.Operand);
 
     /// <inheritdoc />
-    public override string ToString()
-    {
-        if(Operand is IEnumerable enumerable)
-        {
-            var sb = new StringBuilder();
-            var separator = "";
-            sb.Append($"{OpCode} [");
-            foreach(object? item in enumerable)
-            {
-                sb.Append(separator);
-                sb.Append(item?.ToString() ?? "<null>");
-                separator = ", ";
-            }
-            sb.Append("]");
-            return sb.ToString();
-        }
-        else
-        {
-            return $"{OpCode} {Operand}";
-        }
-    }
+    public override string ToString() =>
+        $"{OpCode} {OperandFormatter.ToString(Operand)}";
 }

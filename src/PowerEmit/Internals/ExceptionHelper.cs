@@ -1,4 +1,4 @@
-namespace PowerEmit;
+namespace PowerEmit.Internals;
 
 internal static class ExceptionHelper
 {

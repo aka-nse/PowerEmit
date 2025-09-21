@@ -25,6 +25,6 @@ internal class Deoptimize : ISampleCase
         {
             x += y;
         }
-        return x;
+        return Math.Abs(x);
     }
 }
