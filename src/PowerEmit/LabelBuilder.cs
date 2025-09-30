@@ -90,4 +90,16 @@ public class LabelBuilder
         targetGenerator.MarkLabel(label);
         _markedLabels.Add(targetGenerator, label);
     }
+
+    internal void RegisterLabelExternal(ILGenerator targetGenerator, Label label)
+    {
+        if(_definedLabels.ContainsKey(targetGenerator))
+        {
+            throw new ArgumentException("A label for the specified ILGenerator has already been registered.");
+        }
+        else
+        {
+            _definedLabels.Add(targetGenerator, label);
+        }
+    }
 }

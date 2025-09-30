@@ -5,6 +5,8 @@ namespace PowerEmit;
 /// <summary>
 /// Provides a base class for directives that can be emitted to an IL stream.
 /// </summary>
+#pragma warning disable IDE0079
+#pragma warning disable CS0659
 public abstract partial class Directive : IILStreamAction
 {
     /// <inheritdoc />
@@ -19,11 +21,4 @@ public abstract partial class Directive : IILStreamAction
     /// <inheritdoc />
     public sealed override bool Equals(object? obj)
         => obj is IILStreamAction other && Equals(other);
-
-    /// <inheritdoc />
-    protected abstract int GetHashCodeImpl();
-
-    /// <inheritdoc />
-    public sealed override int GetHashCode() =>
-        GetHashCodeImpl();
 }
