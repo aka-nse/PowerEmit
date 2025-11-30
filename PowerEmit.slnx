@@ -6,6 +6,10 @@
     <File Path="global.json" />
     <File Path="Measure-Coverage.ps1" />
   </Folder>
+  <Folder Name="/etc/.github/" />
+  <Folder Name="/etc/.github/workflows/">
+    <File Path=".github/workflows/dotnet-CI.yml" />
+  </Folder>
   <Folder Name="/etc/docs/">
     <File Path="docs/opcode.csv" />
   </Folder>
