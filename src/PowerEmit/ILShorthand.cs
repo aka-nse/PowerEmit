@@ -26,3 +26,5 @@ public abstract partial class ILShorthand : IILStreamAction
     public sealed override int GetHashCode() =>
         GetHashCodeImpl();
 }
+
+#warning WIP: implement for, foreach, try-catch-finally
