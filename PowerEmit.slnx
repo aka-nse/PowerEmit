@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/etc/">
+    <File Path=".editorconfig" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+    <File Path="global.json" />
+    <File Path="Measure-Coverage.ps1" />
+  </Folder>
+  <Folder Name="/etc/.github/" />
+  <Folder Name="/etc/.github/workflows/">
+    <File Path=".github/workflows/dotnet-CI.yml" />
+  </Folder>
+  <Folder Name="/etc/docs/">
+    <File Path="docs/opcode.csv" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PowerEmit.Sample/PowerEmit.Sample.csproj" />
+    <Project Path="tests/PowerEmit.Test/PowerEmit.Test.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/PowerEmit.Generators.Internal/PowerEmit.Generators.Internal.csproj" />
+    <Project Path="src/PowerEmit/PowerEmit.csproj" />
+  </Folder>
+</Solution>
