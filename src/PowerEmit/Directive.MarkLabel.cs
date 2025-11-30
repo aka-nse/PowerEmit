@@ -4,6 +4,8 @@ using PowerEmit.Internals;
 
 namespace PowerEmit;
 
+#pragma warning disable IDE0079
+#pragma warning disable CS0659
 partial class Directive
 {
     /// <summary>
@@ -61,7 +63,7 @@ file sealed class MarkLabel_Label(Label label) : MarkLabel
         $"label[{label.GetId():X04}]";
 
     [ExcludeFromCodeCoverage]
-    protected override int GetHashCodeImpl() =>
+    public override int GetHashCode() =>
         Label.GetHashCode();
 }
 
@@ -81,6 +83,6 @@ file sealed class MarkLabel_LabelBuilder(LabelBuilder labelBuilder) : MarkLabel
         $"{labelBuilder.Name}";
 
     [ExcludeFromCodeCoverage]
-    protected override int GetHashCodeImpl() =>
+    public override int GetHashCode() =>
         labelBuilder.Name.GetHashCode();
 }
